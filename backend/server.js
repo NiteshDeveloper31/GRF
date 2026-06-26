@@ -8,12 +8,14 @@ import adminRoutes from "./routes/adminRoutes.js";
 import analyticsRoutes from "./routes/analyticsRoutes.js";
 import faqRoutes from "./routes/faqRoutes.js";
 import { seedFAQs } from "./controllers/faqController.js";
+import { seedProducts } from "./controllers/productSeeder.js";
 
 dotenv.config();
 
 // Connect to database and seed defaults
 connectDB().then(() => {
     seedFAQs();
+    seedProducts();
 });
 
 const app = express();

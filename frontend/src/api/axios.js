@@ -1,6 +1,6 @@
 import { mockProducts } from './mockData';
 
-const useMockApi = import.meta.env.VITE_USE_API !== 'true';
+const useMockApi = false;
 const mockSuccess = {
   success: true,
   message: 'Your inquiry has been successfully recorded locally. Thank you!',

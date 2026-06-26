@@ -19,39 +19,49 @@ export default function ProductCard({ product }) {
       {/* CAD blueprint mockup block - Obsidian style */}
       <div className="aspect-[4/3] w-full bg-[#0a0d18]/80 flex items-center justify-center p-6 text-center border-b border-white/[0.03] select-none relative overflow-hidden">
         
-        {/* Technical grids */}
-        <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
-        <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-        
-        {/* Drafting metrics */}
-        <div className="absolute top-2.5 left-2.5 text-[8px] font-mono text-slate-500">X: 198.81 / Y: 72.10</div>
-        <div className="absolute bottom-2.5 right-2.5 text-[8px] font-mono text-slate-500">SCALE: 1:20 [METRIC]</div>
-        <div className="absolute top-2.5 right-2.5 text-[8px] font-mono text-brand-accent/60 font-semibold">GRF-MODEL_PL-{product.id}</div>
-        <div className="absolute bottom-2.5 left-2.5 text-[8px] font-mono text-slate-500">MATERIAL: SS 316L / MS</div>
+        {product.images && product.images.length > 0 ? (
+          <img 
+            src={`data:${product.images[0].contentType};base64,${product.images[0].data}`} 
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <>
+            {/* Technical grids */}
+            <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
+            <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
+            
+            {/* Drafting metrics */}
+            <div className="absolute top-2.5 left-2.5 text-[8px] font-mono text-slate-500">X: 198.81 / Y: 72.10</div>
+            <div className="absolute bottom-2.5 right-2.5 text-[8px] font-mono text-slate-500">SCALE: 1:20 [METRIC]</div>
+            <div className="absolute top-2.5 right-2.5 text-[8px] font-mono text-brand-accent/60 font-semibold">GRF-MODEL_PL-{product._id || product.id}</div>
+            <div className="absolute bottom-2.5 left-2.5 text-[8px] font-mono text-slate-500">MATERIAL: SS 316L / MS</div>
 
-        {/* Concentric blueprint guides */}
-        <div className="absolute h-32 w-32 rounded-full border border-dashed border-slate-700/50 flex items-center justify-center">
-          <div className="h-24 w-24 rounded-full border border-dashed border-brand-accent/15 spin-slow-hover"></div>
-        </div>
-        
-        {/* Dimension markings */}
-        <div className="absolute left-6 right-6 h-px border-t border-dashed border-slate-700/50 flex justify-between px-2 text-[7px] font-mono text-slate-500">
-          <span>| MIN CAPACITY</span>
-          <span>MAX PRESSURE |</span>
-        </div>
+            {/* Concentric blueprint guides */}
+            <div className="absolute h-32 w-32 rounded-full border border-dashed border-slate-700/50 flex items-center justify-center">
+              <div className="h-24 w-24 rounded-full border border-dashed border-brand-accent/15 spin-slow-hover"></div>
+            </div>
+            
+            {/* Dimension markings */}
+            <div className="absolute left-6 right-6 h-px border-t border-dashed border-slate-700/50 flex justify-between px-2 text-[7px] font-mono text-slate-500">
+              <span>| MIN CAPACITY</span>
+              <span>MAX PRESSURE |</span>
+            </div>
 
-        {/* Floating specification tag */}
-        <div className="z-10 px-4 bg-[#0b0d16]/95 p-4 border border-white/5 rounded-sm shadow-lg relative max-w-[200px]">
-          <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-brand-accent"></div>
-          <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-brand-accent"></div>
-          
-          <p className="heading-font text-white font-bold text-xs sm:text-sm leading-snug tracking-wide uppercase transition-colors duration-300">
-            {product.name}
-          </p>
-          <span className="text-[8px] tracking-widest text-brand-accent font-bold mt-1 block font-mono">
-            CAD // PL-{product.id}
-          </span>
-        </div>
+            {/* Floating specification tag */}
+            <div className="z-10 px-4 bg-[#0b0d16]/95 p-4 border border-white/5 rounded-sm shadow-lg relative max-w-[200px]">
+              <div className="absolute -top-1 -left-1 w-2 h-2 border-t-2 border-l-2 border-brand-accent"></div>
+              <div className="absolute -bottom-1 -right-1 w-2 h-2 border-b-2 border-r-2 border-brand-accent"></div>
+              
+              <p className="heading-font text-white font-bold text-xs sm:text-sm leading-snug tracking-wide uppercase transition-colors duration-300">
+                {product.name}
+              </p>
+              <span className="text-[8px] tracking-widest text-brand-accent font-bold mt-1 block font-mono">
+                CAD // PL-{product._id || product.id}
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Information details */}
@@ -59,7 +69,7 @@ export default function ProductCard({ product }) {
         <div>
           {/* Category tag */}
           <div className="mb-4">
-            <span className="inline-block bg-brand-accent/5 border border-brand-accent/20 text-brand-accent text-[9px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-widest">
+            <span className="inline-block whitespace-nowrap bg-brand-accent/5 border border-brand-accent/20 text-brand-accent text-[9px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-widest">
               {product.category}
             </span>
           </div>
@@ -76,7 +86,7 @@ export default function ProductCard({ product }) {
         {/* Button Actions */}
         <div className="grid grid-cols-2 gap-4 pt-5 border-t border-white/[0.04]">
           <Link
-            to={`/products/${product.id}`}
+            to={`/products/${product._id || product.id}`}
             className="w-full text-center border border-white/10 hover:border-white text-slate-300 hover:text-white py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-all duration-300 hover:bg-white/[0.02] active:scale-95"
           >
             Details

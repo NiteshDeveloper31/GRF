@@ -50,8 +50,24 @@ export const getProductById = async (id) => {
 export const createLead = async (leadData) => {
   if (!useMockApi) {
     const { default: axios } = await import('axios');
-    const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/leads`, leadData);
-    return response.data;
+    const mappedData = {
+      name: leadData.fullName || leadData.name,
+      email: leadData.email,
+      phone: leadData.phone,
+      whatsapp: leadData.whatsapp,
+      company: leadData.companyName || leadData.company,
+      designation: leadData.designation,
+      productInterest: leadData.productInterest,
+      capacityRequired: leadData.capacityRequired,
+      material: leadData.materialPreference || leadData.material,
+      message: leadData.message
+    };
+    const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/leads`, mappedData);
+    return {
+      success: true,
+      message: response.data.message || 'Your inquiry has been submitted successfully',
+      lead: response.data.lead
+    };
   }
 
   return mockSuccess;

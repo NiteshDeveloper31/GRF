@@ -1,90 +1,140 @@
 import Lead from "../models/Lead.js";
 
-// @desc    Create a new lead/quote inquiry
-// @route   POST /api/leads
-// @access  Public
 export const createLead = async (req, res) => {
     try {
         const {
-            fullName,
+            name,
             email,
             phone,
             whatsapp,
-            companyName,
+            company,
             designation,
             productInterest,
             capacityRequired,
-            materialPreference,
-            message
+            material,
+            message,
+            source,
+            city,
+            state,
         } = req.body;
 
-        // Basic validations
-        if (!fullName || !email || !phone) {
-            return res.status(400).json({ 
-                success: false, 
-                message: "Name, email, and phone number are required." 
+        if (!name || !email || !phone || !productInterest) {
+            return res.status(400).json({
+                message: "Please provide name, email, phone and product interest",
             });
         }
 
-        // Map frontend fields to backend schema
-        let mappedMaterial = "Not Sure";
-        if (materialPreference === "SS") {
-            mappedMaterial = "Stainless Steel";
-        } else if (materialPreference === "MS") {
-            mappedMaterial = "Mild Steel";
-        } else if (materialPreference === "Not Sure") {
-            mappedMaterial = "Not Sure";
-        } else if (materialPreference) {
-            mappedMaterial = "Custom";
-        }
-
-        // Validate productInterest enum
-        const validCategories = [
-            "Storage Tank",
-            "Milk Storage Tank",
-            "Silo System",
-            "Brewery Tank",
-            "Reactor Vessel",
-            "High Pressure Vessel",
-            "Mixing Tank",
-            "Jacketed Vessel",
-            "Underground Oil Storage Tank",
-            "Custom Equipment"
-        ];
-        
-        let mappedProductInterest = "Custom Equipment";
-        if (productInterest && validCategories.includes(productInterest)) {
-            mappedProductInterest = productInterest;
-        }
-
-        const newLead = new Lead({
-            name: fullName,
-            email: email,
-            phone: phone,
-            whatsapp: whatsapp || "",
-            company: companyName || "",
-            designation: designation || "",
-            productInterest: mappedProductInterest,
-            capacityRequired: capacityRequired || "",
-            material: mappedMaterial,
-            message: message || "",
-            source: "website",
-            status: "new",
-            priority: "warm"
+        const lead = await Lead.create({
+            name,
+            email,
+            phone,
+            whatsapp,
+            company,
+            designation,
+            productInterest,
+            capacityRequired,
+            material,
+            message,
+            source,
+            city,
+            state,
         });
 
-        await newLead.save();
+        res.status(201).json({ message: "Your inquiry has been submitted successfully", lead });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
-        res.status(201).json({
-            success: true,
-            message: "Your inquiry has been successfully submitted.",
-            lead: newLead
+export const getAllLeads = async (req, res) => {
+    try {
+        const { status, priority, productInterest } = req.query;
+
+        const filter = {};
+
+        if (status) filter.status = status;
+        if (priority) filter.priority = priority;
+        if (productInterest) filter.productInterest = productInterest;
+
+        const leads = await Lead.find(filter)
+            .populate("assignedTo", "name email")
+            .sort({ createdAt: -1 });
+
+        res.status(200).json(leads);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getLeadById = async (req, res) => {
+    try {
+        const lead = await Lead.findById(req.params.id).populate("assignedTo", "name email");
+
+        if (!lead) {
+            return res.status(404).json({ message: "Lead not found" });
+        }
+
+        res.status(200).json(lead);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const updateLead = async (req, res) => {
+    try {
+        const lead = await Lead.findById(req.params.id);
+
+        if (!lead) {
+            return res.status(404).json({ message: "Lead not found" });
+        }
+
+        lead.status = req.body.status || lead.status;
+        lead.priority = req.body.priority || lead.priority;
+        lead.assignedTo = req.body.assignedTo || lead.assignedTo;
+        lead.capacityRequired = req.body.capacityRequired || lead.capacityRequired;
+        lead.material = req.body.material || lead.material;
+        lead.message = req.body.message || lead.message;
+
+        const updatedLead = await lead.save();
+
+        res.status(200).json(updatedLead);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const deleteLead = async (req, res) => {
+    try {
+        const lead = await Lead.findById(req.params.id);
+
+        if (!lead) {
+            return res.status(404).json({ message: "Lead not found" });
+        }
+
+        await lead.deleteOne();
+
+        res.status(200).json({ message: "Lead deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const getLeadStats = async (req, res) => {
+    try {
+        const totalLeads = await Lead.countDocuments();
+        const newLeads = await Lead.countDocuments({ status: "new" });
+        const contactedLeads = await Lead.countDocuments({ status: "contacted" });
+        const closedLeads = await Lead.countDocuments({ status: "closed" });
+        const lostLeads = await Lead.countDocuments({ status: "lost" });
+
+        res.status(200).json({
+            totalLeads,
+            newLeads,
+            contactedLeads,
+            closedLeads,
+            lostLeads,
         });
     } catch (error) {
-        console.error("Error creating lead:", error);
-        res.status(500).json({ 
-            success: false, 
-            message: "Server error registering lead. Please try again later." 
-        });
+        res.status(500).json({ message: error.message });
     }
 };

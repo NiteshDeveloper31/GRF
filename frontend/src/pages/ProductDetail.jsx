@@ -22,7 +22,7 @@ export default function ProductDetail() {
 
         const allProducts = await getProducts();
         const related = allProducts.filter(
-          (item) => item.category === productData.category && item.id !== productData.id
+          (item) => item.category === productData.category && (item._id || item.id) !== (productData._id || productData.id)
         );
         setRelatedProducts(related.slice(0, 3));
       } catch (err) {
@@ -100,38 +100,48 @@ export default function ProductDetail() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start glass-panel p-6 sm:p-10 rounded-sm mb-20 shadow-2xl">
           
           {/* Left: Large Placeholder Image - Technical Blueprint Spec style */}
-          <div className="lg:col-span-6 w-full aspect-[4/3] bg-[#0a0d18]/80 flex flex-col items-center justify-center p-8 text-center border border-white/5 relative select-none rounded-sm min-h-[350px]">
-            {/* Blueprint grid overlays */}
-            <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
-            <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-            
-            {/* Corner Drafting Marks */}
-            <div className="absolute top-4 left-4 border-l-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
-            <div className="absolute top-4 right-4 border-r-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
-            <div className="absolute bottom-4 left-4 border-l-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
-            <div className="absolute bottom-4 right-4 border-r-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
-            
-            <div className="absolute top-2.5 left-6 text-[8px] font-mono text-slate-500">GRF-DESIGN-ENG_SYS</div>
-            <div className="absolute bottom-2.5 right-6 text-[8px] font-mono text-slate-500">ASME CODE COMPLIANT</div>
+          <div className="lg:col-span-6 w-full aspect-[4/3] bg-[#0a0d18]/80 flex flex-col items-center justify-center p-8 text-center border border-white/5 relative select-none rounded-sm min-h-[350px] overflow-hidden">
+            {product.images && product.images.length > 0 ? (
+              <img 
+                src={`data:${product.images[0].contentType};base64,${product.images[0].data}`} 
+                alt={product.name}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <>
+                {/* Blueprint grid overlays */}
+                <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
+                <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
+                
+                {/* Corner Drafting Marks */}
+                <div className="absolute top-4 left-4 border-l-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                <div className="absolute top-4 right-4 border-r-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                <div className="absolute bottom-4 left-4 border-l-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                <div className="absolute bottom-4 right-4 border-r-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                
+                <div className="absolute top-2.5 left-6 text-[8px] font-mono text-slate-500">GRF-DESIGN-ENG_SYS</div>
+                <div className="absolute bottom-2.5 right-6 text-[8px] font-mono text-slate-500">ASME CODE COMPLIANT</div>
 
-            {/* Concentric rotating grids */}
-            <div className="absolute h-56 w-56 rounded-full border border-dashed border-slate-700/50 flex items-center justify-center">
-              <div className="h-44 w-44 rounded-full border border-dashed border-brand-accent/20 flex items-center justify-center">
-                <div className="h-32 w-32 rounded-full border border-dashed border-slate-700/40"></div>
-              </div>
-            </div>
+                {/* Concentric rotating grids */}
+                <div className="absolute h-56 w-56 rounded-full border border-dashed border-slate-700/50 flex items-center justify-center">
+                  <div className="h-44 w-44 rounded-full border border-dashed border-brand-accent/20 flex items-center justify-center">
+                    <div className="h-32 w-32 rounded-full border border-dashed border-slate-700/40"></div>
+                  </div>
+                </div>
 
-            <div className="z-10 px-4 bg-brand-charcoal/95 p-6 border border-white/5 rounded-sm shadow-lg relative max-w-sm">
-              <h2 className="heading-font text-white font-extrabold text-lg sm:text-xl md:text-2xl leading-snug tracking-wider uppercase mb-2">
-                {product.name}
-              </h2>
-              <span className="text-[10px] tracking-[0.2em] text-brand-accent uppercase font-bold block bg-brand-charcoal/90 py-1.5 px-4 border border-brand-accent/20 rounded-sm">
-                GRF DYNAMIC SYSTEM
-              </span>
-              <p className="text-[9px] text-slate-500 mt-4 font-mono">
-                MODEL: GRF-{product.category.toUpperCase().replace(/\s+/g, '-')}-00{product.id}
-              </p>
-            </div>
+                <div className="z-10 px-4 bg-brand-charcoal/95 p-6 border border-white/5 rounded-sm shadow-lg relative max-w-sm">
+                  <h2 className="heading-font text-white font-extrabold text-lg sm:text-xl md:text-2xl leading-snug tracking-wider uppercase mb-2">
+                    {product.name}
+                  </h2>
+                  <span className="text-[10px] tracking-[0.2em] text-brand-accent uppercase font-bold block bg-brand-charcoal/90 py-1.5 px-4 border border-brand-accent/20 rounded-sm">
+                    GRF DYNAMIC SYSTEM
+                  </span>
+                  <p className="text-[9px] text-slate-500 mt-4 font-mono">
+                    MODEL: GRF-{product.category.toUpperCase().replace(/\s+/g, '-')}-00{product._id || product.id}
+                  </p>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Right: Technical Details & Specifications */}
@@ -139,7 +149,7 @@ export default function ProductDetail() {
             <div>
               {/* Category Badge */}
               <div className="mb-5">
-                <span className="bg-brand-accent/5 border border-brand-accent/25 text-brand-accent text-[10px] font-bold px-3.5 py-1.5 uppercase tracking-widest rounded-sm">
+                <span className="inline-block bg-brand-accent/5 border border-brand-accent/25 text-brand-accent text-[10px] font-bold px-3.5 py-1.5 uppercase tracking-widest rounded-sm">
                   {product.category}
                 </span>
               </div>
@@ -148,9 +158,27 @@ export default function ProductDetail() {
                 {product.name}
               </h1>
               
-              <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-8 font-light">
+              <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 font-light">
                 {product.longDescription || product.description}
               </p>
+
+              {/* Material & Capacity Quick Info */}
+              <div className="flex flex-wrap gap-x-6 gap-y-2 mb-8 text-[11px] font-mono tracking-wider">
+                {product.material && product.material.length > 0 && (
+                  <div>
+                    <span className="text-slate-500 uppercase">Material: </span>
+                    <span className="text-brand-accent font-semibold uppercase">{product.material.join(', ')}</span>
+                  </div>
+                )}
+                {product.capacityRange && (product.capacityRange.min || product.capacityRange.max) && (
+                  <div>
+                    <span className="text-slate-500 uppercase">Capacity: </span>
+                    <span className="text-white font-semibold">
+                      {product.capacityRange.min || 0} - {product.capacityRange.max || 'Custom'} {product.capacityRange.unit || 'Liters'}
+                    </span>
+                  </div>
+                )}
+              </div>
 
               {/* Technical Specifications Table */}
               <h3 className="heading-font text-white text-md font-bold tracking-widest uppercase mb-4 border-b border-brand-accent/25 pb-2">
@@ -160,18 +188,56 @@ export default function ProductDetail() {
               <div className="overflow-hidden border border-white/[0.04] bg-brand-charcoal/50 rounded-sm mb-8 shadow-inner">
                 <table className="min-w-full divide-y divide-white/[0.04]">
                   <tbody className="divide-y divide-white/[0.04] text-xs sm:text-sm">
-                    {product.specs && Object.entries(product.specs).map(([key, value]) => (
-                      <tr key={key} className="hover:bg-white/[0.01] transition-colors">
-                        <td className="px-4 py-3.5 bg-white/[0.02] font-bold text-slate-300 w-1/3 uppercase tracking-wider text-[10px] sm:text-xs">
-                          {key}
-                        </td>
-                        <td className="px-4 py-3.5 text-slate-400 font-light">
-                          {value}
+                    {product.specifications && Array.isArray(product.specifications) && product.specifications.length > 0 ? (
+                      product.specifications.map((spec, index) => (
+                        <tr key={index} className="hover:bg-white/[0.01] transition-colors">
+                          <td className="px-4 py-3.5 bg-white/[0.02] font-bold text-slate-300 w-1/3 uppercase tracking-wider text-[10px] sm:text-xs">
+                            {spec.key}
+                          </td>
+                          <td className="px-4 py-3.5 text-slate-400 font-light">
+                            {spec.value}
+                          </td>
+                        </tr>
+                      ))
+                    ) : product.specs && Object.entries(product.specs).length > 0 ? (
+                      Object.entries(product.specs).map(([key, value]) => (
+                        <tr key={key} className="hover:bg-white/[0.01] transition-colors">
+                          <td className="px-4 py-3.5 bg-white/[0.02] font-bold text-slate-300 w-1/3 uppercase tracking-wider text-[10px] sm:text-xs">
+                            {key}
+                          </td>
+                          <td className="px-4 py-3.5 text-slate-400 font-light">
+                            {value}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="2" className="px-4 py-3.5 text-slate-500 font-light text-center">
+                          Custom specifications available upon request.
                         </td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
+              </div>
+
+              {/* Key Features & Standards Checklist */}
+              <div className="mb-8 p-4 bg-white/[0.01] border border-white/[0.03] rounded-sm">
+                <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-3">Engineering Features & Standards</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-[11px] text-slate-400 font-light">
+                  <div className="flex items-center gap-2">
+                    <span className="text-brand-accent">✓</span> Quality: Hydrostatic & DP tested
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-brand-accent">✓</span> Design: ASME Section VIII standards
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-brand-accent">✓</span> Finish: Mirror/Matte polish options
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-brand-accent">✓</span> Custom: Fully custom nozzle orientations
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -198,7 +264,7 @@ export default function ProductDetail() {
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {relatedProducts.map((item) => (
-                <ProductCard key={item.id} product={item} />
+                <ProductCard key={item._id || item.id} product={item} />
               ))}
             </div>
           </div>

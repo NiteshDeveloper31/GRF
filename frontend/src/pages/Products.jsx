@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { getProducts } from '../api/axios';
 import ProductCard from '../components/ProductCard';
@@ -26,22 +26,52 @@ export default function Products() {
   const [error, setError] = useState(null);
 
   const categoryFilter = searchParams.get('category') || '';
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const fetchAllProducts = async () => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleCategorySelect = (selected) => {
+    if (selected) {
+      setSearchParams({ category: selected });
+    } else {
+      setSearchParams({});
+    }
+    setIsDropdownOpen(false);
+  };
+
+  useEffect(() => {
+    const fetchAllProducts = async (showLoading = true) => {
       try {
-        setLoading(true);
+        if (showLoading) setLoading(true);
         const data = await getProducts();
         setProducts(data);
       } catch (err) {
-        setError('Unable to load products. Please check your network connection.');
+        if (showLoading) setError('Unable to load products. Please check your network connection.');
         console.error(err);
       } finally {
-        setLoading(false);
+        if (showLoading) setLoading(false);
       }
     };
 
-    fetchAllProducts();
+    fetchAllProducts(true);
+
+    // Poll for new products every 60 seconds
+    const interval = setInterval(() => {
+      fetchAllProducts(false);
+    }, 60000);
+
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -55,15 +85,6 @@ export default function Products() {
     }
   }, [categoryFilter, products]);
 
-  const handleCategoryChange = (e) => {
-    const selected = e.target.value;
-    if (selected) {
-      setSearchParams({ category: selected });
-    } else {
-      setSearchParams({});
-    }
-  };
-
   const handleContactForDetails = (categoryName) => {
     const params = new URLSearchParams();
     params.set('product', categoryName || 'Custom Equipment');
@@ -72,27 +93,8 @@ export default function Products() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Build items to display: Mix actual products and "Coming Soon" placeholders for empty categories
-  const displayItems = [];
-  
-  if (categoryFilter) {
-    if (filteredProducts.length > 0) {
-      filteredProducts.forEach(p => displayItems.push({ type: 'product', data: p }));
-    } else {
-      displayItems.push({ type: 'coming_soon', category: categoryFilter });
-    }
-  } else {
-    // Show all actual products first
-    products.forEach(p => displayItems.push({ type: 'product', data: p }));
-    
-    // Add "Coming Soon" cards for categories that have no products
-    CATEGORIES.forEach(cat => {
-      const catHasProducts = products.some(p => p.category.toLowerCase() === cat.toLowerCase());
-      if (!catHasProducts) {
-        displayItems.push({ type: 'coming_soon', category: cat });
-      }
-    });
-  }
+  // Build items to display: Only show real products from database
+  const displayItems = categoryFilter ? filteredProducts : products;
 
   return (
     <div className="py-16 bg-brand-obsidian min-h-screen relative overflow-hidden text-left">
@@ -118,28 +120,63 @@ export default function Products() {
         {/* Filters Panel */}
         <div className="glass-panel p-6 rounded-sm mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-2xl">
           <div>
-            <label htmlFor="category-select" className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
+            <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
               Filter by Equipment Category
             </label>
-            <div className="relative">
-              <select
-                id="category-select"
-                value={categoryFilter}
-                onChange={handleCategoryChange}
-                className="bg-brand-charcoal text-slate-200 text-sm border border-white/5 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent px-5 py-3 rounded-sm outline-none transition-all w-full sm:w-80 cursor-pointer appearance-none shadow-sm"
+            <div className="relative w-full max-w-[280px] sm:max-w-none sm:w-80" ref={dropdownRef}>
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="bg-brand-charcoal text-slate-200 text-sm border border-white/5 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent px-5 py-3.5 rounded-sm outline-none transition-all w-full flex justify-between items-center cursor-pointer shadow-sm hover:bg-brand-charcoal/80"
               >
-                <option value="">All Categories</option>
-                {CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-              <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <span className="heading-font text-xs tracking-wider text-left">
+                  {categoryFilter ? categoryFilter : 'All Categories'}
+                </span>
+                <svg
+                  className={`h-4 w-4 text-slate-400 transition-transform duration-200 ${
+                    isDropdownOpen ? 'rotate-180' : ''
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
-              </div>
+              </button>
+              
+              {isDropdownOpen && (
+                <div className="absolute left-0 z-50 w-full mt-2 bg-[#0b0d16]/98 border border-white/10 rounded-sm shadow-2xl max-h-72 overflow-y-auto backdrop-blur-md animate-scaleUp">
+                  <div className="py-1">
+                    <button
+                      type="button"
+                      onClick={() => handleCategorySelect('')}
+                      className={`w-full text-left px-5 py-3 text-xs tracking-wider font-bold heading-font transition-all ${
+                        !categoryFilter
+                          ? 'bg-brand-accent text-white'
+                          : 'text-slate-300 hover:bg-white/[0.03] hover:text-white border-b border-white/[0.02]'
+                      }`}
+                    >
+                      All Categories
+                    </button>
+                    {CATEGORIES.map((cat, idx) => (
+                      <button
+                        key={cat}
+                        type="button"
+                        onClick={() => handleCategorySelect(cat)}
+                        className={`w-full text-left px-5 py-3 text-xs tracking-wider font-bold heading-font transition-all ${
+                          categoryFilter.toLowerCase() === cat.toLowerCase()
+                            ? 'bg-brand-accent text-white'
+                            : `text-slate-300 hover:bg-white/[0.03] hover:text-white ${
+                                idx < CATEGORIES.length - 1 ? 'border-b border-white/[0.02]' : ''
+                              }`
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           
@@ -191,19 +228,9 @@ export default function Products() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 animate-fadeIn">
-            {displayItems.map((item, index) => {
-              if (item.type === 'product') {
-                return <ProductCard key={`prod-${item.data.id}`} product={item.data} />;
-              } else {
-                return (
-                  <ComingSoonCard 
-                    key={`cs-${item.category.replace(/\s+/g, '-')}`} 
-                    category={item.category} 
-                    onContact={handleContactForDetails} 
-                  />
-                );
-              }
-            })}
+            {displayItems.map((product) => (
+              <ProductCard key={`prod-${product._id || product.id}`} product={product} />
+            ))}
           </div>
         )}
         
@@ -263,7 +290,7 @@ function ComingSoonCard({ category, onContact }) {
         <div>
           {/* Category tag */}
           <div className="mb-4">
-            <span className="inline-block bg-brand-accent/5 border border-brand-accent/20 text-brand-accent text-[9px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-widest">
+            <span className="inline-block whitespace-nowrap bg-brand-accent/5 border border-brand-accent/20 text-brand-accent text-[9px] font-bold px-2.5 py-1 rounded-sm uppercase tracking-widest">
               {category}
             </span>
           </div>

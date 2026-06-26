@@ -77,9 +77,7 @@ export default function Footer() {
                   </svg>
                 </div>
                 <p className="text-slate-500 leading-relaxed font-light">
-                  Opposite Indian Oil Petrol Pump,<br />
-                  Shop No.5, Chaudhary Market,<br />
-                  Dehradun Road, Saharanpur - 247001,<br />
+                  Dehradun Rd, Saharanpur - 247001,<br />
                   Uttar Pradesh, India
                 </p>
               </div>
@@ -92,7 +90,7 @@ export default function Footer() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                     </svg>
                   </div>
-                  <a href="tel:+919876543210" className="hover:text-white font-medium transition-colors text-slate-300 font-mono">+91 98765 43210</a>
+                  <a href="tel:+919557530193" className="hover:text-white font-medium transition-colors text-slate-300 font-mono">+91 95575 30193</a>
                 </div>
 
                 <div className="flex items-center gap-3.5">
@@ -101,7 +99,7 @@ export default function Footer() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <a href="mailto:info@grfdynamicengineering.com" className="hover:text-white font-medium transition-colors text-slate-300 font-mono break-all">info@grfdynamicengineering.com</a>
+                  <a href="mailto:grfdynamicengineering@gmail.com" className="hover:text-white font-medium transition-colors text-slate-300 font-mono break-all">grfdynamicengineering@gmail.com</a>
                 </div>
 
                 <div className="flex items-center gap-3.5">
@@ -110,7 +108,7 @@ export default function Footer() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <span className="text-slate-500 font-light text-xs sm:text-sm">Mon - Sat: 9:00 AM - 6:30 PM</span>
+                  <span className="text-slate-500 font-light text-xs sm:text-sm">Mon - Sat: 9:00 AM - 6:00 PM</span>
                 </div>
               </div>
             </div>

@@ -232,6 +232,9 @@ export default function Home() {
             {/* Right Column: Premium Product Showcase Image */}
             <div className="lg:col-span-5 flex justify-center lg:justify-end mt-12 lg:mt-0">
               <div className="relative w-full max-w-[420px] aspect-square group flex items-center justify-center">
+                {/* Solid dark circle background to prevent smudge in light theme (using inline style to prevent class overrides) */}
+                <div className="absolute inset-4 rounded-full border border-brand-accent/15 shadow-2xl pointer-events-none" style={{ backgroundColor: '#0b0d16' }}></div>
+                
                 {/* Tech background grids & rings to blend it */}
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/5 to-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
                 
@@ -252,7 +255,7 @@ export default function Home() {
                 <img 
                   src={reactorImg} 
                   alt="Industrial Double Jacketed Chemical Reactor" 
-                  className="w-[90%] h-[90%] object-contain relative z-10 opacity-80 mix-blend-screen transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                  className="w-[85%] h-[85%] object-contain relative z-10 opacity-80 mix-blend-screen transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                   style={{
                     maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)',
                     WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)'
@@ -260,7 +263,7 @@ export default function Home() {
                 />
 
                 {/* Floating status tag */}
-                <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 bg-brand-charcoal/95 border border-brand-accent/30 px-3 py-1.5 rounded-sm shadow-xl">
+                <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2 border border-brand-accent/30 px-3 py-1.5 rounded-sm shadow-xl" style={{ backgroundColor: '#0b0d16' }}>
                   <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></span>
                   <span className="text-[9px] font-mono tracking-wider text-slate-300 uppercase font-semibold">GRF-RX-2000L</span>
                 </div>
@@ -448,7 +451,7 @@ export default function Home() {
                   Configure Custom Reactor
                 </Link>
                 <a
-                  href="tel:+919876543210"
+                  href="tel:+919557530193"
                   className="border border-white/10 hover:border-white text-slate-300 hover:text-white px-6 py-3.5 rounded-sm text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-white/[0.02]"
                 >
                   Call Lead Fabricator
@@ -490,7 +493,7 @@ export default function Home() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product._id || product.id} product={product} />
             ))}
           </div>
         )}

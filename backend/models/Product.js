@@ -45,10 +45,10 @@ const productSchema = new mongoose.Schema(
 
         images: [
             {
-                url: {
+                data: {
                     type: String,
                 },
-                publicId: {
+                contentType: {
                     type: String,
                 },
             },

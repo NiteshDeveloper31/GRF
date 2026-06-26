@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { createLead } from '../api/axios';
+import mapBlueprintImg from '../assets/location_blueprint.png';
 
 const CATEGORIES = [
   "Storage Tank",
@@ -18,6 +19,10 @@ const CATEGORIES = [
 export default function Contact() {
   const [searchParams] = useSearchParams();
   
+  const [mapCoords, setMapCoords] = useState({ x: 204, y: 110 });
+  const [expandedFaqId, setExpandedFaqId] = useState(null);
+  const [officeOpen, setOfficeOpen] = useState(true);
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -35,6 +40,27 @@ export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    const checkOfficeStatus = () => {
+      const now = new Date();
+      const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+      const istTime = new Date(utc + (3600000 * 5.5));
+      const hours = istTime.getHours();
+      setOfficeOpen(hours >= 9 && hours < 18);
+    };
+
+    checkOfficeStatus();
+    const interval = setInterval(checkOfficeStatus, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleMapMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.round(e.clientX - rect.left);
+    const y = Math.round(e.clientY - rect.top);
+    setMapCoords({ x, y });
+  };
 
   useEffect(() => {
     const productParam = searchParams.get('product') || '';
@@ -113,25 +139,49 @@ export default function Contact() {
         setSubmitError(result.message || 'Error occurred while recording your inquiry.');
       }
     } catch (err) {
-      setSubmitError('Failed to connect to the server. Please check your connection and try again.');
       console.error(err);
+      setSubmitError(
+        err.response?.data?.message || 
+        'Failed to connect to the server. Please check your connection and try again.'
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
+  const faqs = [
+    {
+      id: "01",
+      question: "What is your typical manufacturing lead time?",
+      answer: "Lead times vary based on vessel complexity and capacity. Standard storage tanks (up to 20,000L) are usually fabricated within 3 to 4 weeks. Custom reactors featuring half-pipe jacket limpets and heavy-duty agitator structures typically require 6 to 8 weeks, including full mechanical simulation and hydro-testing."
+    },
+    {
+      id: "02",
+      question: "Do you supply third-party testing and certifications?",
+      answer: "Yes, we provide comprehensive test certifications. Standard testing contains dye-penetrant checks (DPI), hydrostatic pressure tests up to 50 Bar, and ultrasonic thickness checks. We regularly coordinate inspections with recognized third-party agencies such as TUV, SGS, LLOYDS, and Bureau Veritas."
+    },
+    {
+      id: "03",
+      question: "Can you install and commission the equipment on-site?",
+      answer: "G R F Dynamic Engineering provides complete installation support. Our crew of ASME-qualified welders and rigging technicians can assemble, connect pipelines, and commission oversized silos, bright beer conditioning tanks, or industrial agitators directly at your factory site."
+    },
+    {
+      id: "04",
+      question: "Do you handle transport and oversize logistics?",
+      answer: "Yes. Saharanpur workshop has direct access to national highways. We coordinate transport logistics for oversized cargo, including low-bed trailers, secure tie-down structures, and transit insurance management to deliver systems safely across India."
+    }
+  ];
+
   return (
     <div className="py-16 bg-brand-obsidian min-h-screen relative overflow-hidden text-left animate-fadeIn">
       
-      {/* Blueprint grid background */}
       <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Page Header */}
         <div className="border-b border-white/[0.04] pb-10 mb-16">
-          <span className="text-brand-accent text-xs font-bold uppercase tracking-widest bg-brand-accent/5 border border-brand-accent/20 px-3 py-1.5 rounded-sm">
-            CONTACT & PROCUREMENT INQUIRIES
+          <span className="text-brand-accent text-xs font-bold uppercase tracking-widest bg-brand-accent/5 border border-brand-accent/20 px-3 py-1.5 rounded-sm font-mono">
+            CONTACT & PROCUREMENT INQUIRIES // DIRECT ROUTE
           </span>
           <h1 className="heading-font text-4xl sm:text-5xl font-extrabold text-white mt-4 uppercase">
             Request a Quote
@@ -139,30 +189,24 @@ export default function Contact() {
           <div className="h-0.5 w-12 bg-brand-accent mt-4"></div>
         </div>
 
-        {/* Success Modal Overlay */}
         {submitSuccess && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-brand-obsidian/95">
             <div className="bg-[#121216] border border-white/[0.05] p-8 sm:p-10 rounded-sm max-w-md w-full text-center shadow-2xl relative animate-scaleUp">
-              
               <div className="absolute top-2.5 left-2.5 border-t border-l border-brand-accent/35 w-4 h-4"></div>
               <div className="absolute top-2.5 right-2.5 border-t border-r border-brand-accent/35 w-4 h-4"></div>
               <div className="absolute bottom-2.5 left-2.5 border-b border-l border-brand-accent/35 w-4 h-4"></div>
               <div className="absolute bottom-2.5 right-2.5 border-b border-r border-brand-accent/35 w-4 h-4"></div>
-
               <div className="mx-auto flex items-center justify-center h-14 w-14 rounded-full bg-brand-accent/10 text-brand-accent mb-5 border border-brand-accent/20 shadow-inner">
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              
               <h3 className="heading-font text-white text-xl font-bold uppercase mb-3 tracking-wide">
                 Inquiry Submitted
               </h3>
-              
               <p className="text-slate-400 text-sm leading-relaxed mb-8 font-light">
                 Your request has been successfully recorded. Our sales team from the Saharanpur office will contact you within 24 business hours with technical specifications and commercial rates.
               </p>
-              
               <button
                 onClick={() => setSubmitSuccess(false)}
                 className="bg-gradient-to-r from-brand-accent to-blue-600 hover:brightness-110 text-white w-full py-3 rounded-sm font-bold uppercase text-xs tracking-widest transition-all duration-200 shadow-md shadow-brand-accent/15 cursor-pointer"
@@ -175,19 +219,67 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Contact Details */}
           <div className="lg:col-span-5 space-y-8">
             
-            {/* Office Coordinates */}
-            <div className="glass-panel p-8 rounded-sm shadow-2xl relative overflow-hidden">
+            <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm flex items-center justify-between">
+              <div className="flex items-center space-x-3">
+                <span className={`h-2.5 w-2.5 rounded-full ${officeOpen ? 'bg-emerald-500 animate-pulse' : 'bg-amber-500'}`}></span>
+                <div>
+                  <span className="text-[9px] font-mono text-slate-500 block uppercase">Saharanpur Office Status</span>
+                  <span className="text-xs font-bold text-white uppercase font-mono">
+                    {officeOpen ? 'Open & Receiving Inquiries' : 'After Hours // Form Active'}
+                  </span>
+                </div>
+              </div>
+              <div className="text-right text-[10px] font-mono text-slate-500">
+                IST // GMT+5.5
+              </div>
+            </div>
+
+            <div className="relative border border-white/10 bg-[#0a0d18] rounded-sm overflow-hidden p-3 shadow-2xl group">
+              <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none"></div>
+              <div className="absolute top-2 left-2 border-t border-l border-brand-accent/20 w-2.5 h-2.5"></div>
+              <div className="absolute top-2 right-2 border-t border-r border-brand-accent/20 w-2.5 h-2.5"></div>
+              <div className="absolute bottom-2 left-2 border-b border-l border-brand-accent/20 w-2.5 h-2.5"></div>
+              <div className="absolute bottom-2 right-2 border-b border-r border-brand-accent/20 w-2.5 h-2.5"></div>
+
+              <div 
+                className="relative cursor-crosshair overflow-hidden rounded-xs border border-white/5 select-none"
+                onMouseMove={handleMapMouseMove}
+              >
+                <img 
+                  src={mapBlueprintImg} 
+                  alt="GRF Location Blueprint" 
+                  className="w-full h-48 object-cover opacity-60 group-hover:opacity-75 transition-opacity duration-300"
+                />
+                <div 
+                  className="absolute pointer-events-none border-t border-dashed border-brand-accent/30 left-0 right-0 transition-all duration-75"
+                  style={{ top: `${(mapCoords.y / 192) * 100}%` }}
+                ></div>
+                <div 
+                  className="absolute pointer-events-none border-l border-dashed border-brand-accent/30 top-0 bottom-0 transition-all duration-75"
+                  style={{ left: `${(mapCoords.x / 365) * 100}%` }}
+                ></div>
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+                  <span className="absolute h-6 w-6 rounded-full bg-brand-accent/20 border border-brand-accent/50 animate-ping"></span>
+                  <span className="h-2 w-2 rounded-full bg-brand-accent relative z-10 shadow-md"></span>
+                </div>
+              </div>
+
+              <div className="mt-3 flex justify-between items-center text-[9px] font-mono text-slate-500 border-t border-white/[0.04] pt-2.5">
+                <span>X_COORD: {mapCoords.x}px / Y_COORD: {mapCoords.y}px</span>
+                <span className="text-brand-accent font-bold">LOC: 29.968°N 77.555°E</span>
+              </div>
+            </div>
+
+            <div className="glass-panel p-6 sm:p-8 rounded-sm shadow-2xl relative overflow-hidden">
               <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
               
-              <h2 className="heading-font text-lg text-white font-bold uppercase mb-8 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-8 after:h-0.5 after:bg-brand-accent">
+              <h2 className="heading-font text-md text-white font-bold uppercase mb-8 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-8 after:h-0.5 after:bg-brand-accent">
                 Registered Office
               </h2>
               
               <div className="space-y-7 text-sm text-slate-300">
-                {/* Address block */}
                 <div className="flex items-start gap-4">
                   <div className="bg-brand-charcoal p-3 rounded-sm border border-white/5 text-brand-accent shrink-0 shadow-md">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -196,17 +288,14 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <span className="text-slate-500 font-bold uppercase text-[9px] tracking-widest block mb-1.5">Company Address</span>
-                    <p className="leading-relaxed font-light text-slate-400">
-                      Opposite Indian Oil Petrol Pump,<br />
-                      Shop No.5, Chaudhary Market,<br />
-                      Dehradun Road, Saharanpur - 247001,<br />
+                    <span className="text-slate-500 font-bold uppercase text-[9px] tracking-widest block mb-1.5 font-mono">Company Address</span>
+                    <p className="leading-relaxed font-light text-slate-400 text-xs sm:text-sm">
+                      Dehradun Rd, Saharanpur - 247001,<br />
                       Uttar Pradesh, India
                     </p>
                   </div>
                 </div>
 
-                {/* Phone block */}
                 <div className="flex items-start gap-4">
                   <div className="bg-brand-charcoal p-3 rounded-sm border border-white/5 text-brand-accent shrink-0 shadow-md">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,14 +303,13 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <span className="text-slate-400 font-bold uppercase text-[9px] tracking-widest block mb-1.5">Phone Number</span>
-                    <p className="leading-relaxed font-bold text-white font-mono text-base">
-                      <a href="tel:+919876543210" className="hover:text-brand-accent transition-colors">+91 98765 43210</a>
+                    <span className="text-slate-400 font-bold uppercase text-[9px] tracking-widest block mb-1.5 font-mono">Phone Number</span>
+                    <p className="leading-relaxed font-bold text-white font-mono text-sm sm:text-base">
+                      <a href="tel:+919557530193" className="hover:text-brand-accent transition-colors">+91 95575 30193</a>
                     </p>
                   </div>
                 </div>
 
-                {/* Email block */}
                 <div className="flex items-start gap-4">
                   <div className="bg-brand-charcoal p-3 rounded-sm border border-white/5 text-brand-accent shrink-0 shadow-md">
                     <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -229,27 +317,26 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <span className="text-slate-400 font-bold uppercase text-[9px] tracking-widest block mb-1.5">Email Coordinates</span>
-                    <p className="leading-relaxed font-bold text-white font-mono break-all text-base">
-                      <a href="mailto:info@grfdynamicengineering.com" className="hover:text-brand-accent transition-colors">info@grfdynamicengineering.com</a>
+                    <span className="text-slate-400 font-bold uppercase text-[9px] tracking-widest block mb-1.5 font-mono">Email Coordinates</span>
+                    <p className="leading-relaxed font-bold text-white font-mono break-all text-xs sm:text-sm">
+                      <a href="mailto:grfdynamicengineering@gmail.com" className="hover:text-brand-accent transition-colors">grfdynamicengineering@gmail.com</a>
                     </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Consulting Message Callout */}
             <div className="border-l-[3px] border-brand-accent bg-brand-steel/20 p-6 rounded-r-sm shadow-md">
               <h3 className="heading-font text-white font-bold text-sm uppercase tracking-wide mb-1.5">Technical Consulting</h3>
-              <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                Need urgent assistance or specific custom configurations? You can directly speak to our lead mechanical fabricator by dialing <a href="tel:+919876543210" className="text-white hover:text-brand-accent underline font-semibold">+91 98765 43210</a>.
+              <p className="text-slate-400 text-xs leading-relaxed font-light">
+                Need urgent assistance or specific custom configurations? You can directly speak to our lead mechanical fabricator by dialing <a href="tel:+919557530193" className="text-white hover:text-brand-accent underline font-semibold">+91 95575 30193</a>.
               </p>
             </div>
 
           </div>
 
-          {/* Right Column: Quote Request Form */}
-          <div className="lg:col-span-7 glass-panel p-6 sm:p-10 rounded-sm shadow-2xl">
+          <div className="lg:col-span-7 glass-panel p-6 sm:p-10 rounded-sm shadow-2xl relative">
+            <div className="absolute top-0 right-0 border-t-2 border-r-2 border-brand-accent/10 w-6 h-6"></div>
             <h2 className="heading-font text-xl text-white font-bold uppercase mb-8 pb-3 border-b border-white/[0.03]">
               Request Technical Details & Quote
             </h2>
@@ -264,8 +351,6 @@ export default function Contact() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              
-              {/* Row 1: Name and Email */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
@@ -283,7 +368,6 @@ export default function Contact() {
                   />
                   {errors.fullName && <p className="text-red-500 text-xs mt-1.5 font-semibold">{errors.fullName}</p>}
                 </div>
-                
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                     Email Address <span className="text-brand-accent">*</span>
@@ -302,7 +386,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Row 2: Phone and WhatsApp */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
@@ -320,7 +403,6 @@ export default function Contact() {
                   />
                   {errors.phone && <p className="text-red-500 text-xs mt-1.5 font-semibold">{errors.phone}</p>}
                 </div>
-                
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                     WhatsApp Number
@@ -336,7 +418,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Row 3: Company and Designation */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
@@ -351,7 +432,6 @@ export default function Contact() {
                     placeholder="e.g. GRF Foods Pvt Ltd"
                   />
                 </div>
-                
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                     Designation
@@ -367,7 +447,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Row 4: Product Interest */}
               <div className="text-left">
                 <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                   Product Interest
@@ -394,7 +473,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Row 5: Capacity and Material Preference */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
@@ -409,7 +487,6 @@ export default function Contact() {
                     placeholder="e.g. 10,000 Litres, 20 Tons"
                   />
                 </div>
-                
                 <div className="text-left">
                   <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                     Material Preference
@@ -422,8 +499,9 @@ export default function Contact() {
                       className="w-full bg-brand-charcoal border border-white/5 focus:border-brand-accent focus:ring-1 focus:ring-brand-accent text-sm text-white px-4 py-3 rounded-sm outline-none transition-all cursor-pointer appearance-none"
                     >
                       <option value="">-- Select Material --</option>
-                      <option value="SS">Stainless Steel (SS 304 / 316)</option>
-                      <option value="MS">Mild Steel (MS)</option>
+                      <option value="Stainless Steel">Stainless Steel (SS 304 / 316)</option>
+                      <option value="Mild Steel">Mild Steel (MS)</option>
+                      <option value="Custom">Custom</option>
                       <option value="Not Sure">Not Sure / Need Advice</option>
                     </select>
                     <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-500">
@@ -435,7 +513,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Message */}
               <div className="text-left">
                 <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                   Specific Requirements / Message
@@ -450,7 +527,6 @@ export default function Contact() {
                 ></textarea>
               </div>
 
-              {/* Submit Button */}
               <div className="pt-2">
                 <button
                   type="submit"
@@ -467,11 +543,55 @@ export default function Contact() {
                   )}
                 </button>
               </div>
-
             </form>
           </div>
-
         </div>
+
+        <section className="mt-24 border-t border-white/[0.04] pt-16 mb-8">
+          <div className="mb-10 text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-[10px] font-mono text-brand-accent uppercase tracking-widest block">// PROCUREMENT HELP</span>
+            <h2 className="heading-font text-2xl text-white font-bold uppercase">
+              Frequently Asked Procurement Questions
+            </h2>
+            <p className="text-slate-400 text-xs sm:text-sm font-light">
+              Review standard lead times, testing practices, and delivery details for custom industrial structures.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {faqs.map((faq) => {
+              const isExpanded = expandedFaqId === faq.id;
+              return (
+                <div 
+                  key={faq.id}
+                  className="bg-brand-charcoal/30 border border-white/5 hover:border-brand-accent/10 rounded-sm p-5 transition-all duration-300 relative group"
+                >
+                  <div className="absolute top-2 left-2 text-[7px] font-mono text-slate-600">FAQ-ID: {faq.id}</div>
+                  
+                  <button
+                    onClick={() => setExpandedFaqId(isExpanded ? null : faq.id)}
+                    className="w-full flex justify-between items-start text-left pt-2 focus:outline-none cursor-pointer"
+                  >
+                    <h3 className="heading-font text-white font-bold text-xs uppercase tracking-wider pr-4 group-hover:text-brand-accent transition-colors">
+                      {faq.question}
+                    </h3>
+                    <span className="text-brand-accent shrink-0 font-mono text-xs font-bold pt-0.5">
+                      {isExpanded ? "[-]" : "[+]"}
+                    </span>
+                  </button>
+
+                  <div className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                    isExpanded ? 'max-h-60 opacity-100 mt-4' : 'max-h-0 opacity-0'
+                  }`}>
+                    <p className="text-slate-400 text-xs leading-relaxed font-light border-t border-white/[0.03] pt-3">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
       </div>
     </div>

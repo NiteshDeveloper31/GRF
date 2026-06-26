@@ -4,10 +4,17 @@ import cors from "cors";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import leadRoutes from "./routes/leadRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import analyticsRoutes from "./routes/analyticsRoutes.js";
+import faqRoutes from "./routes/faqRoutes.js";
+import { seedFAQs } from "./controllers/faqController.js";
 
 dotenv.config();
 
-connectDB();
+// Connect to database and seed defaults
+connectDB().then(() => {
+    seedFAQs();
+});
 
 const app = express();
 
@@ -17,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/products", productRoutes);
 app.use("/api/leads", leadRoutes);
+app.use("/api/admin", adminRoutes);
+app.use("/api/analytics", analyticsRoutes);
+app.use("/api/faqs", faqRoutes);
 
 app.get("/", (req, res) => {
     res.json({ message: "GRF Dynamic Engineering API Running" });

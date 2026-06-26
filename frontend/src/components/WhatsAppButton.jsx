@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function WhatsAppButton() {
   const handleClick = async () => {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://grf-8fnl.onrender.com/api';
     try {
       // Fire-and-forget click analytics tracking
       fetch(`${apiUrl}/analytics/whatsapp-click`, {

@@ -13,7 +13,7 @@ const mockSuccess = {
 export const getProducts = async (categoryFilter = '') => {
   if (!useMockApi) {
     const { default: axios } = await import('axios');
-    const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/products`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL || 'https://grf-8fnl.onrender.com/api'}/products`);
     const products = response.data;
     return categoryFilter
       ? products.filter(p => p.category.toLowerCase() === categoryFilter.toLowerCase())
@@ -32,7 +32,7 @@ export const getProducts = async (categoryFilter = '') => {
 export const getProductById = async (id) => {
   if (!useMockApi) {
     const { default: axios } = await import('axios');
-    const response = await axios.get(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/products/${id}`);
+    const response = await axios.get(`${import.meta.env.VITE_API_URL || 'https://grf-8fnl.onrender.com/api'}/products/${id}`);
     return response.data;
   }
 
@@ -62,7 +62,7 @@ export const createLead = async (leadData) => {
       material: leadData.materialPreference || leadData.material,
       message: leadData.message
     };
-    const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:5000/api'}/leads`, mappedData);
+    const response = await axios.post(`${import.meta.env.VITE_API_URL || 'https://grf-8fnl.onrender.com/api'}/leads`, mappedData);
     return {
       success: true,
       message: response.data.message || 'Your inquiry has been submitted successfully',

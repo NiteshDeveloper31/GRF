@@ -16,7 +16,7 @@ export default function Chatbot() {
   const messagesEndRef = useRef(null);
   const inputRef = useRef(null);
 
-  const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+  const apiUrl = import.meta.env.VITE_API_URL || "https://grf-8fnl.onrender.com/api";
 
   const suggestedQuestions = [
     { label: "Lead Time", query: "What is your manufacturing lead time?" },

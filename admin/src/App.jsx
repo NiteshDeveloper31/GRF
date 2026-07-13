@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet, useLocation, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { ToastProvider } from "./context/ToastContext";
@@ -15,6 +16,22 @@ import FAQs from "./pages/FAQs";
 // Layout for authorized sections
 const AppLayout = () => {
   const location = useLocation();
+
+  // Products global state
+  const [products, setProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
+  const [productsError, setProductsError] = useState(null);
+
+  // Inquiries (Quotes) global state
+  const [inquiries, setInquiries] = useState([]);
+  const [inquiriesLoading, setInquiriesLoading] = useState(true);
+  const [inquiriesError, setInquiriesError] = useState(null);
+  const [whatsappClickCount, setWhatsappClickCount] = useState(0);
+
+  // FAQs global state
+  const [faqs, setFaqs] = useState([]);
+  const [faqsLoading, setFaqsLoading] = useState(true);
+  const [faqsError, setFaqsError] = useState(null);
 
   // Map route paths to header titles
   const getSectionTitle = (path) => {
@@ -48,7 +65,11 @@ const AppLayout = () => {
         {/* Scrollable workspace */}
         <main className="flex-1 overflow-y-auto bg-brand-obsidian relative">
           <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-          <Outlet />
+          <Outlet context={{
+            products, setProducts, productsLoading, setProductsLoading, productsError, setProductsError,
+            inquiries, setInquiries, inquiriesLoading, setInquiriesLoading, inquiriesError, setInquiriesError, whatsappClickCount, setWhatsappClickCount,
+            faqs, setFaqs, faqsLoading, setFaqsLoading, faqsError, setFaqsError
+          }} />
         </main>
       </div>
     </div>

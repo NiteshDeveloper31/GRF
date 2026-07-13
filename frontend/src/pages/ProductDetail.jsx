@@ -7,18 +7,34 @@ export default function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [productPdfUrl, setProductPdfUrl] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   useEffect(() => {
+    let currentPdfUrl = null;
     const fetchProductAndRelated = async () => {
       try {
         setLoading(true);
         setError(null);
-        
+
         const productData = await getProductById(id);
         setProduct(productData);
+
+        if (productData?.pdf?.data) {
+          const bytes = atob(productData.pdf.data);
+          const buffer = new Uint8Array(bytes.length);
+          for (let i = 0; i < bytes.length; i += 1) {
+            buffer[i] = bytes.charCodeAt(i);
+          }
+          const blob = new Blob([buffer], { type: productData.pdf.contentType });
+          currentPdfUrl = URL.createObjectURL(blob);
+          setProductPdfUrl(currentPdfUrl);
+        } else {
+          setProductPdfUrl(null);
+        }
 
         const allProducts = await getProducts();
         const related = allProducts.filter(
@@ -34,7 +50,14 @@ export default function ProductDetail() {
     };
 
     fetchProductAndRelated();
+    setActiveImageIndex(0);
     window.scrollTo({ top: 0, behavior: 'instant' });
+
+    return () => {
+      if (productPdfUrl) {
+        URL.revokeObjectURL(productPdfUrl);
+      }
+    };
   }, [id]);
 
   const handleRequestQuote = () => {
@@ -81,12 +104,12 @@ export default function ProductDetail() {
 
   return (
     <div className="py-16 bg-brand-obsidian min-h-screen relative overflow-hidden text-left">
-      
+
       {/* Blueprint grid background */}
       <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 animate-fadeIn">
-        
+
         {/* Breadcrumb Navigation */}
         <nav className="flex items-center text-[10px] text-slate-500 gap-2 mb-8 uppercase font-bold tracking-widest">
           <Link to="/" className="hover:text-brand-accent transition-colors">Home</Link>
@@ -98,49 +121,76 @@ export default function ProductDetail() {
 
         {/* Product Details Main Block */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start glass-panel p-6 sm:p-10 rounded-sm mb-20 shadow-2xl">
-          
-          {/* Left: Large Placeholder Image - Technical Blueprint Spec style */}
-          <div className="lg:col-span-6 w-full aspect-[4/3] bg-[#0a0d18]/80 flex flex-col items-center justify-center p-8 text-center border border-white/5 relative select-none rounded-sm min-h-[350px] overflow-hidden">
-            {product.images && product.images.length > 0 ? (
-              <img 
-                src={`data:${product.images[0].contentType};base64,${product.images[0].data}`} 
-                alt={product.name}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            ) : (
-              <>
-                {/* Blueprint grid overlays */}
-                <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
-                <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-                
-                {/* Corner Drafting Marks */}
-                <div className="absolute top-4 left-4 border-l-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
-                <div className="absolute top-4 right-4 border-r-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
-                <div className="absolute bottom-4 left-4 border-l-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
-                <div className="absolute bottom-4 right-4 border-r-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
-                
-                <div className="absolute top-2.5 left-6 text-[8px] font-mono text-slate-500">GRF-DESIGN-ENG_SYS</div>
-                <div className="absolute bottom-2.5 right-6 text-[8px] font-mono text-slate-500">ASME CODE COMPLIANT</div>
 
-                {/* Concentric rotating grids */}
-                <div className="absolute h-56 w-56 rounded-full border border-dashed border-slate-700/50 flex items-center justify-center">
-                  <div className="h-44 w-44 rounded-full border border-dashed border-brand-accent/20 flex items-center justify-center">
-                    <div className="h-32 w-32 rounded-full border border-dashed border-slate-700/40"></div>
+          {/* Left: Product Images Gallery */}
+          <div className="lg:col-span-6 space-y-4 w-full">
+            {/* Large Viewport */}
+            <div className={`w-full aspect-[4/3] ${product.images && product.images.length > 0 ? 'bg-transparent' : 'bg-[#0a0d18]/80'} flex flex-col items-center justify-center p-8 text-center border border-white/5 relative select-none rounded-sm min-h-[350px] overflow-hidden`}>
+              {product.images && product.images.length > 0 ? (
+                <img
+                  src={`data:${product.images[activeImageIndex]?.contentType || product.images[0].contentType};base64,${product.images[activeImageIndex]?.data || product.images[0].data}`}
+                  alt={product.name}
+                  className="absolute inset-0 w-full h-full object-contain object-center animate-fadeIn"
+                  style={{ imageRendering: 'auto' }}
+                />
+              ) : (
+                <>
+                  {/* Blueprint grid overlays */}
+                  <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
+                  <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
+
+                  {/* Corner Drafting Marks */}
+                  <div className="absolute top-4 left-4 border-l-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                  <div className="absolute top-4 right-4 border-r-2 border-t-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                  <div className="absolute bottom-4 left-4 border-l-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
+                  <div className="absolute bottom-4 right-4 border-r-2 border-b-2 border-brand-accent w-6 h-6 opacity-80"></div>
+
+                  <div className="absolute top-2.5 left-6 text-[8px] font-mono text-slate-500">GRF-DESIGN-ENG_SYS</div>
+                  <div className="absolute bottom-2.5 right-6 text-[8px] font-mono text-slate-500">ASME CODE COMPLIANT</div>
+
+                  {/* Concentric rotating grids */}
+                  <div className="absolute h-56 w-56 rounded-full border border-dashed border-slate-700/50 flex items-center justify-center">
+                    <div className="h-44 w-44 rounded-full border border-dashed border-brand-accent/20 flex items-center justify-center">
+                      <div className="h-32 w-32 rounded-full border border-dashed border-slate-700/40"></div>
+                    </div>
                   </div>
-                </div>
 
-                <div className="z-10 px-4 bg-brand-charcoal/95 p-6 border border-white/5 rounded-sm shadow-lg relative max-w-sm">
-                  <h2 className="heading-font text-white font-extrabold text-lg sm:text-xl md:text-2xl leading-snug tracking-wider uppercase mb-2">
-                    {product.name}
-                  </h2>
-                  <span className="text-[10px] tracking-[0.2em] text-brand-accent uppercase font-bold block bg-brand-charcoal/90 py-1.5 px-4 border border-brand-accent/20 rounded-sm">
-                    GRF DYNAMIC SYSTEM
-                  </span>
-                  <p className="text-[9px] text-slate-500 mt-4 font-mono">
-                    MODEL: GRF-{product.category.toUpperCase().replace(/\s+/g, '-')}-00{product._id || product.id}
-                  </p>
-                </div>
-              </>
+                  <div className="z-10 px-4 bg-brand-charcoal/95 p-6 border border-white/5 rounded-sm shadow-lg relative max-w-sm text-center">
+                    <h2 className="heading-font text-white font-extrabold text-lg sm:text-xl md:text-2xl leading-snug tracking-wider uppercase mb-2">
+                      {product.name}
+                    </h2>
+                    <span className="text-[10px] tracking-[0.2em] text-brand-accent uppercase font-bold block bg-brand-charcoal/90 py-1.5 px-4 border border-brand-accent/20 rounded-sm">
+                      GRF DYNAMIC SYSTEM
+                    </span>
+                    <p className="text-[9px] text-slate-500 mt-4 font-mono">
+                      MODEL: GRF-{product.category.toUpperCase().replace(/\s+/g, '-')}-00{product._id || product.id}
+                    </p>
+                  </div>
+                </>
+              )}
+            </div>
+
+            {/* Thumbnail Navigation */}
+            {product.images && product.images.length > 1 && (
+              <div className="grid grid-cols-5 gap-3">
+                {product.images.map((img, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveImageIndex(idx)}
+                    className={`aspect-[4/3] rounded-sm overflow-hidden border-2 bg-[#0a0d18] transition-all cursor-pointer ${
+                      activeImageIndex === idx
+                        ? 'border-brand-accent scale-[1.02] shadow-md shadow-brand-accent/15'
+                        : 'border-white/5 hover:border-brand-accent/40'
+                    }`}
+                  >
+                    <img
+                      src={`data:${img.contentType};base64,${img.data}`}
+                      alt={`thumbnail ${idx + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             )}
           </div>
 
@@ -153,11 +203,11 @@ export default function ProductDetail() {
                   {product.category}
                 </span>
               </div>
-              
+
               <h1 className="heading-font text-3xl sm:text-4xl font-extrabold text-white mb-4 uppercase leading-none">
                 {product.name}
               </h1>
-              
+
               <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 font-light">
                 {product.longDescription || product.description}
               </p>
@@ -184,7 +234,7 @@ export default function ProductDetail() {
               <h3 className="heading-font text-white text-md font-bold tracking-widest uppercase mb-4 border-b border-brand-accent/25 pb-2">
                 Technical Specifications
               </h3>
-              
+
               <div className="overflow-hidden border border-white/[0.04] bg-brand-charcoal/50 rounded-sm mb-8 shadow-inner">
                 <table className="min-w-full divide-y divide-white/[0.04]">
                   <tbody className="divide-y divide-white/[0.04] text-xs sm:text-sm">
@@ -239,6 +289,38 @@ export default function ProductDetail() {
                   </div>
                 </div>
               </div>
+
+              {product.pdf && (
+                <div className="mb-8 p-5 bg-[#061b29] border border-brand-accent/10 rounded-2xl shadow-[0_0_30px_rgba(8,44,74,0.25)]">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="space-y-2">
+                      <p className="text-[10px] uppercase tracking-[0.35em] text-brand-accent font-bold">
+                        Product PDF
+                      </p>
+                      <p className="text-sm text-slate-300 max-w-2xl">
+                        View the equipment specification document directly in your browser, or download it for offline review.
+                      </p>
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-stretch gap-3">
+                      <a
+                        href={productPdfUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center justify-center rounded-sm bg-white/10 border border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition-all duration-200 hover:bg-white/15"
+                      >
+                        View PDF
+                      </a>
+                      <a
+                        href={productPdfUrl}
+                        download={product.pdf.filename || `${product.name}.pdf`}
+                        className="inline-flex items-center justify-center rounded-sm bg-brand-accent px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-slate-950 transition-all duration-200 hover:bg-brand-accent/90"
+                      >
+                        Download PDF
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* CTA button */}
@@ -261,7 +343,7 @@ export default function ProductDetail() {
               Related Equipment
             </h2>
             <div className="h-px bg-white/[0.04] w-full mb-8"></div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {relatedProducts.map((item) => (
                 <ProductCard key={item._id || item.id} product={item} />

@@ -40,16 +40,16 @@ export default function Navbar() {
     { path: '/contact', label: 'Contact Us' },
   ];
 
-  const activeStyle = "text-brand-accent font-bold relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-full after:h-0.5 after:bg-brand-accent after:shadow-[0_0_10px_#0ea5e9] pb-1 transition-all duration-300";
-  const inactiveStyle = "text-slate-400 hover:text-white font-medium pb-1 transition-all duration-300 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-0 after:h-0.5 after:bg-brand-accent hover:after:w-full after:transition-all after:duration-300";
+  const activeStyle = "text-brand-accent font-bold text-base md:text-lg relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-full after:h-0.5 after:bg-brand-accent after:shadow-[0_0_10px_#0ea5e9] pb-1 transition-all duration-300";
+  const inactiveStyle = "text-slate-400 hover:text-white font-medium text-base md:text-lg pb-1 transition-all duration-300 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-0 after:h-0.5 after:bg-brand-accent hover:after:w-full after:transition-all after:duration-300";
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
-      ? 'bg-brand-obsidian/95 shadow-lg border-b border-brand-accent/15 py-3.5'
-      : 'bg-transparent border-b border-white/5 py-6'
+      ? 'bg-brand-obsidian/95 shadow-lg border-b border-brand-accent/15 py-3'
+      : 'bg-transparent border-b border-white/5 py-4'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-12">
+        <div className="flex justify-between items-center">
           {/* Logo Section */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
@@ -57,15 +57,12 @@ export default function Navbar() {
               <img
                 src={logo}
                 alt="GRF Logo"
-                className="h-11 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                className="h-16 md:h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
               />
             </div>
-            <div className="flex flex-col text-left">
-              <span className="heading-font text-xl md:text-2xl font-extrabold tracking-wider text-white leading-none">
-                GRF <span className="text-brand-accent">DYNAMIC</span>
-              </span>
-              <span className="text-[9px] tracking-[0.25em] text-slate-500 font-semibold uppercase mt-0.5 leading-none">
-                Engineering
+            <div className="flex items-center text-left">
+              <span className="heading-font text-xl sm:text-2xl md:text-4xl font-extrabold tracking-wider text-white leading-none whitespace-nowrap">
+                GRF <span className="text-brand-accent">DYNAMIC</span> ENGINEERING
               </span>
             </div>
           </Link>
@@ -83,7 +80,7 @@ export default function Navbar() {
             ))}
             <Link
               to="/contact"
-              className="bg-gradient-to-r from-brand-accent to-blue-600 hover:brightness-110 text-white px-5 py-2.5 rounded-sm text-xs font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-brand-accent/10 active:scale-[0.98] mt-1"
+              className="bg-gradient-to-r from-brand-accent to-blue-600 hover:brightness-110 text-white px-6 py-3 rounded-sm text-sm font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-brand-accent/10 active:scale-[0.98] mt-1"
             >
               Get Quote
             </Link>

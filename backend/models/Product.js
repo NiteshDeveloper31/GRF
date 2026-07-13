@@ -54,6 +54,18 @@ const productSchema = new mongoose.Schema(
             },
         ],
 
+        pdf: {
+            data: {
+                type: String,
+            },
+            contentType: {
+                type: String,
+            },
+            filename: {
+                type: String,
+            },
+        },
+
         brochureUrl: {
             type: String,
         },

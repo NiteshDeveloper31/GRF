@@ -23,12 +23,12 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       type="button"
       title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
-      className="p-2.5 rounded-sm bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-brand-accent/20 text-slate-400 hover:text-white transition-all cursor-pointer flex items-center justify-center shadow-md active:scale-95"
+      className="p-3 rounded-sm bg-white/[0.03] hover:bg-white/[0.08] border border-white/5 hover:border-brand-accent/20 text-slate-400 hover:text-white transition-all cursor-pointer flex items-center justify-center shadow-md active:scale-95"
     >
       {theme === 'dark' ? (
         /* Sun Icon */
         <svg
-          className="h-4.5 w-4.5 text-brand-accent animate-[spin_10s_linear_infinite]"
+          className="h-5.5 w-5.5 text-brand-accent animate-[spin_10s_linear_infinite]"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -43,7 +43,7 @@ export default function ThemeToggle() {
       ) : (
         /* Moon Icon */
         <svg
-          className="h-4.5 w-4.5 text-indigo-400"
+          className="h-5.5 w-5.5 text-indigo-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import { faqsApi } from "../api/api";
 import { useToast } from "../context/ToastContext";
 import {
@@ -15,10 +16,13 @@ import {
 export default function FAQs() {
   const { showToast } = useToast();
 
-  // States
-  const [faqs, setFaqs] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Lifted States from AppLayout Outlet Context
+  const {
+    faqs, setFaqs,
+    faqsLoading: loading, setFaqsLoading: setLoading,
+    faqsError: error, setFaqsError: setError
+  } = useOutletContext();
+
   const [searchQuery, setSearchQuery] = useState("");
   
   // Modal states
@@ -33,21 +37,31 @@ export default function FAQs() {
   const [submitting, setSubmitting] = useState(false);
   const [deleteId, setDeleteId] = useState(null);
 
-  const fetchFaqs = async () => {
+  const fetchFaqs = async (showLoading = true) => {
     try {
-      setLoading(true);
+      if (showLoading) {
+        setLoading(true);
+        setError(null);
+      }
       const data = await faqsApi.getAll();
       setFaqs(data);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch FAQ catalog.");
+      if (showLoading && faqs.length === 0) {
+        setError("Failed to fetch FAQ catalog.");
+      }
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchFaqs();
+    if (faqs.length === 0) {
+      fetchFaqs(true);
+    } else {
+      // Revalidate silently in the background
+      fetchFaqs(false);
+    }
   }, []);
 
   const handleOpenAdd = () => {

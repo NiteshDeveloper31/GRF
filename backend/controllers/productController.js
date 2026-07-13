@@ -30,12 +30,22 @@ export const createProduct = async (req, res) => {
         }
 
         let images = [];
+        let pdf = undefined;
 
-        if (req.files && req.files.length > 0) {
-            images = req.files.map((file) => ({
+        if (req.files?.images?.length > 0) {
+            images = req.files.images.map((file) => ({
                 data: file.buffer.toString("base64"),
                 contentType: file.mimetype,
             }));
+        }
+
+        if (req.files?.pdf?.[0]) {
+            const pdfFile = req.files.pdf[0];
+            pdf = {
+                data: pdfFile.buffer.toString("base64"),
+                contentType: pdfFile.mimetype,
+                filename: pdfFile.originalname,
+            };
         }
 
         const isActiveBool = isActive === "false" || isActive === false ? false : true;
@@ -47,6 +57,7 @@ export const createProduct = async (req, res) => {
             description,
             specifications,
             images,
+            pdf,
             brochureUrl,
             material,
             capacityRange,
@@ -147,6 +158,18 @@ export const updateProduct = async (req, res) => {
         }
         product.capacityRange = capacityRange || product.capacityRange;
 
+        let existingImages = req.body.existingImages;
+        if (typeof existingImages === "string") {
+            try { existingImages = JSON.parse(existingImages); } catch (e) { }
+        }
+        if (Array.isArray(existingImages)) {
+            product.images = existingImages;
+        }
+
+        if (req.body.removePdf === "true" || req.body.removePdf === true) {
+            product.pdf = undefined;
+        }
+
         if (req.body.isActive !== undefined) {
             product.isActive = req.body.isActive === "false" || req.body.isActive === false ? false : true;
         }
@@ -155,12 +178,21 @@ export const updateProduct = async (req, res) => {
         }
         product.order = req.body.order ?? product.order;
 
-        if (req.files && req.files.length > 0) {
-            const newImages = req.files.map((file) => ({
+        if (req.files?.images?.length > 0) {
+            const newImages = req.files.images.map((file) => ({
                 data: file.buffer.toString("base64"),
                 contentType: file.mimetype,
             }));
             product.images = [...product.images, ...newImages];
+        }
+
+        if (req.files?.pdf?.[0]) {
+            const pdfFile = req.files.pdf[0];
+            product.pdf = {
+                data: pdfFile.buffer.toString("base64"),
+                contentType: pdfFile.mimetype,
+                filename: pdfFile.originalname,
+            };
         }
 
         const updatedProduct = await product.save();

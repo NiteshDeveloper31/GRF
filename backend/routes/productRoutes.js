@@ -12,11 +12,27 @@ import upload from "../middleware/uploadMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", protect, upload.array("images", 5), createProduct);
+router.post(
+    "/",
+    protect,
+    upload.fields([
+        { name: "images", maxCount: 10 },
+        { name: "pdf", maxCount: 1 },
+    ]),
+    createProduct
+);
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 router.get("/:id/related", getRelatedProducts);
-router.put("/:id", protect, upload.array("images", 5), updateProduct);
+router.put(
+    "/:id",
+    protect,
+    upload.fields([
+        { name: "images", maxCount: 10 },
+        { name: "pdf", maxCount: 1 },
+    ]),
+    updateProduct
+);
 router.delete("/:id", protect, deleteProduct);
 
 export default router;

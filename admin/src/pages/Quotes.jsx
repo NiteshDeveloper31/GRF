@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import { useOutletContext } from "react-router-dom";
 import { leadsApi, analyticsApi } from "../api/api";
 import { useToast } from "../context/ToastContext";
 import {
@@ -18,10 +19,14 @@ import {
 
 const Quotes = () => {
   const { showToast } = useToast();
-  const [inquiries, setInquiries] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [whatsappClickCount, setWhatsappClickCount] = useState(0);
+
+  // Lifted States from AppLayout Outlet Context
+  const {
+    inquiries, setInquiries,
+    inquiriesLoading: loading, setInquiriesLoading: setLoading,
+    inquiriesError: error, setInquiriesError: setError,
+    whatsappClickCount, setWhatsappClickCount
+  } = useOutletContext();
 
   // Search & Filter States
   const [search, setSearch] = useState("");
@@ -80,9 +85,13 @@ const Quotes = () => {
       }
     }
   };
-
   useEffect(() => {
-    fetchInquiries(true);
+    if (inquiries.length === 0) {
+      fetchInquiries(true);
+    } else {
+      // Revalidate silently in the background
+      fetchInquiries(false);
+    }
 
     const interval = setInterval(() => {
       fetchInquiries(false);

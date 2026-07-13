@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { productsApi } from "../api/api";
 import { useToast } from "../context/ToastContext";
 import {
@@ -14,27 +14,40 @@ const Products = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
 
-  // States
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // Lifted States from AppLayout Outlet Context
+  const {
+    products, setProducts,
+    productsLoading: loading, setProductsLoading: setLoading,
+    productsError: error, setProductsError: setError
+  } = useOutletContext();
+  
   const [deleteId, setDeleteId] = useState(null);
 
-  const fetchProducts = async () => {
+  const fetchProducts = async (showLoading = true) => {
     try {
-      setLoading(true);
+      if (showLoading) {
+        setLoading(true);
+        setError(null);
+      }
       const data = await productsApi.getAll({ all: true });
       setProducts(data);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch products catalog.");
+      if (showLoading && products.length === 0) {
+        setError("Failed to fetch products catalog.");
+      }
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchProducts();
+    if (products.length === 0) {
+      fetchProducts(true);
+    } else {
+      // Revalidate silently in the background
+      fetchProducts(false);
+    }
   }, []);
 
   const handleOpenAdd = () => {

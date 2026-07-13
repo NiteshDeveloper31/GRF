@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -11,6 +12,11 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 
 function App() {
+  // Lift products catalog state to persist in RAM across page changes
+  const [products, setProducts] = useState([]);
+  const [productsLoading, setProductsLoading] = useState(true);
+  const [productsError, setProductsError] = useState(null);
+
   return (
     <Router>
       <ScrollToTop />
@@ -21,8 +27,32 @@ function App() {
         {/* Dynamic Pages */}
         <main className="flex-grow pt-16">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
+            <Route 
+              path="/" 
+              element={
+                <Home 
+                  products={products} 
+                  setProducts={setProducts} 
+                  loading={productsLoading} 
+                  setLoading={setProductsLoading} 
+                  error={productsError} 
+                  setError={setProductsError} 
+                />
+              } 
+            />
+            <Route 
+              path="/products" 
+              element={
+                <Products 
+                  products={products} 
+                  setProducts={setProducts} 
+                  loading={productsLoading} 
+                  setLoading={setProductsLoading} 
+                  error={productsError} 
+                  setError={setProductsError} 
+                />
+              } 
+            />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />

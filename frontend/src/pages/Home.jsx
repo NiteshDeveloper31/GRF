@@ -59,21 +59,21 @@ const CATEGORIES_SHOWCASE = [
   }
 ];
 
-export default function Home() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
+export default function Home({ products, setProducts, loading, setLoading, error, setError }) {
   const [activeHotspot, setActiveHotspot] = useState(1);
 
   useEffect(() => {
     const fetchFeaturedProducts = async () => {
       try {
-        setLoading(true);
-        const data = await getProducts();
-        setProducts(data.slice(0, 6));
+        if (products.length === 0) {
+          setLoading(true);
+          const data = await getProducts();
+          setProducts(data);
+        }
       } catch (err) {
-        setError('Failed to fetch featured products. Please try again later.');
+        if (products.length === 0) {
+          setError('Failed to fetch featured products. Please try again later.');
+        }
         console.error(err);
       } finally {
         setLoading(false);
@@ -81,7 +81,7 @@ export default function Home() {
     };
 
     fetchFeaturedProducts();
-  }, []);
+  }, [products.length, setProducts, setLoading, setError]);
 
   const hotspots = [
     {
@@ -180,18 +180,18 @@ export default function Home() {
 
   return (
     <div className="flex flex-col bg-brand-obsidian text-slate-300 animate-fadeIn">
-      
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-24 md:py-32 border-b border-white/[0.03]">
+      <section className="relative overflow-hidden pt-16 md:pt-20 pb-16 border-b border-white/[0.03]">
         <div className="absolute inset-0 blueprint-grid opacity-30 pointer-events-none"></div>
         <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-        
+
         <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-brand-accent/[0.03] rounded-full pointer-events-none"></div>
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-900/[0.03] rounded-full pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-left">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Column: Hero Text */}
             <div className="lg:col-span-7">
               <div className="inline-flex items-center gap-2 bg-brand-accent/10 border border-brand-accent/20 px-3.5 py-1.5 rounded-full mb-6">
@@ -208,11 +208,11 @@ export default function Home() {
                   <span className="absolute left-0 bottom-0.5 w-full h-[3px] bg-brand-accent blur-[3px] opacity-40"></span>
                 </span>
               </h1>
-              
+
               <p className="text-slate-400 text-base sm:text-lg md:text-lg mb-10 max-w-2xl leading-relaxed font-light">
                 G R F Dynamic Engineering designs, builds, and delivers high-capacity storage silos, double-jacketed chemical reactors, milk tanks, and custom process equipment complying with ASME and ISO sanitary codes.
               </p>
-              
+
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/products"
@@ -234,10 +234,10 @@ export default function Home() {
               <div className="relative w-full max-w-[420px] aspect-square group flex items-center justify-center">
                 {/* Solid dark circle background to prevent smudge in light theme (using inline style to prevent class overrides) */}
                 <div className="absolute inset-4 rounded-full border border-brand-accent/15 shadow-2xl pointer-events-none" style={{ backgroundColor: '#0b0d16' }}></div>
-                
+
                 {/* Tech background grids & rings to blend it */}
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-accent/5 to-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
-                
+
                 {/* Concentric rotating grids & blueprint guides */}
                 <div className="absolute h-[85%] w-[85%] rounded-full border border-dashed border-slate-800/40 flex items-center justify-center pointer-events-none">
                   <div className="h-[75%] w-[75%] rounded-full border border-dashed border-brand-accent/20 flex items-center justify-center animate-pulse">
@@ -252,9 +252,9 @@ export default function Home() {
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-brand-accent/30 pointer-events-none"></div>
 
                 {/* Image itself with blending and radial mask */}
-                <img 
-                  src={reactorImg} 
-                  alt="Industrial Double Jacketed Chemical Reactor" 
+                <img
+                  src={reactorImg}
+                  alt="Industrial Double Jacketed Chemical Reactor"
                   className="w-[85%] h-[85%] object-contain relative z-10 opacity-80 mix-blend-screen transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                   style={{
                     maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)',
@@ -278,7 +278,7 @@ export default function Home() {
       <section className="py-16 border-b border-white/[0.03] bg-brand-charcoal/20 relative">
         <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="text-brand-accent text-xs font-bold uppercase tracking-widest bg-brand-accent/5 border border-brand-accent/20 px-3 py-1.5 rounded-sm">
               MANUFACTURING DIVISIONS
@@ -313,7 +313,7 @@ export default function Home() {
                     {cat.desc}
                   </p>
                 </div>
-                
+
                 <div className="text-[10px] text-brand-accent group-hover:text-white font-bold uppercase tracking-widest mt-4 flex items-center gap-1">
                   <span>View Catalog</span>
                   <svg className="h-3 w-3 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -331,7 +331,7 @@ export default function Home() {
       <section className="py-16 border-b border-white/[0.03] bg-brand-charcoal/30 relative">
         <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="text-brand-accent text-xs font-bold uppercase tracking-widest bg-brand-accent/5 border border-brand-accent/20 px-3 py-1.5 rounded-sm">
               INTERACTIVE VESSEL SPECIFICATIONS
@@ -348,17 +348,17 @@ export default function Home() {
           {/* Interactive Card Board */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-brand-charcoal/60 border border-white/5 rounded-sm p-6 sm:p-10 shadow-2xl relative">
             <div className="absolute inset-0 blueprint-grid opacity-15 pointer-events-none"></div>
-            
+
             {/* Left: The CAD Diagram */}
             <div className="lg:col-span-6 relative aspect-[3/4] max-w-[400px] mx-auto w-full bg-[#060810]/95 border border-white/5 rounded-sm p-6 flex items-center justify-center overflow-hidden">
               <div className="absolute inset-0 blueprint-grid opacity-25 pointer-events-none"></div>
               <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-              
+
               <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-brand-accent/40"></div>
               <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-brand-accent/40"></div>
               <div className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-brand-accent/40"></div>
               <div className="absolute bottom-3 right-3 w-4 h-4 border-b border-r border-brand-accent/40"></div>
-              
+
               <svg viewBox="0 0 100 130" className="w-full h-full text-brand-accent/35 font-mono select-none">
                 <line x1="50" y1="5" x2="50" y2="125" stroke="currentColor" strokeWidth="0.25" strokeDasharray="2,2" />
                 <rect x="42" y="8" width="16" height="12" fill="none" stroke="currentColor" strokeWidth="0.6" />
@@ -383,7 +383,7 @@ export default function Home() {
                 <rect x="46" y="105" width="8" height="6" fill="none" stroke="currentColor" strokeWidth="0.6" />
                 <line x1="44" y1="111" x2="56" y2="111" stroke="currentColor" strokeWidth="0.8" />
               </svg>
-              
+
               {/* Hotspots */}
               {hotspots.map((spot) => (
                 <button
@@ -393,15 +393,13 @@ export default function Home() {
                   }}
                   onClick={() => setActiveHotspot(spot.id)}
                   style={{ left: spot.x, top: spot.y }}
-                  className={`absolute h-7 w-7 rounded-full flex items-center justify-center transition-all duration-300 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 ${
-                    activeHotspot === spot.id 
+                  className={`absolute h-7 w-7 rounded-full flex items-center justify-center transition-all duration-300 -translate-x-1/2 -translate-y-1/2 cursor-pointer z-20 ${activeHotspot === spot.id
                       ? 'bg-brand-accent text-white scale-110 shadow-[0_0_15px_#0ea5e9]'
                       : 'bg-brand-charcoal border border-brand-accent/40 text-brand-accent hover:bg-brand-accent/20'
-                  }`}
+                    }`}
                 >
-                  <span className={`absolute inset-0 rounded-full bg-brand-accent/30 pointer-events-none ${
-                    activeHotspot === spot.id ? 'hotspot-glow' : ''
-                  }`}></span>
+                  <span className={`absolute inset-0 rounded-full bg-brand-accent/30 pointer-events-none ${activeHotspot === spot.id ? 'hotspot-glow' : ''
+                    }`}></span>
                   <span className="text-[10px] font-bold font-mono">{spot.id}</span>
                 </button>
               ))}
@@ -409,10 +407,10 @@ export default function Home() {
 
             {/* Right: Technical Inspector Data card */}
             <div className="lg:col-span-6 text-left flex flex-col justify-between h-full space-y-6">
-              
+
               <div className="bg-brand-obsidian/60 border border-white/5 p-6 sm:p-8 rounded-sm shadow-xl relative overflow-hidden">
                 <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
-                
+
                 <div className="flex items-center gap-3 mb-4">
                   <span className="bg-brand-accent text-white heading-font text-xs font-bold px-2 py-0.5 rounded-sm font-mono">
                     COMPONENT 0{activeHotspotInfo.id}
@@ -423,7 +421,7 @@ export default function Home() {
                 <h3 className="heading-font text-white text-2xl font-extrabold mb-3 tracking-wide uppercase border-b border-brand-accent/25 pb-2">
                   {activeHotspotInfo.title}
                 </h3>
-                
+
                 <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light mb-6">
                   {activeHotspotInfo.desc}
                 </p>
@@ -483,8 +481,8 @@ export default function Home() {
         ) : error ? (
           <div className="text-center py-16 bg-brand-charcoal/30 rounded-sm border border-white/5 max-w-md mx-auto shadow-2xl">
             <p className="text-red-500 font-semibold mb-4 text-sm">{error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="bg-brand-steel border border-white/10 hover:border-white text-white px-6 py-2 rounded-sm text-xs font-bold uppercase tracking-wider transition-colors"
             >
               Retry
@@ -492,7 +490,7 @@ export default function Home() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {products.map((product) => (
+            {products.slice(0, 6).map((product) => (
               <ProductCard key={product._id || product.id} product={product} />
             ))}
           </div>
@@ -515,7 +513,7 @@ export default function Home() {
       <section className="bg-brand-charcoal/20 py-16 border-t border-b border-white/[0.03] relative">
         <div className="absolute inset-0 blueprint-grid opacity-5 pointer-events-none"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="text-center max-w-3xl mx-auto mb-10">
             <span className="text-brand-accent text-xs font-bold uppercase tracking-widest">
               OUR MANUFACTURE STANDARDS
@@ -528,8 +526,8 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {usps.map((usp, index) => (
-              <div 
-                key={index} 
+              <div
+                key={index}
                 className="glass-panel glass-panel-hover p-7 rounded-sm flex flex-col justify-between relative group text-left"
               >
                 <div className="absolute top-0 right-0 w-4 h-[1px] bg-brand-accent/30 group-hover:bg-brand-accent transition-colors"></div>
@@ -566,7 +564,7 @@ export default function Home() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {industries.map((ind, index) => (
-            <div 
+            <div
               key={index}
               className="bg-brand-steel/30 p-7 rounded-sm border border-white/[0.03] hover:border-brand-accent/20 flex items-start gap-5 transition-all duration-300 group shadow-md hover:shadow-xl text-left"
             >
@@ -591,10 +589,10 @@ export default function Home() {
         <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
         <div className="absolute right-10 bottom-0 w-80 h-80 opacity-5 text-white select-none pointer-events-none hidden md:block">
           <svg fill="currentColor" viewBox="0 0 24 24" className="w-full h-full">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
           </svg>
         </div>
-        
+
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="heading-font text-3xl sm:text-4xl md:text-5xl text-white font-extrabold uppercase tracking-wide leading-none">
             Have a project in mind? Let's talk.

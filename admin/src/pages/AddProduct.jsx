@@ -38,6 +38,9 @@ const AddProduct = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [filePreviews, setFilePreviews] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
+  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [existingPdf, setExistingPdf] = useState(null);
+  const [removeExistingPdf, setRemoveExistingPdf] = useState(false);
   const [uploadError, setUploadError] = useState("");
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -83,6 +86,7 @@ const AddProduct = () => {
             order: product.order || 0,
           });
           setExistingImages(product.images || []);
+          setExistingPdf(product.pdf || null);
         } catch (err) {
           console.error(err);
           showToast("Failed to fetch product details.", "error");
@@ -138,15 +142,8 @@ const AddProduct = () => {
     const files = Array.from(e.target.files);
     setUploadError("");
 
-    // Validate size & count
-    const invalidFiles = files.filter(file => file.size > 2 * 1024 * 1024);
-    if (invalidFiles.length > 0) {
-      setUploadError("Some files exceed the 2MB limit.");
-      return;
-    }
-
-    if (selectedFiles.length + files.length > 5) {
-      setUploadError("Maximum 5 images allowed per equipment.");
+    if (selectedFiles.length + files.length > 10) {
+      setUploadError("Maximum 10 images allowed per equipment.");
       return;
     }
 
@@ -169,6 +166,33 @@ const AddProduct = () => {
     setExistingImages(existingImages.filter((_, idx) => idx !== index));
   };
 
+  const handlePdfSelect = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (file.type !== "application/pdf") {
+      setUploadError("Please upload a PDF document.");
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setUploadError("PDF file size must be under 10MB.");
+      return;
+    }
+    setUploadError("");
+    setSelectedPdf(file);
+    setRemoveExistingPdf(false);
+  };
+
+  const clearSelectedPdf = () => {
+    setSelectedPdf(null);
+    setUploadError("");
+  };
+
+  const removeExistingPdfHandler = () => {
+    setExistingPdf(null);
+    setRemoveExistingPdf(true);
+    setUploadError("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.category) {
@@ -186,10 +210,10 @@ const AddProduct = () => {
       formData.append("isActive", form.isActive);
       formData.append("isFeatured", form.isFeatured);
       formData.append("order", form.order === "" ? 0 : form.order);
-      
+
       formData.append("material", JSON.stringify(form.material));
       formData.append("capacityRange", JSON.stringify(form.capacityRange));
-      
+
       const cleanSpecs = form.specifications.filter(s => s.key && s.value);
       formData.append("specifications", JSON.stringify(cleanSpecs));
 
@@ -198,9 +222,15 @@ const AddProduct = () => {
         formData.append("images", file);
       });
 
-      // If editing, send existing images that weren't deleted
+      if (selectedPdf) {
+        formData.append("pdf", selectedPdf);
+      }
+
       if (isEditMode) {
         formData.append("existingImages", JSON.stringify(existingImages));
+        if (removeExistingPdf) {
+          formData.append("removePdf", "true");
+        }
         await productsApi.update(id, formData);
         showToast("Equipment updated successfully.", "success");
       } else {
@@ -249,7 +279,7 @@ const AddProduct = () => {
 
       {/* Form Card */}
       <form onSubmit={handleSubmit} className="glass-panel p-6 rounded-sm border border-white/[0.04] space-y-6">
-        
+
         {/* Name and Category */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-1">
@@ -424,8 +454,8 @@ const AddProduct = () => {
 
         {/* Media uploads */}
         <div className="space-y-3 border-t border-white/[0.04] pt-5">
-          <label className="text-[10px] font-mono text-slate-500 uppercase block">Upload New Images (Max 5, max 2MB each)</label>
-          
+          <label className="text-[10px] font-mono text-slate-500 uppercase block">Upload New Images (Max 10)</label>
+
           <div className="border border-dashed border-white/10 hover:border-brand-accent/20 rounded-sm bg-[#0a0d18]/45 transition-colors p-6 text-center relative">
             <input
               type="file"
@@ -443,7 +473,6 @@ const AddProduct = () => {
 
           {uploadError && <p className="text-xs text-red-400 font-mono">{uploadError}</p>}
 
-          {/* New previews */}
           {filePreviews.length > 0 && (
             <div className="grid grid-cols-5 gap-4 mt-4">
               {filePreviews.map((preview, index) => (
@@ -460,6 +489,56 @@ const AddProduct = () => {
               ))}
             </div>
           )}
+        </div>
+
+        <div className="space-y-3 border-t border-white/[0.04] pt-5">
+          <label className="text-[10px] font-mono text-slate-500 uppercase block">Optional PDF Document</label>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="border border-dashed border-white/10 rounded-sm bg-[#0a0d18]/45 p-4 transition-colors">
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={handlePdfSelect}
+                className="w-full text-xs text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border-0 file:bg-brand-accent file:text-white cursor-pointer"
+              />
+              {selectedPdf && (
+                <div className="mt-3 flex items-center justify-between gap-3 text-xs text-slate-300">
+                  <span>Selected PDF: <span className="text-brand-accent">{selectedPdf.name}</span></span>
+                  <button
+                    type="button"
+                    onClick={clearSelectedPdf}
+                    className="text-brand-accent hover:text-white text-[10px] uppercase tracking-widest"
+                  >
+                    Clear
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className="border border-dashed border-white/10 rounded-sm bg-[#0a0d18]/45 p-4 transition-colors">
+              <div className="flex items-center justify-between gap-3 text-xs text-slate-300">
+                <div>
+                  <div className="font-semibold text-slate-100 text-[11px] mb-1">Current PDF</div>
+                  {isEditMode && existingPdf ? (
+                    <p>
+                      <span className="text-brand-accent">{existingPdf.filename || "Uploaded PDF"}</span>
+                    </p>
+                  ) : (
+                    <p className="text-slate-500">No PDF uploaded yet.</p>
+                  )}
+                </div>
+                {isEditMode && existingPdf && (
+                  <button
+                    type="button"
+                    onClick={removeExistingPdfHandler}
+                    className="text-red-400 hover:text-white text-[10px] uppercase tracking-widest"
+                  >
+                    Remove
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Boolean Toggles & Order */}
@@ -513,8 +592,8 @@ const AddProduct = () => {
           </button>
         </div>
 
-      </form>
-    </div>
+      </form >
+    </div >
   );
 };
 

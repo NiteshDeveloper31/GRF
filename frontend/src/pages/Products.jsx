@@ -17,13 +17,14 @@ const CATEGORIES = [
   "Custom Equipment"
 ];
 
-export default function Products() {
+export default function Products({ products, setProducts, loading, setLoading, error, setError }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  
+  // Scroll Pagination State
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [isNextPageLoading, setIsNextPageLoading] = useState(false);
 
   const categoryFilter = searchParams.get('category') || '';
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -57,22 +58,53 @@ export default function Products() {
         const data = await getProducts();
         setProducts(data);
       } catch (err) {
-        if (showLoading) setError('Unable to load products. Please check your network connection.');
+        if (showLoading && products.length === 0) {
+          setError('Unable to load products. Please check your network connection.');
+        }
         console.error(err);
       } finally {
         if (showLoading) setLoading(false);
       }
     };
 
-    fetchAllProducts(true);
+    if (products.length === 0) {
+      fetchAllProducts(true);
+    } else {
+      // Silently revalidate in background to fetch updates
+      fetchAllProducts(false);
+    }
 
-    // Poll for new products every 60 seconds
+    // Poll for new products every 60 seconds (silently in background)
     const interval = setInterval(() => {
       fetchAllProducts(false);
     }, 60000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [products.length, setProducts, setLoading, setError]);
+
+  // Infinite Scroll Pagination logic (load 6 products at a time)
+  useEffect(() => {
+    const handleScroll = () => {
+      if (loading || error || isNextPageLoading) return;
+
+      const totalItems = categoryFilter ? filteredProducts.length : products.length;
+      if (visibleCount >= totalItems) return;
+
+      const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+      const isNearBottom = window.innerHeight + scrollTop >= document.documentElement.scrollHeight - 250;
+      
+      if (isNearBottom) {
+        setIsNextPageLoading(true);
+        setTimeout(() => {
+          setVisibleCount(prev => Math.min(prev + 6, totalItems));
+          setIsNextPageLoading(false);
+        }, 600); // 600ms delay to feel realistic and smooth
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [visibleCount, filteredProducts.length, products.length, loading, error, isNextPageLoading, categoryFilter]);
 
   useEffect(() => {
     if (categoryFilter) {
@@ -83,6 +115,9 @@ export default function Products() {
     } else {
       setFilteredProducts(products);
     }
+    // Reset visible count on category change
+    setVisibleCount(6);
+    setIsNextPageLoading(false);
   }, [categoryFilter, products]);
 
   const handleContactForDetails = (categoryName) => {
@@ -227,10 +262,26 @@ export default function Products() {
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 animate-fadeIn">
-            {displayItems.map((product) => (
-              <ProductCard key={`prod-${product._id || product.id}`} product={product} />
-            ))}
+          <div className="space-y-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 animate-fadeIn">
+              {displayItems.slice(0, visibleCount).map((product) => (
+                <ProductCard key={`prod-${product._id || product.id}`} product={product} />
+              ))}
+            </div>
+
+            {/* Next page premium loader */}
+            {isNextPageLoading && (
+              <div className="flex flex-col items-center justify-center py-6 animate-pulse">
+                <div className="flex space-x-2 justify-center items-center">
+                  <div className="h-2 w-2 bg-brand-accent rounded-full animate-bounce [animation-delay:-0.3s]"></div>
+                  <div className="h-2 w-2 bg-brand-accent rounded-full animate-bounce [animation-delay:-0.15s]"></div>
+                  <div className="h-2 w-2 bg-brand-accent rounded-full animate-bounce"></div>
+                </div>
+                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mt-3">
+                  Loading engineering models...
+                </span>
+              </div>
+            )}
           </div>
         )}
         

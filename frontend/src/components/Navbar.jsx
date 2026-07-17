@@ -61,7 +61,7 @@ export default function Navbar() {
               />
             </div>
             <div className="flex items-center text-left">
-              <span className="heading-font text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-extrabold tracking-wider text-white leading-tight max-w-[130px] sm:max-w-none whitespace-normal sm:whitespace-nowrap">
+              <span className="heading-font text-xl sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-extrabold tracking-wider text-white leading-tight max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap">
                 GRF <span className="text-brand-accent">DYNAMIC</span> ENGINEERING
               </span>
             </div>

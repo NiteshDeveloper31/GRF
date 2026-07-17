@@ -61,14 +61,14 @@ export default function Navbar() {
               />
             </div>
             <div className="flex items-center text-left">
-              <span className="heading-font text-xl sm:text-2xl md:text-4xl font-extrabold tracking-wider text-white leading-none whitespace-nowrap">
+              <span className="heading-font text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-extrabold tracking-wider text-white leading-tight max-w-[130px] sm:max-w-none whitespace-normal sm:whitespace-nowrap">
                 GRF <span className="text-brand-accent">DYNAMIC</span> ENGINEERING
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden xl:flex items-center space-x-8">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -88,7 +88,7 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-3">
+          <div className="xl:hidden flex items-center space-x-3">
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -112,7 +112,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ease-in-out border-white/[0.03] ${isOpen
+        className={`xl:hidden transition-all duration-300 ease-in-out border-white/[0.03] ${isOpen
           ? 'max-h-screen opacity-100 py-6 border-b bg-brand-obsidian shadow-2xl'
           : 'max-h-0 opacity-0 overflow-hidden pointer-events-none border-b-0'
           }`}

@@ -123,7 +123,7 @@ export default function Products({ products, setProducts, loading, setLoading, e
   const handleContactForDetails = (categoryName) => {
     const params = new URLSearchParams();
     params.set('product', categoryName || 'Custom Equipment');
-    params.set('message', `Inquiry regarding custom fabrication of ${categoryName || 'process equipment'}.`);
+    params.set('message', `Inquiry regarding custom manufacturing of ${categoryName || 'process equipment'}.`);
     navigate(`/contact?${params.toString()}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -351,7 +351,7 @@ function ComingSoonCard({ category, onContact }) {
           </h3>
           
           <p className="text-slate-400 text-sm mb-6 leading-relaxed font-light">
-            We are currently adding standard inventory products to this category. We fully design and fabricate custom {category} equipment to client specifications. Contact us for custom sizing, pressure ratings, and layouts.
+            We are currently adding standard inventory products to this category. We fully design and manufacture custom {category} equipment to client specifications. Contact us for custom sizing, pressure ratings, and layouts.
           </p>
         </div>
 

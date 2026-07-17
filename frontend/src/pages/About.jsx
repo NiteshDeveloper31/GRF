@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Link } from 'react-router-dom';
-import workshopImg from '../assets/workshop_fabrication.png';
+import workshopImg from '../assets/production_site.jpg';
 import cadImg from '../assets/cad_engineering.png';
 import weldingImg from '../assets/welding_precision.png';
 import reactorImg from '../assets/industrial_reactor.png';
@@ -10,6 +10,7 @@ import shahzadMalikImg from '../assets/Sahjad Malik .jpeg';
 import zainulAbidinImg from '../assets/Zainul Abidin.jpeg';
 import zrRamanImg from '../assets/ZR raman.jpeg';
 import sajidMalikImg from '../assets/Sajid Malik.jpeg';
+import grfImage from '../assets/GRF-Image.jpeg';
 
 export default function About() {
   // States
@@ -46,7 +47,7 @@ export default function About() {
     {
       id: 2,
       title: "Advanced Welding & Forming",
-      short: "ASME Sec IX Certified Fabrication",
+      short: "ASME Sec IX Certified Manufacturing",
       desc: "Equipped with automatic plate bending rollers, dished end forming presses, and skilled weld technicians certified to ASME Section IX for high-integrity TIG, MIG, and Submerged Arc Welding.",
       image: weldingImg,
       details: [
@@ -89,8 +90,8 @@ export default function About() {
       year: "2011",
       title: "Company Foundation",
       subtitle: "Saharanpur, UP",
-      desc: "Founded as a regional custom fabrication unit specializing in steel structures and basic industrial silos in Saharanpur, Uttar Pradesh.",
-      stats: { "Team Size": "10 fabricators", "Facility Area": "5,000 sq ft", "Initial Focus": "Agricultural storage" }
+      desc: "Founded as a regional custom manufacturing unit specializing in steel structures and basic industrial silos in Saharanpur, Uttar Pradesh.",
+      stats: { "Team Size": "10 skilled technicians", "Facility Area": "5,000 sq ft", "Initial Focus": "Agricultural storage" }
     },
     {
       year: "2015",
@@ -123,10 +124,10 @@ export default function About() {
   ];
 
   const values = [
-    { name: "Engineering Precision", desc: "Every millimeter and weld joint is scrutinized to ensure it complies with ASME, API, or ISO codes." },
-    { name: "Safety First", desc: "All vessels undergo strict safety testing to operate under high pressure and vacuum without risk." },
-    { name: "Customer Centricity", desc: "We fabricate bespoke custom equipment tailored exactly to your floor space and process requirements." },
-    { name: "Long-term Durability", desc: "We select the highest grade SS and MS metals, guaranteeing an extended operational lifecycle." }
+    { name: "Engineering Precision", desc: "Every single millimeter, dimensional spec, and weld joint is meticulously scrutinized using advanced testing and inspection techniques. We ensure strict compliance with international standards such as ASME Section VIII, API 650, and ISO sanitization codes, delivering absolute accuracy and fault-free structural stability in every custom build." },
+    { name: "Safety First", desc: "All pressure vessels, chemical reactors, and storage tanks undergo rigorous pressure and safety trials. We perform mandatory non-destructive testing (NDT), high-pressure hydro-tests, pneumatic checks, and vacuum retention trials to guarantee safe, risk-free performance under extreme industrial conditions." },
+    { name: "Customer Centricity", desc: "We design and manufacture bespoke industrial process equipment tailored to your layout blueprints, chemical parameters, and exact floor space. From specific nozzle placements to custom mixing systems, your physical and process requirements drive our design and engineering layouts." },
+    { name: "Long-term Durability", desc: "We source and certify only premium grades of Stainless Steel (SS304, SS316L, Duplex) and Mild Steel (MS) metals. With precise chemical-resistant surface coatings and professional mirror-finish polishing, we ensure our equipment achieves an extended operational lifecycle under harsh, heavy-duty industrial cycles." }
   ];
 
   const team = [
@@ -217,12 +218,12 @@ export default function About() {
       experience: "14+ Years",
       shortBio: "Sahjad Malik is a Project Execution and Installation Expert with over 14 years of hands-on experience in site management, equipment installation, testing, commissioning, and quality assurance.",
       fullBio: [
-        "I am Shahzad, the Site Incharge at GRF Dynamic Engineering, with more than 14 years of professional experience in industrial project execution, equipment installation, fabrication supervision, site management, quality assurance, and commissioning. Throughout my career, I have been dedicated to delivering safe, efficient, and high-quality project execution while ensuring complete customer satisfaction and compliance with engineering standards.",
-        "With over fourteen years of hands-on industrial experience, I have developed extensive expertise in managing complex installation projects, supervising fabrication and erection activities, coordinating multidisciplinary teams, and ensuring that every project is completed on schedule and within the required quality standards. My practical knowledge of industrial processes, combined with strong leadership and problem-solving abilities, enables me to successfully manage projects from initial planning to final commissioning.",
-        "As the Site Incharge at GRF Dynamic Engineering, I am responsible for planning, organizing, and supervising all on-site activities. My role includes coordinating with clients, engineers, contractors, and project teams to ensure seamless project execution. I oversee equipment installation, fabrication, erection, alignment, testing, commissioning, quality inspections, safety compliance, manpower management, and project documentation while ensuring strict adherence to engineering drawings and technical specifications.",
-        "My expertise includes interpreting engineering drawings, supervising fabrication and welding activities, monitoring installation procedures, conducting site inspections, ensuring dimensional accuracy, managing resources efficiently, resolving technical challenges, and maintaining project timelines. I am committed to implementing best engineering practices that improve productivity, enhance operational efficiency, and deliver reliable industrial solutions.",
+        "I am Shahzad, the Site Incharge at GRF Dynamic Engineering, with more than 14 years of professional experience in industrial project execution, equipment installation, manufacturing supervision, site management, quality assurance, and commissioning. Throughout my career, I have been dedicated to delivering safe, efficient, and high-quality project execution while ensuring complete customer satisfaction and compliance with engineering standards.",
+        "With over fourteen years of hands-on industrial experience, I have developed extensive expertise in managing complex installation projects, supervising installation and erection activities, coordinating multidisciplinary teams, and ensuring that every project is completed on schedule and within the required quality standards. My practical knowledge of industrial processes, combined with strong leadership and problem-solving abilities, enables me to successfully manage projects from initial planning to final commissioning.",
+        "As the Site Incharge at GRF Dynamic Engineering, I am responsible for planning, organizing, and supervising all on-site activities. My role includes coordinating with clients, engineers, contractors, and project teams to ensure seamless project execution. I oversee equipment installation, manufacturing assembly, erection, alignment, testing, commissioning, quality inspections, safety compliance, manpower management, and project documentation while ensuring strict adherence to engineering drawings and technical specifications.",
+        "My expertise includes interpreting engineering drawings, supervising manufacturing and welding activities, monitoring installation procedures, conducting site inspections, ensuring dimensional accuracy, managing resources efficiently, resolving technical challenges, and maintaining project timelines. I am committed to implementing best engineering practices that improve productivity, enhance operational efficiency, and deliver reliable industrial solutions.",
         "Throughout my career, I have successfully managed the installation and commissioning of a wide range of industrial process equipment for chemical, pharmaceutical, dairy, food processing, cosmetic, water treatment, and other manufacturing industries. My technical knowledge and practical experience enable me to handle challenging site conditions while maintaining the highest standards of quality, safety, and performance.",
-        "At GRF Dynamic Engineering, we specialize in the design, manufacturing, installation, and commissioning of premium industrial process equipment, including MS & SS Reactors, Limpeted & Jacketed Reactors, Pressure Vessels, Heat Exchangers, Storage Tanks, Mixing Tanks, Air Receivers, Dairy Processing Equipment, Chemical Process Equipment, Pharmaceutical Equipment, Stainless Steel Fabrication, and Customized Industrial Process Equipment.",
+        "At GRF Dynamic Engineering, we specialize in the design, manufacturing, installation, and commissioning of premium industrial process equipment, including MS & SS Reactors, Limpeted & Jacketed Reactors, Pressure Vessels, Heat Exchangers, Storage Tanks, Mixing Tanks, Air Receivers, Dairy Processing Equipment, Chemical Process Equipment, Pharmaceutical Equipment, Stainless Steel Manufacturing, and Customized Industrial Process Equipment.",
         "I firmly believe that safety, discipline, teamwork, quality, and customer satisfaction are the cornerstones of every successful industrial project. My mission is to ensure that every installation is executed with precision, every project is delivered on time, and every customer receives dependable engineering solutions that meet the highest industry standards.",
         "With 14+ years of professional experience, I remain committed to supporting the continued growth of GRF Dynamic Engineering through exceptional site management, technical expertise, and dedicated project execution. My goal is to contribute to the successful completion of every project by delivering excellence, reliability, and long-term value to our clients while upholding the company's reputation for quality and professionalism."
       ],
@@ -230,7 +231,7 @@ export default function About() {
         "Industrial Equipment Installation",
         "Site Management & Coordination",
         "Equipment Alignment & Leveling",
-        "Fabrication & Welding Supervision",
+        "Manufacturing & Welding Supervision",
         "Testing & Commissioning Procedures",
         "Safety Compliance & Resource Management",
         "Manpower Management",
@@ -247,7 +248,7 @@ export default function About() {
         "Dairy Processing Equipment",
         "Chemical Process Equipment",
         "Pharmaceutical Equipment",
-        "Stainless Steel Fabrication",
+        "Stainless Steel Manufacturing",
         "Customized Industrial Process Equipment"
       ]
     },
@@ -256,21 +257,21 @@ export default function About() {
       image: zainulAbidinImg,
       role: "Technical & Drawing Engineer",
       experience: "15+ Years",
-      shortBio: "Zainul Abidin is a Technical & Drawing Engineer with over 15 years of experience in engineering design, technical drawing, industrial manufacturing, fabrication, quality assurance, and project execution.",
+      shortBio: "Zainul Abidin is a Technical & Drawing Engineer with over 15 years of experience in engineering design, technical drawing, industrial manufacturing, assembly operations, quality assurance, and project execution.",
       fullBio: [
-        "I am Zainul Abidin, serving as the Technical & Drawing Engineer at GRF Dynamic Engineering, with more than 15 years of professional experience in engineering design, technical drawing, industrial manufacturing, fabrication, quality assurance, and project execution. Throughout my career, I have been dedicated to delivering technically accurate engineering solutions, innovative designs, and high-quality manufacturing support while maintaining the highest standards of precision, safety, and operational excellence.",
-        "With over 15 years of hands-on industrial experience, I have developed extensive expertise in engineering design, fabrication drawings, process equipment manufacturing, technical documentation, production planning, inspection, and engineering coordination. My practical knowledge and technical capabilities enable me to transform complex engineering concepts into efficient, reliable, and cost-effective manufacturing solutions that meet customer requirements and international engineering standards.",
-        "As the Technical & Drawing Engineer at GRF Dynamic Engineering, I play a vital role in the design and development of industrial process equipment. My responsibilities include preparing and reviewing engineering drawings, developing fabrication and assembly drawings, creating General Arrangement (GA) drawings, interpreting technical specifications, coordinating with production teams, and providing complete technical support throughout the manufacturing process. I ensure that every drawing is accurate, practical for fabrication, and fully compliant with project specifications and engineering standards.",
+        "I am Zainul Abidin, serving as the Technical & Drawing Engineer at GRF Dynamic Engineering, with more than 15 years of professional experience in engineering design, technical drawing, industrial manufacturing, quality control, quality assurance, and project execution. Throughout my career, I have been dedicated to delivering technically accurate engineering solutions, innovative designs, and high-quality manufacturing support while maintaining the highest standards of precision, safety, and operational excellence.",
+        "With over 15 years of hands-on industrial experience, I have developed extensive expertise in engineering design, production drawings, process equipment manufacturing, technical documentation, production planning, inspection, and engineering coordination. My practical knowledge and technical capabilities enable me to transform complex engineering concepts into efficient, reliable, and cost-effective manufacturing solutions that meet customer requirements and international engineering standards.",
+        "As the Technical & Drawing Engineer at GRF Dynamic Engineering, I play a vital role in the design and development of industrial process equipment. My responsibilities include preparing and reviewing engineering drawings, developing manufacturing and assembly drawings, creating General Arrangement (GA) drawings, interpreting technical specifications, coordinating with production teams, and providing complete technical support throughout the manufacturing process. I ensure that every drawing is accurate, practical for manufacturing, and fully compliant with project specifications and engineering standards.",
         "I work closely with project managers, production engineers, quality assurance teams, and clients to ensure smooth coordination between design and manufacturing. My responsibilities also include design verification, material estimation, bill of materials (BOM) preparation, production planning support, technical problem-solving, drawing revisions, and engineering documentation. Through careful planning and attention to detail, I help ensure that every project is completed with maximum efficiency, accuracy, and quality.",
         "Throughout my professional career, I have successfully contributed to the design, engineering, and manufacturing of customized industrial equipment for the chemical, pharmaceutical, dairy, food processing, cosmetic, water treatment, paints, petrochemical, and other process industries. My expertise enables me to optimize designs for better manufacturing efficiency, reduce production costs, improve product performance, and maintain strict quality standards throughout every stage of production.",
-        "My core areas of expertise include: Engineering Design & Development, Technical & Fabrication Drawings, General Arrangement (GA) Drawings, Manufacturing & Production Support, Material Estimation & Bill of Materials (BOM), Equipment Detailing & Assembly Drawings, Inspection & Quality Assurance, Technical Documentation, Engineering Coordination, Process Equipment Design, Problem Solving & Design Optimization, Production Planning & Manufacturing Support.",
-        "At GRF Dynamic Engineering, we specialize in the design and manufacturing of premium industrial process equipment, including MS & SS Reactors, Limpeted & Jacketed Reactors, Pressure Vessels, Heat Exchangers, Storage Tanks, Mixing Tanks, Air Receivers, Chemical Process Equipment, Pharmaceutical Equipment, Dairy Processing Equipment, Stainless Steel Fabrication, and Customized Industrial Process Equipment.",
+        "My core areas of expertise include: Engineering Design & Development, Technical & Production Drawings, General Arrangement (GA) Drawings, Manufacturing & Production Support, Material Estimation & Bill of Materials (BOM), Equipment Detailing & Assembly Drawings, Inspection & Quality Assurance, Technical Documentation, Engineering Coordination, Process Equipment Design, Problem Solving & Design Optimization, Production Planning & Manufacturing Support.",
+        "At GRF Dynamic Engineering, we specialize in the design and manufacturing of premium industrial process equipment, including MS & SS Reactors, Limpeted & Jacketed Reactors, Pressure Vessels, Heat Exchangers, Storage Tanks, Mixing Tanks, Air Receivers, Chemical Process Equipment, Pharmaceutical Equipment, Dairy Processing Equipment, Stainless Steel Manufacturing, and Customized Industrial Process Equipment.",
         "I firmly believe that precision, innovation, technical excellence, and continuous improvement are the cornerstones of successful engineering. Every engineering drawing serves as the foundation of a successful manufacturing project, and I am committed to ensuring that every design is technically sound, practical, and optimized for efficient production. My objective is to develop engineering solutions that enhance productivity, improve equipment reliability, and deliver long-term value to our clients.",
         "With 15+ years of professional experience, I continue to contribute to the growth and success of GRF Dynamic Engineering by combining technical expertise, practical industry knowledge, and innovative thinking. I remain committed to delivering world-class engineering drawings, customized technical solutions, and manufacturing excellence while supporting our clients with reliable, efficient, and high-performance industrial process equipment. My dedication to engineering quality, customer satisfaction, and continuous innovation drives me to achieve excellence in every project and strengthen the reputation of GRF Dynamic Engineering as a trusted name in industrial process equipment manufacturing."
       ],
       specialties: [
         "Engineering Design & Development",
-        "Technical & Fabrication Drawings",
+        "Technical & Production Drawings",
         "General Arrangement (GA) Drawings",
         "Manufacturing & Production Support",
         "Material Estimation & Bill of Materials (BOM)",
@@ -293,7 +294,7 @@ export default function About() {
         "Chemical Process Equipment",
         "Pharmaceutical Equipment",
         "Dairy Processing Equipment",
-        "Stainless Steel Fabrication",
+        "Stainless Steel Manufacturing",
         "Customized Industrial Process Equipment"
       ]
     },
@@ -302,9 +303,9 @@ export default function About() {
       image: sajidMalikImg,
       role: "Supervisor | Project & Erection Specialist",
       experience: "10 Years",
-      shortBio: "Sajid Malik is a dedicated and experienced Supervisor with 10 years of expertise in the fabrication, erection, installation, testing, and commissioning of industrial process equipment.",
+      shortBio: "Sajid Malik is a dedicated and experienced Supervisor with 10 years of expertise in the manufacturing, erection, installation, testing, and commissioning of industrial process equipment.",
       fullBio: [
-        "I am Sajid Malik, a dedicated and experienced Supervisor at GRF Dynamic Engineering, with 10 years of expertise in the fabrication, erection, installation, testing, and commissioning of industrial process equipment. I have successfully supervised projects involving SS/MS storage tanks, pressure vessels, reactors, mixing vessels, condensers, milk processing plants, dairy equipment, and process piping systems.",
+        "I am Sajid Malik, a dedicated and experienced Supervisor at GRF Dynamic Engineering, with 10 years of expertise in the manufacturing, erection, installation, testing, and commissioning of industrial process equipment. I have successfully supervised projects involving SS/MS storage tanks, pressure vessels, reactors, mixing vessels, condensers, milk processing plants, dairy equipment, and process piping systems.",
         "As a Supervisor, he is responsible for overseeing daily site activities, supervising skilled manpower, ensuring work is executed according to approved drawings and technical specifications, and maintaining the highest standards of quality and safety. He coordinates closely with site engineers and project teams to ensure smooth project execution and timely completion.",
         "With strong technical knowledge, practical problem-solving skills, and a commitment to quality workmanship, Sajid Malik has earned a reputation for reliability and professionalism. His dedication to delivering projects safely, efficiently, and on schedule makes him a valuable member of the GRF Dynamic Engineering team."
       ],
@@ -360,10 +361,10 @@ export default function About() {
               // COMPANY OVERVIEW
             </span>
             <h2 className="heading-font text-2xl sm:text-3xl text-white font-black uppercase leading-tight">
-              Fabricating Excellence Since 2011
+              Manufacturing Excellence Since 2011
             </h2>
             <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
-              Based in the industrial hub of Saharanpur, Uttar Pradesh, G R F Dynamic Engineering has grown from a regional custom fabrication unit to a national supplier of process equipment and storage systems. We specialize in engineering high-integrity stainless steel (SS) and mild steel (MS) structures, tailored specifically for sanitary dairy products, corrosive chemicals, and high-pressure steam environments.
+              Based in the industrial hub of Saharanpur, Uttar Pradesh, G R F Dynamic Engineering has grown from a regional custom manufacturing unit to a national supplier of process equipment and storage systems. We specialize in engineering high-integrity stainless steel (SS) and mild steel (MS) structures, tailored specifically for sanitary dairy products, corrosive chemicals, and high-pressure steam environments.
             </p>
             <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
               With a state-of-the-art workshop and team of qualified engineers, we handle the entire equipment lifecycle—from mechanical design and thermal calculations to sheet metal forming, welding, polish finish, testing, and transport logistics.
@@ -424,7 +425,7 @@ export default function About() {
               </h2>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed font-light">
-              To design, fabricate, and install exceptionally reliable industrial equipment that maximizes operational efficiency, ensures process safety, and fulfills sanitary or pressure compliance standards without compromise.
+              To design, manufacture, and install exceptionally reliable industrial equipment that maximizes operational efficiency, ensures process safety, and fulfills sanitary or pressure compliance standards without compromise.
             </p>
           </div>
 
@@ -445,6 +446,86 @@ export default function About() {
             <p className="text-slate-400 text-sm leading-relaxed font-light">
               To be recognized as India's premier engineering partner for custom industrial systems, constantly innovating in shell welding automation and sanitary surface finishes while maintaining roots in Saharanpur.
             </p>
+          </div>
+        </section>
+
+        {/* Factory Registry & Board Info */}
+        <section className="mb-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left: Registered Board Image Card */}
+          <div className="lg:col-span-5 relative border border-white/10 bg-[#0a0d18] rounded-sm overflow-hidden p-3 shadow-2xl group">
+            <div className="absolute inset-0 blueprint-grid opacity-25 pointer-events-none"></div>
+            <div className="absolute top-2 left-2 text-[7px] font-mono text-slate-500">SYS_REG: GSTIN-09DSUPA8591K1ZS</div>
+            <div className="absolute top-2 right-2 text-[7px] font-mono text-slate-500">SIGNAGE: BOARD-01</div>
+            <div className="absolute bottom-2 right-2 text-[7px] font-mono text-slate-500">STATUS: VERIFIED</div>
+
+            <img
+              src={grfImage}
+              alt="GRF Dynamic Engineering Official Board"
+              className="w-full h-auto object-contain rounded-xs border border-white/5 opacity-85 group-hover:opacity-100 transition-opacity duration-300 select-none"
+            />
+
+            <div className="mt-3 bg-brand-obsidian/95 border border-brand-accent/25 p-3 rounded-xs text-[10px] font-mono">
+              <div className="flex justify-between items-center mb-1.5 text-slate-400">
+                <span>UNIT SIGNAGE</span>
+                <span className="text-brand-accent font-bold">● REGISTERED</span>
+              </div>
+              <p className="heading-font text-white font-bold uppercase text-[11px] tracking-wide">
+                Official Production Unit Board
+              </p>
+            </div>
+          </div>
+
+          {/* Right: Technical Credentials & Registrations */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            <span className="text-[10px] font-mono text-brand-accent uppercase tracking-widest block font-bold">
+              // CORPORATE REGISTRATION & CREDENTIALS
+            </span>
+            <h2 className="heading-font text-2xl sm:text-3xl text-white font-black uppercase leading-tight">
+              Official Manufacturing Registry
+            </h2>
+            <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              G R F Dynamic Engineering is fully registered and compliant with all national manufacturing and taxation authorities. Our factory premises and production specs are displayed at our Saharanpur manufacturing unit, detailing our GSTIN coordinates and approved manufacturing catalog.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm relative group overflow-hidden">
+                <div className="absolute top-0 left-0 h-[2px] bg-brand-accent w-0 group-hover:w-full transition-all duration-300"></div>
+                <span className="text-slate-500 font-mono text-[9px] block uppercase">GSTIN REGISTRATION</span>
+                <span className="text-sm font-bold text-white font-mono mt-1.5 block">09DSUPA8591K1ZS</span>
+              </div>
+              <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm relative group overflow-hidden">
+                <div className="absolute top-0 left-0 h-[2px] bg-blue-500 w-0 group-hover:w-full transition-all duration-300"></div>
+                <span className="text-slate-500 font-mono text-[9px] block uppercase">REGISTERED ENTITY</span>
+                <span className="text-sm font-bold text-brand-accent font-mono mt-1.5 block">G.R.F. DYNAMIC ENGINEERING</span>
+              </div>
+            </div>
+
+            <div className="border-t border-white/[0.04] pt-5 mt-2 space-y-4">
+              <span className="text-[8px] font-mono text-brand-accent uppercase tracking-widest block">
+                // FACTORY COORDINATES & LOCATIONS
+              </span>
+
+              <div className="grid grid-cols-1 gap-3 font-mono text-[10px]">
+                <div className="p-3 bg-brand-charcoal/50 border border-white/5 rounded-xs flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                  <span className="text-slate-500 uppercase">PRODUCTION UNIT ADDRESS:</span>
+                  <span className="text-white font-bold text-right sm:max-w-md">
+                    Plot No. 5253, Annu Vihar Colony, Kailashpur, Saharanpur, U.P.
+                  </span>
+                </div>
+                <div className="p-3 bg-brand-charcoal/50 border border-white/5 rounded-xs flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                  <span className="text-slate-500 uppercase">CORPORATE OFFICE:</span>
+                  <span className="text-white font-bold text-right sm:max-w-md">
+                    Chaudhary Market, Laxman Puram Colony, Opp. Transport Nagar, Saharanpur, U.P.
+                  </span>
+                </div>
+                <div className="p-3 bg-brand-charcoal/50 border border-white/5 rounded-xs flex flex-col sm:flex-row justify-between sm:items-center gap-2">
+                  <span className="text-slate-500 uppercase">OFFICIAL CONTACT:</span>
+                  <span className="text-brand-accent font-bold">
+                    +91 95575 30193 / +91 86309 62561
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -511,7 +592,7 @@ export default function About() {
                 </p>
               </div>
               <div className="text-[9px] font-mono text-slate-500 pt-3 border-t border-white/5 flex items-center gap-1.5">
-                <span>YEAR OF FABRICATION: {activeTimeline.year}</span>
+                <span>YEAR OF MANUFACTURE: {activeTimeline.year}</span>
                 <span>//</span>
                 <span>STATUS: ARCHIVED</span>
               </div>
@@ -560,38 +641,100 @@ export default function About() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-            {/* Left Column: Capability Selectors */}
+            {/* Left Column: Capability Selectors & Mobile Inline Content */}
             <div className="lg:col-span-5 space-y-3">
               {capabilities.map((cap) => {
                 const isActive = cap.id === activeCapId;
                 return (
-                  <button
-                    key={cap.id}
-                    onClick={() => setActiveCapId(cap.id)}
-                    className={`w-full text-left p-4 sm:p-5 rounded-sm border transition-all duration-300 cursor-pointer flex gap-4 ${isActive
-                      ? 'bg-brand-accent/5 border-brand-accent text-brand-accent shadow-md shadow-brand-accent/[0.02]'
-                      : 'bg-brand-steel/10 border-white/5 hover:border-white/20 text-slate-400 hover:text-slate-200'
-                      }`}
-                  >
-                    <div className={`heading-font font-bold text-xs font-mono shrink-0 ${isActive ? 'text-brand-accent' : 'text-slate-600'}`}>
-                      [0{cap.id}]
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className={`heading-font text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors ${isActive ? 'text-white' : 'text-slate-300'}`}>
-                        {cap.title}
-                      </h3>
-                      <p className="text-[10px] opacity-75 line-clamp-1 leading-normal font-light">
-                        {cap.short}
-                      </p>
-                    </div>
-                  </button>
+                  <div key={cap.id} id={`cap-container-${cap.id}`} className="space-y-3 scroll-mt-24">
+                    <button
+                      onClick={() => {
+                        setActiveCapId(cap.id);
+                        if (window.innerWidth < 1024) {
+                          setTimeout(() => {
+                            const el = document.getElementById(`cap-container-${cap.id}`);
+                            if (el) {
+                              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                          }, 120);
+                        }
+                      }}
+                      className={`w-full text-left p-4 sm:p-5 rounded-sm border transition-all duration-300 cursor-pointer flex gap-4 ${isActive
+                        ? 'bg-brand-accent/5 border-brand-accent text-brand-accent shadow-md shadow-brand-accent/[0.02]'
+                        : 'bg-brand-steel/10 border-white/5 hover:border-white/20 text-slate-400 hover:text-slate-200'
+                        }`}
+                    >
+                      <div className={`heading-font font-bold text-xs font-mono shrink-0 ${isActive ? 'text-brand-accent' : 'text-slate-600'}`}>
+                        [0{cap.id}]
+                      </div>
+                      <div className="space-y-1">
+                        <h3 className={`heading-font text-xs sm:text-sm font-bold uppercase tracking-wider transition-colors ${isActive ? 'text-white' : 'text-slate-300'}`}>
+                          {cap.title}
+                        </h3>
+                        <p className="text-[10px] opacity-75 line-clamp-1 leading-normal font-light">
+                          {cap.short}
+                        </p>
+                      </div>
+                    </button>
+
+                    {/* Inline Content (Mobile Only) */}
+                    {isActive && (
+                      <div className="block lg:hidden bg-[#0a0d18]/45 border border-white/5 rounded-sm p-5 relative overflow-hidden flex flex-col gap-5 shadow-2xl animate-fadeIn">
+                        <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
+                        {/* CAD blueprint style corner markers */}
+                        <div className="absolute top-2 left-2 border-t border-l border-brand-accent/20 w-3 h-3"></div>
+                        <div className="absolute top-2 right-2 border-t border-r border-brand-accent/20 w-3 h-3"></div>
+                        <div className="absolute bottom-2 left-2 border-b border-l border-brand-accent/20 w-3 h-3"></div>
+                        <div className="absolute bottom-2 right-2 border-b border-r border-brand-accent/20 w-3 h-3"></div>
+
+                        {/* Photo Area */}
+                        <div className="relative aspect-[16/9] w-full rounded-xs overflow-hidden border border-white/5 group" style={{ backgroundColor: '#0a0d18' }}>
+                          <div className="absolute inset-0 blueprint-grid opacity-20 pointer-events-none"></div>
+                          <img
+                            src={cap.image}
+                            alt={cap.title}
+                            className="w-full h-full object-cover opacity-80 select-none"
+                          />
+                          <div className="absolute top-3 left-3 border border-white/10 px-2 py-1 rounded-xs text-[8px] font-mono text-slate-400" style={{ backgroundColor: 'rgba(5, 6, 11, 0.9)' }}>
+                            REF_DWG: GRF-CAP-0{cap.id}
+                          </div>
+                        </div>
+
+                        {/* Details & Specs Sheet */}
+                        <div className="space-y-4">
+                          <div className="space-y-2">
+                            <h3 className="heading-font text-white text-base font-bold uppercase tracking-wider">
+                              {cap.title}
+                            </h3>
+                            <p className="text-slate-400 text-xs leading-relaxed font-light">
+                              {cap.desc}
+                            </p>
+                          </div>
+
+                          <div className="border-t border-white/[0.04] pt-4 mt-2">
+                            <span className="text-[8px] font-mono text-brand-accent uppercase tracking-widest block mb-3">
+                              // TECHNICAL SPECIFICATIONS PARAMETERS
+                            </span>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                              {cap.details.map((detail, dIndex) => (
+                                <div key={dIndex} className="p-3 bg-brand-charcoal/50 border border-white/5 rounded-xs font-mono text-[9px]">
+                                  <span className="text-slate-500 uppercase block mb-1">{detail.label}</span>
+                                  <span className="text-white font-bold block">{detail.value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
 
-            {/* Right Column: Active Capability Details */}
-            <div className="lg:col-span-7 bg-[#0a0d18]/45 border border-white/5 rounded-sm p-6 sm:p-8 relative overflow-hidden flex flex-col gap-6 shadow-2xl">
+            {/* Right Column: Active Capability Details (Desktop Only) */}
+            <div className="hidden lg:flex lg:col-span-7 bg-[#0a0d18]/45 border border-white/5 rounded-sm p-6 sm:p-8 relative overflow-hidden flex-col gap-6 shadow-2xl">
               <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
 
               {/* CAD blueprint style corner markers */}
@@ -640,7 +783,6 @@ export default function About() {
                   </div>
                 </div>
               </div>
-
             </div>
 
           </div>
@@ -683,19 +825,26 @@ export default function About() {
             <div className="h-px bg-white/[0.04] w-full mt-3"></div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="bg-brand-charcoal/80 p-6 rounded-sm border border-white/5 hover:border-brand-accent/30 transition-all duration-300 group flex flex-col justify-between relative overflow-hidden">
+              <div key={index} className="bg-brand-charcoal/80 p-6 rounded-sm border border-white/5 hover:border-brand-accent/30 transition-all duration-300 group flex flex-col justify-between relative overflow-hidden h-full">
                 <div className="space-y-4">
-                  <div className="aspect-square w-full bg-[#0a0d18] border border-white/5 rounded-xs flex flex-col items-center justify-center relative group overflow-hidden">
+                  <div className="aspect-[4/3] w-full bg-[#0a0d18] border border-white/5 rounded-xs flex items-center justify-center relative group overflow-hidden">
                     <div className="absolute inset-0 blueprint-grid opacity-10 pointer-events-none"></div>
                     {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
+                      <>
+                        <img
+                          src={member.image}
+                          alt=""
+                          className="absolute inset-0 w-full h-full object-cover blur-xl opacity-30 scale-110 pointer-events-none"
+                        />
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="relative z-10 w-full h-full object-contain"
+                          loading="lazy"
+                        />
+                      </>
                     ) : (
                       <>
                         <svg className="w-12 h-12 text-slate-700 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -746,7 +895,7 @@ export default function About() {
 
         {/* Detailed Biography Modal */}
         {activeMember && createPortal(
-          <div 
+          <div
             onClick={() => setActiveMember(null)}
             className="fixed inset-0 z-[100] bg-black/90 backdrop-blur-[2px] flex items-center justify-center p-4 overflow-y-auto animate-fadeIn cursor-pointer"
           >
@@ -830,7 +979,7 @@ export default function About() {
         {/* Manufacturing Excellence Section */}
         <section className="mb-28">
           <div className="mb-12">
-            <span className="text-[10px] font-mono text-brand-accent uppercase tracking-widest block">// FABRICATION STANDARD</span>
+            <span className="text-[10px] font-mono text-brand-accent uppercase tracking-widest block">// MANUFACTURING STANDARD</span>
             <h2 className="heading-font text-2xl sm:text-3xl text-white font-bold uppercase mt-1">
               Manufacturing Excellence
             </h2>
@@ -848,10 +997,10 @@ export default function About() {
                   At GRF Dynamic Engineering, manufacturing excellence is the result of technical expertise, precision engineering, and a highly dedicated workforce. Based in Saharanpur, Uttar Pradesh, we are a trusted manufacturer of premium industrial process equipment, serving the chemical, pharmaceutical, dairy, food processing, cosmetic, water treatment, edible oil, and allied industries with reliable and customized engineering solutions.
                 </p>
                 <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                  Our manufacturing facility is equipped to fabricate a wide range of MS and SS Reactors, Limpeted & Jacketed Reactors, Pressure Vessels, Heat Exchangers, Storage Tanks, Mixing Tanks, Air Receivers, Dairy Processing Equipment, Pharmaceutical Equipment, Chemical Process Equipment, and Customized Stainless Steel Fabrication. Every product is engineered with a strong focus on structural integrity, process efficiency, durability, and long service life to meet diverse industrial requirements.
+                  Our manufacturing facility is equipped to manufacture a wide range of MS and SS Reactors, Limpeted & Jacketed Reactors, Pressure Vessels, Heat Exchangers, Storage Tanks, Mixing Tanks, Air Receivers, Dairy Processing Equipment, Pharmaceutical Equipment, Chemical Process Equipment, and Customized Stainless Steel Manufacturing. Every product is engineered with a strong focus on structural integrity, process efficiency, durability, and long service life to meet diverse industrial requirements.
                 </p>
                 <p className="text-slate-450 text-xs sm:text-sm leading-relaxed font-light">
-                  The strength of GRF Dynamic Engineering lies in its experienced team of engineers, project managers, inspection professionals, technical drawing specialists, and 15 highly skilled fabrication professionals, supported by a dedicated team of helpers and installation personnel. Together, they execute every stage of manufacturing—from engineering design and material inspection to fabrication, welding, machining, polishing, testing, assembly, installation, and commissioning—with strict adherence to approved engineering standards and quality procedures.
+                  The strength of GRF Dynamic Engineering lies in its experienced team of engineers, project managers, inspection professionals, technical drawing specialists, and 15 highly skilled manufacturing professionals, supported by a dedicated team of helpers and installation personnel. Together, they execute every stage of manufacturing—from engineering design and material inspection to manufacturing, welding, machining, polishing, testing, assembly, installation, and commissioning—with strict adherence to approved engineering standards and quality procedures.
                 </p>
                 <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
                   We believe that every successful project begins with detailed engineering and ends with complete customer satisfaction. Our manufacturing processes emphasize precision, quality control, safety, timely delivery, and continuous improvement. By combining modern engineering practices with practical industry experience, we consistently deliver equipment that offers reliable performance, operational efficiency, and long-term value.
@@ -892,11 +1041,11 @@ export default function About() {
 
               <div className="space-y-4">
                 <span className="text-[9px] font-mono text-slate-400 uppercase tracking-widest block border-b border-white/[0.04] pb-2">
-                  APPROVED_FABRICATION_SPECTRUM
+                  APPROVED_MANUFACTURING_SPECTRUM
                 </span>
 
                 <p className="text-slate-400 text-xs font-light leading-relaxed">
-                  Our manufacturing facility is fully equipped to fabricate a wide range of custom vessels and pressure components designed for structural integrity, process efficiency, and long service life:
+                  Our manufacturing facility is fully equipped to manufacture a wide range of custom vessels and pressure components designed for structural integrity, process efficiency, and long service life:
                 </p>
 
                 <div className="space-y-2 font-mono text-[10px] sm:text-[11px] text-slate-350">
@@ -907,7 +1056,7 @@ export default function About() {
                     "Milk Storage & Dairy Processing Tanks",
                     "Custom Storage & Mixing Tanks",
                     "Industrial Air Receivers",
-                    "Customized Stainless Steel Fabrication",
+                    "Customized Stainless Steel Manufacturing",
                     "Sanitary Food & Chemical Piping"
                   ].map((item, idx) => (
                     <div key={idx} className="flex justify-between border-b border-white/[0.03] pb-1.5">
@@ -952,7 +1101,7 @@ export default function About() {
                   Safety, discipline, teamwork, and continuous skill development are integral to our work culture. We regularly promote safe working practices, quality awareness, and technical improvement to ensure our workforce remains aligned with the latest industry standards and customer expectations.
                 </p>
                 <p className="text-slate-450 text-xs sm:text-sm leading-relaxed font-light">
-                  Our experienced engineers, fabrication specialists, welders, fitters, machinists, polishers, installers, and support staff work together with a shared commitment to delivering durable, high-performance, and cost-effective engineering solutions.
+                  Our experienced engineers, manufacturing specialists, welders, fitters, machinists, polishers, installers, and support staff work together with a shared commitment to delivering durable, high-performance, and cost-effective engineering solutions.
                 </p>
               </div>
 
@@ -961,7 +1110,7 @@ export default function About() {
                 <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm relative group overflow-hidden">
                   <div className="absolute top-0 left-0 h-[2px] bg-brand-accent w-0 group-hover:w-full transition-all duration-300"></div>
                   <span className="text-brand-accent font-mono text-3xl font-extrabold block">15</span>
-                  <span className="text-slate-500 font-mono text-[8px] block uppercase mt-1">Fabrication Specialists</span>
+                  <span className="text-slate-500 font-mono text-[8px] block uppercase mt-1">Manufacturing Specialists</span>
                 </div>
                 <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm relative group overflow-hidden">
                   <div className="absolute top-0 left-0 h-[2px] bg-white w-0 group-hover:w-full transition-all duration-300"></div>
@@ -979,7 +1128,7 @@ export default function About() {
             {/* Right Panels: Pillars of Workforce */}
             <div className="lg:col-span-7 space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Pillar 1: Fabrication Specialists */}
+                {/* Pillar 1: Manufacturing Specialists */}
                 <div className="bg-brand-charcoal/80 p-5 rounded-sm border border-white/5 hover:border-brand-accent/20 transition-all duration-300 relative overflow-hidden flex flex-col justify-between group">
                   <div className="space-y-3">
                     <div className="flex justify-between items-center">
@@ -990,7 +1139,7 @@ export default function About() {
                       Skilled Technical Team
                     </h3>
                     <p className="text-slate-400 text-xs leading-relaxed font-light">
-                      Supported by 15 highly skilled fabrication professionals, fitters, welders, and polishers with extensive hands-on experience in SS & MS setups.
+                      Supported by 15 highly skilled manufacturing professionals, fitters, welders, and polishers with extensive hands-on experience in SS & MS setups.
                     </p>
                     <ul className="space-y-1.5 pt-2 text-[10px] font-mono text-slate-350">
                       <li className="flex items-center gap-1.5">
@@ -1025,7 +1174,7 @@ export default function About() {
                     <ul className="space-y-1.5 pt-2 text-[10px] font-mono text-slate-350">
                       <li className="flex items-center gap-1.5">
                         <span className="w-1 h-1 bg-white rounded-full opacity-50"></span>
-                        Detailed Fabrication Drawings
+                        Detailed Production Drawings
                       </li>
                       <li className="flex items-center gap-1.5">
                         <span className="w-1 h-1 bg-white rounded-full opacity-50"></span>
@@ -1054,7 +1203,7 @@ export default function About() {
                   </span>
                 </div>
                 <p className="text-slate-400 text-xs leading-relaxed font-light">
-                  A dedicated team of semi-skilled and unskilled helpers who play a vital role in supporting fabrication, material handling, machine operations, assembly, loading, finishing, housekeeping, and on-site installation activities. Their continuous support enables smooth workflow management, timely project execution, and enhanced productivity across all departments.
+                  A dedicated team of semi-skilled and unskilled helpers who play a vital role in supporting manufacturing, material handling, machine operations, assembly, loading, finishing, housekeeping, and on-site installation activities. Their continuous support enables smooth workflow management, timely project execution, and enhanced productivity across all departments.
                 </p>
               </div>
             </div>
@@ -1090,9 +1239,9 @@ export default function About() {
             <div className="absolute top-2 right-2 border-t border-r border-white/10 w-2.5 h-2.5"></div>
             <div className="absolute bottom-2 left-2 border-b border-l border-white/10 w-2.5 h-2.5"></div>
             <div className="absolute bottom-2 right-2 border-b border-r border-white/10 w-2.5 h-2.5"></div>
-            
+
             <div className="mb-8 border-b border-white/[0.04] pb-6">
-              <span className="text-[9px] font-mono text-brand-accent uppercase tracking-widest block">// FABRICATION SPECTRUM CATALOG</span>
+              <span className="text-[9px] font-mono text-brand-accent uppercase tracking-widest block">// MANUFACTURING SPECTRUM CATALOG</span>
               <h3 className="heading-font text-white font-extrabold text-lg uppercase tracking-wider mt-1">
                 Collective Equipment Scope
               </h3>
@@ -1113,11 +1262,11 @@ export default function About() {
                 "Dairy Processing Equipment",
                 "Chemical Process Equipment",
                 "Pharmaceutical Equipment",
-                "Stainless Steel Fabrication",
+                "Stainless Steel Manufacturing",
                 "Customized Process Systems"
               ].map((tag, idx) => (
-                <div 
-                  key={idx} 
+                <div
+                  key={idx}
                   className="bg-[#0a0d18] border border-white/5 hover:border-brand-accent/30 p-4 rounded-sm transition-all duration-300 flex items-center justify-between group"
                 >
                   <div className="flex items-center gap-3">
@@ -1309,7 +1458,7 @@ export default function About() {
               Need a Custom Process Vessel Solution?
             </h3>
             <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-              Get in touch with our engineering team based in Saharanpur. We will work with your process calculations to design and fabricate the exact reactor or storage system required.
+              Get in touch with our engineering team based in Saharanpur. We will work with your process calculations to design and manufacture the exact reactor or storage system required.
             </p>
             <div className="pt-2">
               <Link

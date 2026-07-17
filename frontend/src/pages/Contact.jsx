@@ -153,7 +153,7 @@ export default function Contact() {
     {
       id: "01",
       question: "What is your typical manufacturing lead time?",
-      answer: "Lead times vary based on vessel complexity and capacity. Standard storage tanks (up to 20,000L) are usually fabricated within 3 to 4 weeks. Custom reactors featuring half-pipe jacket limpets and heavy-duty agitator structures typically require 6 to 8 weeks, including full mechanical simulation and hydro-testing."
+      answer: "Lead times vary based on vessel complexity and capacity. Standard storage tanks (up to 20,000L) are usually manufactured within 3 to 4 weeks. Custom reactors featuring half-pipe jacket limpets and heavy-duty agitator structures typically require 6 to 8 weeks, including full mechanical simulation and hydro-testing."
     },
     {
       id: "02",
@@ -329,7 +329,7 @@ export default function Contact() {
             <div className="border-l-[3px] border-brand-accent bg-brand-steel/20 p-6 rounded-r-sm shadow-md">
               <h3 className="heading-font text-white font-bold text-sm uppercase tracking-wide mb-1.5">Technical Consulting</h3>
               <p className="text-slate-400 text-xs leading-relaxed font-light">
-                Need urgent assistance or specific custom configurations? You can directly speak to our lead mechanical fabricator by dialing <a href="tel:+919557530193" className="text-white hover:text-brand-accent underline font-semibold">+91 95575 30193</a>.
+                Need urgent assistance or specific custom configurations? You can directly speak to our lead mechanical engineer by dialing <a href="tel:+919557530193" className="text-white hover:text-brand-accent underline font-semibold">+91 95575 30193</a>.
               </p>
             </div>
 

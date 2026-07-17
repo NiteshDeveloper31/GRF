@@ -95,7 +95,7 @@ export default function Home({ products, setProducts, loading, setLoading, error
     {
       id: 2,
       title: "Flanged Inlet Nozzle",
-      desc: "Raised-face flange process connection (ANSI Class 150/300) fabricated from premium SS 316L. The inner surface is mirror-finished (Ra < 0.4μm) to align with pharmaceutical hygiene standards.",
+      desc: "Raised-face flange process connection (ANSI Class 150/300) manufactured from premium SS 316L. The inner surface is mirror-finished (Ra < 0.4μm) to align with pharmaceutical hygiene standards.",
       x: "33%",
       y: "22%",
       specs: { "Size": "2 inch to 6 inch", "Flange Std": "ANSI B16.5", "Finish Polish": "Ra < 0.4 microns" }
@@ -137,7 +137,7 @@ export default function Home({ products, setProducts, loading, setLoading, error
       )
     },
     {
-      title: "Custom Fabrication",
+      title: "Custom Manufacturing",
       description: "Bespoke storage vessels and piping modules engineered in-house to integrate with your floor layout.",
       icon: (
         <svg className="h-7 w-7 text-brand-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -288,7 +288,7 @@ export default function Home({ products, setProducts, loading, setLoading, error
             </h2>
             <div className="h-px w-16 bg-brand-accent mx-auto mt-4"></div>
             <p className="text-slate-500 mt-4 text-sm font-light">
-              Browse our 10 core engineering and custom fabrication divisions. Select a category to see technical specifications.
+              Browse our 10 core engineering and custom manufacturing divisions. Select a category to see technical specifications.
             </p>
           </div>
 
@@ -452,7 +452,7 @@ export default function Home({ products, setProducts, loading, setLoading, error
                   href="tel:+919557530193"
                   className="border border-white/10 hover:border-white text-slate-300 hover:text-white px-6 py-3.5 rounded-sm text-xs font-bold uppercase tracking-widest transition-all duration-300 hover:bg-white/[0.02]"
                 >
-                  Call Lead Fabricator
+                  Call Lead Engineer
                 </a>
               </div>
 
@@ -472,7 +472,7 @@ export default function Home({ products, setProducts, loading, setLoading, error
           </h2>
           <div className="h-px w-16 bg-brand-accent mx-auto mt-4"></div>
           <p className="text-slate-500 mt-4 text-sm font-light">
-            Explore our line of heavy-duty, certified industrial equipment fabricated from high-grade stainless steel (SS) and mild steel (MS).
+            Explore our line of heavy-duty, certified industrial equipment manufactured from high-grade stainless steel (SS) and mild steel (MS).
           </p>
         </div>
 
@@ -598,7 +598,7 @@ export default function Home({ products, setProducts, loading, setLoading, error
             Have a project in mind? Let's talk.
           </h2>
           <p className="text-slate-300 mt-4 max-w-2xl mx-auto text-sm sm:text-base font-light">
-            Contact our Saharanpur engineering team today. We provide full technical consultations and competitive quotes for all custom fabrication needs.
+            Contact our Saharanpur engineering team today. We provide full technical consultations and competitive quotes for all custom manufacturing needs.
           </p>
           <div className="mt-8">
             <Link

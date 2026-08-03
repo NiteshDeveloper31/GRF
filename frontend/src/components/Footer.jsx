@@ -56,6 +56,9 @@ export default function Footer() {
                 <Link to="/about" onClick={handleScrollToTop} className="hover:text-brand-accent hover:translate-x-1 inline-block transition-all duration-300">About Us</Link>
               </li>
               <li>
+                <Link to="/why-choose-us" onClick={handleScrollToTop} className="hover:text-brand-accent hover:translate-x-1 inline-block transition-all duration-300">Why Choose Us</Link>
+              </li>
+              <li>
                 <Link to="/contact" onClick={handleScrollToTop} className="hover:text-brand-accent hover:translate-x-1 inline-block transition-all duration-300">Contact & Quote Form</Link>
               </li>
             </ul>

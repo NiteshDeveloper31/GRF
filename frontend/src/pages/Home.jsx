@@ -173,7 +173,8 @@ export default function Home({ products, setProducts, loading, setLoading, error
     { name: "Chemical", desc: "Corrosion-resistant limpet reactors and hazardous chemical storage tank systems.", code: "CH" },
     { name: "Food & Beverage", desc: "Mixing and storage equipment matching strict food-grade sanitary standards.", code: "FB" },
     { name: "Oil & Gas", desc: "Certified high-pressure air receivers and double-walled underground fuel tanks.", code: "OG" },
-    { name: "Brewery", desc: "Polished conditioning tanks, bright beer tanks, and fermentation vessels.", code: "BR" }
+    { name: "Brewery", desc: "Polished conditioning tanks, bright beer tanks, and fermentation vessels.", code: "BR" },
+    { name: "Shell & Tube Heat Exchanger", desc: "High-efficiency thermal transfer systems, condenser units, and custom process heat exchangers.", code: "HE" }
   ];
 
   const activeHotspotInfo = hotspots.find(h => h.id === activeHotspot) || hotspots[0];

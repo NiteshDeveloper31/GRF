@@ -37,38 +37,39 @@ export default function Navbar() {
     { path: '/', label: 'Home' },
     { path: '/products', label: 'Products' },
     { path: '/about', label: 'About Us' },
+    { path: '/why-choose-us', label: 'Why Choose Us' },
     { path: '/contact', label: 'Contact Us' },
   ];
 
-  const activeStyle = "text-brand-accent font-bold text-base md:text-lg relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-full after:h-0.5 after:bg-brand-accent after:shadow-[0_0_10px_#0ea5e9] pb-1 transition-all duration-300";
-  const inactiveStyle = "text-slate-400 hover:text-white font-medium text-base md:text-lg pb-1 transition-all duration-300 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-0 after:h-0.5 after:bg-brand-accent hover:after:w-full after:transition-all after:duration-300";
+  const activeStyle = "text-brand-accent font-bold text-sm lg:text-base whitespace-nowrap shrink-0 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-full after:h-0.5 after:bg-brand-accent after:shadow-[0_0_10px_#0ea5e9] pb-1 transition-all duration-300";
+  const inactiveStyle = "text-slate-300 hover:text-white font-medium text-sm lg:text-base whitespace-nowrap shrink-0 pb-1 transition-all duration-300 relative after:content-[''] after:absolute after:-bottom-2.5 after:left-0 after:w-0 after:h-0.5 after:bg-brand-accent hover:after:w-full after:transition-all after:duration-300";
 
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled
-      ? 'bg-brand-obsidian/95 shadow-lg border-b border-brand-accent/15 py-3'
-      : 'bg-transparent border-b border-white/5 py-4'
+      ? 'bg-brand-obsidian/95 backdrop-blur-md shadow-xl border-b border-brand-accent/20 py-2.5'
+      : 'bg-brand-obsidian/90 backdrop-blur-md border-b border-white/10 py-3'
       }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <div className="relative">
               <div className="absolute -inset-1 rounded-full bg-brand-accent/20 blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <img
                 src={logo}
                 alt="GRF Logo"
-                className="h-16 md:h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105 relative z-10"
               />
             </div>
             <div className="flex items-center text-left">
-              <span className="heading-font text-xl sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-extrabold tracking-wider text-white leading-tight max-w-[200px] sm:max-w-none whitespace-normal sm:whitespace-nowrap">
+              <span className="heading-font text-base sm:text-lg md:text-xl lg:text-2xl xl:text-2xl 2xl:text-3xl font-extrabold tracking-wider text-white leading-tight max-w-[170px] sm:max-w-none whitespace-normal sm:whitespace-nowrap">
                 GRF <span className="text-brand-accent">DYNAMIC</span> ENGINEERING
               </span>
             </div>
           </Link>
 
           {/* Desktop Nav Links */}
-          <div className="hidden xl:flex items-center space-x-8">
+          <div className="hidden xl:flex items-center space-x-4 lg:space-x-5 xl:space-x-6 shrink-0">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -80,7 +81,7 @@ export default function Navbar() {
             ))}
             <Link
               to="/contact"
-              className="bg-gradient-to-r from-brand-accent to-blue-600 hover:brightness-110 text-white px-6 py-3 rounded-sm text-sm font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-brand-accent/10 active:scale-[0.98] mt-1"
+              className="bg-gradient-to-r from-brand-accent to-blue-600 hover:brightness-110 text-white px-5 py-2.5 rounded-sm text-xs lg:text-sm font-bold uppercase tracking-wider transition-all duration-200 shadow-md shadow-brand-accent/10 active:scale-[0.98] shrink-0 whitespace-nowrap"
             >
               Get Quote
             </Link>

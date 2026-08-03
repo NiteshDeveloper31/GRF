@@ -8,7 +8,7 @@ import reactorImg from '../assets/industrial_reactor.png';
 import abadMalikImg from '../assets/Abad Malik.jpeg';
 import shahzadMalikImg from '../assets/Sahjad Malik .jpeg';
 import zainulAbidinImg from '../assets/Zainul Abidin.jpeg';
-import zrRamanImg from '../assets/ZR raman.jpeg';
+import zrRamanImg from '../assets/New ZR RAMAN.jpeg';
 import sajidMalikImg from '../assets/Sajid Malik.jpeg';
 import grfImage from '../assets/GRF-Image.jpeg';
 
@@ -17,6 +17,13 @@ export default function About() {
   const [activeCapId, setActiveCapId] = useState(1);
   const [activeYearIndex, setActiveYearIndex] = useState(4); // Default to 2026 (last milestone)
   const [activeMember, setActiveMember] = useState(null);
+  const [isHistoryExpanded, setIsHistoryExpanded] = useState(false);
+  const [isRegistryExpanded, setIsRegistryExpanded] = useState(false);
+  const [isCapabilityExpanded, setIsCapabilityExpanded] = useState(false);
+  const [isWfTechnicalExpanded, setIsWfTechnicalExpanded] = useState(false);
+  const [isWfEngineersExpanded, setIsWfEngineersExpanded] = useState(false);
+  const [isWfHelpersExpanded, setIsWfHelpersExpanded] = useState(false);
+  const [isWorkforceExpanded, setIsWorkforceExpanded] = useState(false);
 
   // Prevent background page scrolling and GPU re-renders when modal is open
   useEffect(() => {
@@ -35,7 +42,18 @@ export default function About() {
       id: 1,
       title: "Design & Engineering",
       short: "Mechanical Layout & FEA Simulation",
-      desc: "Our design team uses advanced 3D CAD modeling and Finite Element Analysis (FEA) to verify stress points, structural integrity, and seismic stability before production begins.",
+      desc: "At G R F Dynamic Engineering, design and engineering form the foundation of every product we manufacture. We believe that high-performance industrial equipment begins with intelligent engineering, detailed planning, and precision-driven design...",
+      fullDesc: [
+        "At G R F Dynamic Engineering, design and engineering form the foundation of every product we manufacture. We believe that high-performance industrial equipment begins with intelligent engineering, detailed planning, and precision-driven design. Every pressure vessel, storage tank, chemical reactor, heat exchanger, process vessel, mixing tank, and customized industrial system is carefully engineered to deliver maximum efficiency, safety, durability, and long-term reliability. Our engineering team combines practical industry experience with advanced design technologies to develop solutions that meet the specific operational requirements of every customer while complying with recognized engineering standards.",
+        "Our design process begins with a comprehensive understanding of the customer's application, production objectives, process parameters, installation environment, and operational challenges. Before creating any design, our engineers conduct detailed technical discussions to gather information regarding operating pressure, temperature, capacity requirements, material compatibility, available installation space, utility connections, and future expansion plans. This collaborative approach enables us to develop customized equipment that integrates seamlessly into existing production facilities while maximizing process efficiency and minimizing operational downtime.",
+        "To achieve superior design accuracy, our engineering team utilizes advanced 3D CAD (Computer-Aided Design) software for detailed equipment modeling and visualization. Three-dimensional models allow us to verify every component before fabrication begins, ensuring proper dimensions, nozzle orientation, structural clearances, piping connections, support arrangements, and assembly compatibility. By identifying potential design challenges during the engineering phase, we reduce manufacturing errors, improve fabrication efficiency, and ensure smooth installation at the customer's site. These digital models also enable customers to visualize the equipment before production, allowing modifications to be incorporated efficiently.",
+        "Structural strength and operational safety are verified using Finite Element Analysis (FEA) and other engineering calculation methods wherever applicable. Through stress analysis, load calculations, pressure evaluation, thermal expansion assessment, and structural simulations, we evaluate how equipment will perform under actual operating conditions. Critical components are analyzed to identify stress concentration areas, deformation possibilities, vibration effects, and structural stability. This analytical approach ensures that every product is capable of withstanding demanding industrial environments while maintaining optimal performance throughout its service life.",
+        "Material selection is another essential aspect of our engineering process. Depending on the customer's application, operating conditions, and industry requirements, we recommend suitable materials such as Stainless Steel SS304, SS316, SS316L, Duplex Stainless Steel, Mild Steel (MS), and other specialized alloys. Our engineers carefully consider factors including corrosion resistance, pressure ratings, temperature limits, product compatibility, hygienic requirements, and mechanical strength before finalizing material specifications. This ensures that every piece of equipment delivers exceptional durability, safety, and operational efficiency.",
+        "Our engineering capabilities extend beyond equipment design to complete process optimization. We carefully design vessel configurations, agitator systems, internal components, nozzle positioning, support structures, piping layouts, insulation arrangements, instrumentation locations, and automation compatibility to improve productivity and simplify maintenance. Every design is developed with consideration for ease of installation, operator accessibility, cleaning efficiency, and future maintenance requirements. This holistic engineering approach enables customers to achieve higher productivity while reducing operating costs and minimizing downtime.",
+        "Before production begins, every design undergoes multiple stages of technical review and quality verification. Experienced engineers carefully examine design drawings, fabrication details, pressure calculations, welding requirements, and manufacturing specifications to ensure complete compliance with project requirements and applicable engineering standards. This rigorous review process helps eliminate potential issues before fabrication, resulting in higher manufacturing accuracy and improved product reliability.",
+        "Innovation remains a key driver of our engineering philosophy. We continuously adopt modern design software, advanced engineering tools, digital modeling technologies, and evolving manufacturing practices to improve product performance and customer satisfaction. By integrating technical expertise with practical manufacturing knowledge, we develop industrial equipment that is efficient, reliable, and built to perform in demanding sectors such as pharmaceuticals, dairy, food processing, chemicals, oil and gas, water treatment, and other process industries.",
+        "At G R F Dynamic Engineering, design and engineering represent far more than creating technical drawings—they reflect our commitment to innovation, precision, and engineering excellence. Every project is approached with careful planning, detailed analysis, and a customer-focused mindset to ensure the final product delivers exceptional performance, structural integrity, safety, and long-term value. Through advanced engineering practices, customized solutions, and continuous improvement, we remain dedicated to designing industrial equipment that helps businesses improve productivity, optimize operations, and achieve sustainable long-term success."
+      ],
       image: cadImg,
       details: [
         { label: "Modeling Software", value: "AutoCAD / SolidWorks / ANSYS" },
@@ -48,7 +66,18 @@ export default function About() {
       id: 2,
       title: "Advanced Welding & Forming",
       short: "ASME Sec IX Certified Manufacturing",
-      desc: "Equipped with automatic plate bending rollers, dished end forming presses, and skilled weld technicians certified to ASME Section IX for high-integrity TIG, MIG, and Submerged Arc Welding.",
+      desc: "At G R F Dynamic Engineering, our Advanced Welding & Forming capabilities represent the foundation of our commitment to manufacturing high-quality, durable, and precision-engineered industrial equipment...",
+      fullDesc: [
+        "At G R F Dynamic Engineering, our Advanced Welding & Forming capabilities represent the foundation of our commitment to manufacturing high-quality, durable, and precision-engineered industrial equipment. With a combination of advanced machinery, experienced technicians, and globally recognized welding standards, we deliver fabrication solutions designed to meet the demanding requirements of industries where strength, safety, and reliability are critical.",
+        "Our manufacturing facility is equipped with automatic plate bending rollers and advanced forming equipment that enables us to achieve accurate cylindrical, conical, and customized shapes with consistent quality. These heavy-duty plate rolling systems are designed to handle various thicknesses and material grades while maintaining precise dimensional accuracy. This ensures that every component manufactured meets the required engineering specifications and performs effectively under challenging operating conditions.",
+        "For specialized applications, we utilize advanced dished end forming presses to manufacture high-strength pressure vessel heads and other critical components. Our forming processes are carefully controlled to maintain uniform thickness, structural integrity, and accurate geometry. By combining modern forming technology with skilled craftsmanship, we produce components that meet strict industry requirements for pressure handling, durability, and long-term operational performance.",
+        "Welding is one of the most important stages in our fabrication process, and we maintain the highest standards of quality through our team of skilled weld technicians. Our welding professionals are certified according to ASME Section IX standards, ensuring that all welding procedures and qualifications comply with internationally accepted practices. Their expertise allows us to perform high-integrity welding operations for complex industrial structures and pressure-based equipment.",
+        "We specialize in multiple advanced welding techniques, including Tungsten Inert Gas (TIG) Welding, Metal Inert Gas (MIG) Welding, and Submerged Arc Welding (SAW). TIG welding provides exceptional precision and clean weld quality for critical applications requiring superior finish and accuracy. MIG welding enables efficient fabrication with excellent strength and productivity, making it suitable for a wide range of industrial assemblies. Submerged Arc Welding delivers deep penetration and high-strength welds for heavy fabrication projects where reliability and structural performance are essential.",
+        "Every welding operation at G R F Dynamic Engineering follows strict quality control procedures. Our team carefully monitors welding parameters, material compatibility, heat input, and inspection requirements to ensure consistent results. Weld inspections and testing procedures are carried out to verify strength, durability, and compliance with project specifications.",
+        "Our advanced welding and forming capabilities allow us to manufacture a wide range of industrial products, including pressure vessels, storage tanks, reactors, heavy fabrication structures, and customized engineering solutions. By integrating automated machinery with expert human skills, we achieve the perfect balance between precision manufacturing and practical engineering expertise.",
+        "At G R F Dynamic Engineering, we continuously invest in technology, workforce development, and process improvements to deliver products that meet the evolving needs of modern industries. Our focus on advanced welding techniques, accurate forming processes, and strict quality standards ensures that every project is completed with reliability, efficiency, and engineering excellence.",
+        "With advanced welding and forming expertise, we provide customers with manufacturing solutions built for performance, safety, and long-term value."
+      ],
       image: weldingImg,
       details: [
         { label: "Weld Standards", value: "ASME Section IX / EN 287" },
@@ -61,7 +90,19 @@ export default function About() {
       id: 3,
       title: "Surface Finish & Polishing",
       short: "Mirror Polishing & Acid Passivation",
-      desc: "Complete surface treatment facilities including automatic inside-mirror polishing (Ra < 0.4 microns) for pharmaceutical/dairy vessels, and external shot blasting or chemical passivation.",
+      desc: "At G R F Dynamic Engineering, we understand that surface finishing plays a vital role in determining the performance, hygiene, durability, and visual quality of industrial equipment...",
+      fullDesc: [
+        "At G R F Dynamic Engineering, we understand that surface finishing plays a vital role in determining the performance, hygiene, durability, and visual quality of industrial equipment. Our advanced Surface Finish & Polishing capabilities are designed to meet the strict requirements of industries such as pharmaceuticals, dairy, food processing, chemicals, and other precision manufacturing sectors where superior surface quality is essential.",
+        "Our manufacturing facility is equipped with complete surface treatment solutions that ensure every fabricated component achieves the required finish, cleanliness, and operational reliability. From internal mirror polishing to external surface treatments, we apply advanced techniques and quality-controlled processes to deliver equipment that performs efficiently in demanding industrial environments.",
+        "For pharmaceutical and dairy applications, where hygiene and contamination prevention are critical, we provide automatic internal mirror polishing solutions. These advanced polishing systems create ultra-smooth internal surfaces with a surface roughness value of Ra < 0.4 microns. Such precision finishing minimizes product retention, prevents bacterial growth, and enables easy cleaning and sterilization during operation. This makes our vessels suitable for applications requiring strict sanitary standards and compliance with industry expectations.",
+        "Our internal polishing process is carried out using specialized equipment and carefully selected polishing methods to achieve uniform surface quality across the entire vessel interior. Whether manufacturing storage tanks, process vessels, reactors, or customized equipment, our team ensures that every internal surface meets the required finish specifications. This attention to detail helps improve product purity, reduce maintenance requirements, and enhance the overall service life of the equipment.",
+        "In addition to internal polishing, we provide advanced external surface treatment options to improve corrosion resistance, appearance, and long-term durability. Our external shot blasting process effectively removes surface impurities, oxidation, and manufacturing residues while creating a clean and uniform surface profile. This preparation improves coating adhesion and provides a strong foundation for further finishing processes.",
+        "For applications requiring enhanced corrosion protection and chemical resistance, we offer chemical passivation treatments. This process strengthens the natural protective oxide layer on stainless steel surfaces, improving resistance against corrosion and maintaining material integrity even in challenging operating conditions. Chemical passivation is especially important for industries where equipment reliability, cleanliness, and long operational life are essential.",
+        "Quality control is an integral part of our surface finishing operations. Our skilled technicians carefully inspect surface conditions, polishing quality, and treatment results at every stage of production. Advanced measurement techniques are used to verify surface roughness and ensure compliance with customer specifications and industry standards.",
+        "At G R F Dynamic Engineering, we combine modern surface treatment technology with skilled workmanship to provide exceptional finishing solutions for critical industrial applications. Our expertise in polishing, shot blasting, and chemical passivation enables us to manufacture equipment that not only meets functional requirements but also delivers superior hygiene, aesthetics, and durability.",
+        "Through continuous improvement, advanced machinery, and strict quality practices, we ensure that every product leaving our facility represents precision engineering and manufacturing excellence. Our Surface Finish & Polishing capabilities help customers achieve reliable performance, improved process efficiency, and long-term value from their industrial equipment.",
+        "With a commitment to quality and innovation, G R F Dynamic Engineering delivers surface finishing solutions engineered for the highest standards of performance, safety, and reliability."
+      ],
       image: workshopImg,
       details: [
         { label: "Interior Surface Finish", value: "Ra < 0.4 microns (Mirror Finish)" },
@@ -74,7 +115,19 @@ export default function About() {
       id: 4,
       title: "Testing & NDT Facility",
       short: "In-house Hydro & Radiography Checks",
-      desc: "In-house quality verification containing hydrostatic testing up to 50 Bar, pneumatic testing, weld radiography (X-ray), dye-penetrant inspection (DPI), and ultrasonic thickness tests.",
+      desc: "At G R F Dynamic Engineering, quality assurance and safety verification are essential parts of our manufacturing process. Our advanced Testing & Non-Destructive Testing (NDT) Facility ensures that every fabricated product undergoes strict inspection...",
+      fullDesc: [
+        "At G R F Dynamic Engineering, quality assurance and safety verification are essential parts of our manufacturing process. Our advanced Testing & Non-Destructive Testing (NDT) Facility ensures that every fabricated product undergoes strict inspection and performance evaluation before delivery. With in-house testing capabilities, experienced quality professionals, and advanced inspection techniques, we verify the structural integrity, durability, and reliability of industrial equipment manufactured at our facility.",
+        "Our comprehensive testing infrastructure is designed to meet the requirements of industries where precision, safety, and operational performance are critical. From pressure vessels and storage tanks to customized fabrication projects, we conduct detailed quality checks to ensure that every component meets customer specifications and applicable engineering standards.",
+        "One of our key testing capabilities is hydrostatic pressure testing, which allows us to verify the strength and leak resistance of pressure-based equipment. Our facility is equipped to perform hydrostatic testing up to 50 Bar, where equipment is filled with water and subjected to controlled pressure conditions. This process helps identify potential weaknesses, leakage points, or structural defects while ensuring that the equipment can safely withstand its intended operating pressure.",
+        "In addition to hydrostatic testing, we provide pneumatic testing solutions for applications requiring gas pressure verification. Pneumatic testing is performed under carefully controlled conditions to examine equipment integrity and identify possible leaks or pressure-related issues. Our skilled inspection team follows strict safety procedures during pneumatic testing to ensure accurate results while maintaining workplace safety.",
+        "To ensure the highest level of weld quality, we offer weld radiography testing using advanced X-ray inspection methods. Radiographic testing allows our quality engineers to examine internal weld structures and detect hidden defects such as cracks, porosity, incomplete penetration, or welding inconsistencies. This non-destructive inspection method provides valuable insights into weld reliability without damaging the fabricated component.",
+        "Our Dye Penetrant Inspection (DPI) facility is used for detecting surface-level defects in critical components. This process helps identify fine cracks, pinholes, and surface imperfections that may not be visible through normal visual inspection. DPI is particularly effective for examining welded joints and ensuring the surface integrity of fabricated equipment.",
+        "We also perform Ultrasonic Thickness Testing to accurately measure material thickness and monitor the condition of equipment components. This advanced inspection technique helps identify material loss, corrosion, or thinning that could affect equipment performance over time. By using ultrasonic testing, we help ensure long-term reliability and support preventive maintenance planning.",
+        "Every testing activity at G R F Dynamic Engineering is carried out according to established quality procedures and industry requirements. Our inspection team carefully documents test results, maintains traceability records, and ensures that all products meet the required acceptance criteria before final approval.",
+        "With a strong focus on quality control, safety, and engineering excellence, our Testing & NDT Facility provides customers with complete confidence in the reliability of our products. By combining advanced testing technology with experienced professionals, we deliver equipment that is built to perform safely and efficiently in demanding industrial environments.",
+        "At G R F Dynamic Engineering, our commitment to rigorous testing and inspection ensures that every product reflects our dedication to precision manufacturing, superior quality, and long-term operational reliability."
+      ],
       image: reactorImg,
       details: [
         { label: "Hydrostatic Testing", value: "Up to 50 Bar working rating" },
@@ -121,13 +174,6 @@ export default function About() {
       desc: "Embraced smart engineering with advanced CAD simulation workflows, achieving over 800+ completed installations nationwide.",
       stats: { "Completed Tanks": "800+ nationwide", "Design Workflow": "Fully 3D & FEA simulation", "Quality Audits": "Zero-defect pass rate" }
     }
-  ];
-
-  const values = [
-    { name: "Engineering Precision", desc: "Every single millimeter, dimensional spec, and weld joint is meticulously scrutinized using advanced testing and inspection techniques. We ensure strict compliance with international standards such as ASME Section VIII, API 650, and ISO sanitization codes, delivering absolute accuracy and fault-free structural stability in every custom build." },
-    { name: "Safety First", desc: "All pressure vessels, chemical reactors, and storage tanks undergo rigorous pressure and safety trials. We perform mandatory non-destructive testing (NDT), high-pressure hydro-tests, pneumatic checks, and vacuum retention trials to guarantee safe, risk-free performance under extreme industrial conditions." },
-    { name: "Customer Centricity", desc: "We design and manufacture bespoke industrial process equipment tailored to your layout blueprints, chemical parameters, and exact floor space. From specific nozzle placements to custom mixing systems, your physical and process requirements drive our design and engineering layouts." },
-    { name: "Long-term Durability", desc: "We source and certify only premium grades of Stainless Steel (SS304, SS316L, Duplex) and Mild Steel (MS) metals. With precise chemical-resistant surface coatings and professional mirror-finish polishing, we ensure our equipment achieves an extended operational lifecycle under harsh, heavy-duty industrial cycles." }
   ];
 
   const team = [
@@ -355,7 +401,7 @@ export default function About() {
         </div>
 
         {/* Company Story Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center mb-24">
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start mb-24">
           <div className="lg:col-span-7 space-y-6">
             <span className="text-[10px] font-mono text-brand-accent uppercase tracking-widest block font-bold">
               // COMPANY OVERVIEW
@@ -363,12 +409,63 @@ export default function About() {
             <h2 className="heading-font text-2xl sm:text-3xl text-white font-black uppercase leading-tight">
               Manufacturing Excellence Since 2011
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
-              Based in the industrial hub of Saharanpur, Uttar Pradesh, G R F Dynamic Engineering has grown from a regional custom manufacturing unit to a national supplier of process equipment and storage systems. We specialize in engineering high-integrity stainless steel (SS) and mild steel (MS) structures, tailored specifically for sanitary dairy products, corrosive chemicals, and high-pressure steam environments.
-            </p>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
-              With a state-of-the-art workshop and team of qualified engineers, we handle the entire equipment lifecycle—from mechanical design and thermal calculations to sheet metal forming, welding, polish finish, testing, and transport logistics.
-            </p>
+            <div className="space-y-4 text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              <p>
+                Since its establishment in 2011, G R F Dynamic Engineering has remained committed to delivering high-quality industrial process equipment, storage solutions, and customized engineering systems that meet the evolving requirements of modern industries. Headquartered in the industrial city of Saharanpur, Uttar Pradesh, the company has steadily grown from a regional fabrication unit into a trusted manufacturer serving customers across India. Through a combination of engineering expertise, modern manufacturing technology, premium-quality materials, and an uncompromising commitment to quality, we have built a strong reputation for delivering reliable industrial equipment that performs consistently in demanding operating environments.
+              </p>
+              {isHistoryExpanded && (
+                <>
+                  <p>
+                    Over the years, our success has been driven by a clear vision—to manufacture industrial equipment that combines durability, precision, safety, and operational efficiency. Every project we undertake reflects our dedication to engineering excellence and customer satisfaction. Whether manufacturing pressure vessels, storage tanks, chemical reactors, heat exchangers, mixing systems, process vessels, CIP systems, dairy processing equipment, pharmaceutical tanks, or customized industrial solutions, we approach every assignment with the same level of professionalism, technical expertise, and attention to detail.
+                  </p>
+                  <p>
+                    Located in one of North India's rapidly developing industrial regions, our manufacturing facility is equipped with modern infrastructure designed to support the complete fabrication process under one roof. Our state-of-the-art workshop features advanced fabrication machinery, CNC cutting equipment, precision welding stations, sheet metal processing machines, polishing units, material handling systems, and comprehensive quality inspection facilities. This integrated manufacturing environment allows us to maintain complete control over every stage of production while ensuring consistency, efficiency, and superior product quality.
+                  </p>
+                  <p>
+                    One of the key strengths of G R F Dynamic Engineering is our ability to manufacture customized industrial equipment according to the exact operational requirements of our clients. We recognize that every manufacturing facility has unique production processes, installation constraints, capacity requirements, and industry regulations. Rather than offering standardized equipment, our engineering team works closely with customers to develop tailor-made solutions that integrate seamlessly into existing production systems. From equipment dimensions and vessel configurations to nozzle orientations, piping arrangements, insulation requirements, automation compatibility, and finishing specifications, every component is designed to deliver maximum operational efficiency.
+                  </p>
+                  <p>
+                    Our engineering process begins with detailed technical consultation and project evaluation. Experienced engineers carefully analyze process requirements, operating conditions, pressure ratings, temperature ranges, material compatibility, and production objectives before initiating equipment design. Using advanced CAD software, 3D modeling tools, and engineering calculations, our design team develops accurate manufacturing drawings that optimize structural integrity, performance, safety, and ease of maintenance. Every design undergoes multiple stages of review to ensure complete compliance with applicable engineering standards and customer specifications before fabrication begins.
+                  </p>
+                  <p>
+                    Material selection plays a crucial role in ensuring product reliability and long service life. We manufacture equipment using premium-grade Stainless Steel SS304, SS316, SS316L, Duplex Stainless Steel, Mild Steel (MS), and other specialized alloys depending on the application. Every raw material is procured from trusted suppliers and undergoes rigorous quality verification before entering production. Material certification, chemical composition verification, mechanical property inspection, and traceability documentation ensure that every component meets stringent quality requirements and industry standards.
+                  </p>
+                  <p>
+                    Our fabrication process combines skilled craftsmanship with modern manufacturing technology to achieve exceptional precision and durability. Precision cutting, CNC machining, rolling, bending, forming, TIG welding, MIG welding, arc welding, polishing, and assembly operations are performed by experienced professionals who understand the importance of accuracy in industrial fabrication. Every weld joint, pressure-retaining component, structural support, flange connection, and fabricated assembly is carefully inspected throughout the manufacturing process to ensure maximum strength, dimensional accuracy, and long-term reliability.
+                  </p>
+                  <p>
+                    Quality assurance is embedded into every stage of production. Our dedicated quality control team performs comprehensive inspections and testing procedures to ensure every product meets the highest standards of safety and performance. Inspection activities include dimensional verification, visual inspection, material traceability, welding inspection, Non-Destructive Testing (NDT), hydrostatic pressure testing, pneumatic leak testing, vacuum testing where applicable, and final performance evaluation. These rigorous inspection procedures help eliminate potential defects before delivery while ensuring dependable performance under demanding industrial conditions.
+                  </p>
+                  <p>
+                    We strictly follow nationally and internationally recognized engineering standards during design and manufacturing. Depending on customer requirements and application, our products are manufactured in accordance with standards such as ASME Section VIII, API 650, ISO sanitary guidelines, and other applicable industrial codes. Compliance with these standards ensures that every product satisfies strict requirements related to structural integrity, pressure containment, hygienic design, operational safety, and long-term reliability.
+                  </p>
+                  <p>
+                    Serving diverse industrial sectors has enabled us to develop extensive expertise across multiple process industries. Our equipment is widely used in pharmaceutical manufacturing, dairy processing, food and beverage production, chemical processing, oil and gas, water treatment plants, distilleries, breweries, cosmetics, power generation, fertilizer plants, and other industrial processing facilities. Each industry presents unique operational challenges, and our engineering team possesses the technical knowledge required to design equipment capable of meeting these specialized requirements with confidence.
+                  </p>
+                  <p>
+                    Innovation remains a driving force behind our manufacturing excellence. We continuously invest in advanced production technologies, modern fabrication methods, engineering software, automation capabilities, and workforce development to improve product quality and manufacturing efficiency. Continuous process improvement enables us to reduce production lead times, enhance fabrication accuracy, optimize resource utilization, and consistently deliver high-quality industrial equipment that exceeds customer expectations.
+                  </p>
+                  <p>
+                    Beyond manufacturing, our commitment extends throughout the complete project lifecycle. We provide comprehensive support that includes equipment installation, commissioning, technical consultation, maintenance guidance, operational assistance, and responsive after-sales service. Our experienced technical team works closely with customers to ensure smooth installation, reliable commissioning, and optimal equipment performance throughout its operational life. This long-term partnership approach has earned the trust of clients across India who rely on our engineering expertise for their critical industrial operations.
+                  </p>
+                  <p>
+                    Safety and environmental responsibility are integral aspects of our manufacturing philosophy. Every product is designed with careful consideration for operator safety, process reliability, and environmental protection. We implement strict workplace safety practices, responsible manufacturing procedures, efficient material utilization, and quality-focused production methods that contribute to sustainable industrial operations while minimizing operational risks.
+                  </p>
+                  <p>
+                    Over more than a decade of dedicated service, G R F Dynamic Engineering has established itself as a trusted name in industrial fabrication by consistently delivering products that combine precision engineering, superior craftsmanship, durable construction, and dependable performance. Our commitment to quality, innovation, customer satisfaction, and continuous improvement has enabled us to build lasting relationships with businesses across multiple industries. As we continue to grow, we remain focused on our mission of providing world-class industrial process equipment and customized engineering solutions that help organizations improve productivity, ensure operational safety, and achieve sustainable long-term success. Every project we undertake reflects our passion for engineering excellence and our commitment to delivering manufacturing solutions that stand the test of time.
+                  </p>
+                </>
+              )}
+            </div>
+
+            <div className="pt-2">
+              <button
+                onClick={() => setIsHistoryExpanded(!isHistoryExpanded)}
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                {isHistoryExpanded ? 'View Less -' : 'View More +'}
+              </button>
+            </div>
 
             <div className="grid grid-cols-2 gap-4 pt-4">
               <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm">
@@ -409,48 +506,8 @@ export default function About() {
           </div>
         </section>
 
-        {/* Mission & Vision Section */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-28">
-          {/* Mission */}
-          <div className="bg-[#0a0d18]/45 p-6 sm:p-8 rounded-sm border border-white/5 border-l-[3px] border-l-brand-accent/60 hover:border-brand-accent/40 transition-all duration-300 relative group overflow-hidden shadow-xl">
-            <div className="absolute top-0 right-0 border-t-2 border-r-2 border-brand-accent/20 w-8 h-8 group-hover:border-brand-accent/40 transition-colors"></div>
-            <div className="flex items-center gap-3.5 mb-5">
-              <div className="bg-brand-accent/10 p-2.5 rounded-sm text-brand-accent border border-brand-accent/20">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h2 className="heading-font text-lg text-white font-bold uppercase tracking-wider">
-                Our Mission
-              </h2>
-            </div>
-            <p className="text-slate-400 text-sm leading-relaxed font-light">
-              To design, manufacture, and install exceptionally reliable industrial equipment that maximizes operational efficiency, ensures process safety, and fulfills sanitary or pressure compliance standards without compromise.
-            </p>
-          </div>
-
-          {/* Vision */}
-          <div className="bg-[#0a0d18]/30 p-6 sm:p-8 rounded-sm border border-white/5 border-r-[3px] border-r-blue-500/60 hover:border-blue-500/40 transition-all duration-300 relative group overflow-hidden shadow-xl">
-            <div className="absolute bottom-0 left-0 border-b-2 border-l-2 border-blue-500/20 w-8 h-8 group-hover:border-blue-500/40 transition-colors"></div>
-            <div className="flex items-center gap-3.5 mb-5">
-              <div className="bg-blue-500/10 p-2.5 rounded-sm text-blue-400 border border-blue-500/20">
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-              </div>
-              <h2 className="heading-font text-lg text-white font-bold uppercase tracking-wider">
-                Our Vision
-              </h2>
-            </div>
-            <p className="text-slate-400 text-sm leading-relaxed font-light">
-              To be recognized as India's premier engineering partner for custom industrial systems, constantly innovating in shell welding automation and sanitary surface finishes while maintaining roots in Saharanpur.
-            </p>
-          </div>
-        </section>
-
         {/* Factory Registry & Board Info */}
-        <section className="mb-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <section className="mb-28 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Left: Registered Board Image Card */}
           <div className="lg:col-span-5 relative border border-white/10 bg-[#0a0d18] rounded-sm overflow-hidden p-3 shadow-2xl group">
             <div className="absolute inset-0 blueprint-grid opacity-25 pointer-events-none"></div>
@@ -483,9 +540,42 @@ export default function About() {
             <h2 className="heading-font text-2xl sm:text-3xl text-white font-black uppercase leading-tight">
               Official Manufacturing Registry
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
-              G R F Dynamic Engineering is fully registered and compliant with all national manufacturing and taxation authorities. Our factory premises and production specs are displayed at our Saharanpur manufacturing unit, detailing our GSTIN coordinates and approved manufacturing catalog.
-            </p>
+            <div className="space-y-4 text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              <p>
+                G R F Dynamic Engineering operates with a strong commitment to transparency, legal compliance, and responsible manufacturing practices. Since our establishment in 2011, we have ensured that every aspect of our business is conducted in accordance with applicable government regulations and industry standards. Our manufacturing facility in Saharanpur, Uttar Pradesh, is officially registered and operates under the necessary statutory requirements, enabling us to serve customers across India with complete confidence. By maintaining full regulatory compliance, we provide our clients with the assurance that they are partnering with a reliable and professionally managed engineering organization.
+              </p>
+              {isRegistryExpanded && (
+                <>
+                  <p>
+                    As a recognized industrial manufacturer, we maintain all required business registrations and taxation records in accordance with Indian regulatory authorities. Our operations are supported by a valid Goods and Services Tax Identification Number (GSTIN), allowing us to conduct business efficiently while ensuring complete transparency in commercial transactions. All customer invoices, quotations, purchase orders, and related documentation are processed through our registered business entity, ensuring compliance with applicable taxation laws and financial regulations. This systematic approach reflects our dedication to ethical business practices and long-term customer trust.
+                  </p>
+                  <p>
+                    Our manufacturing facility is designed to support the complete production lifecycle of industrial process equipment under one roof. The factory premises accommodate modern fabrication infrastructure, precision machining equipment, advanced welding facilities, sheet metal processing units, polishing stations, quality inspection areas, and material handling systems. Every department within the facility is organized to maintain smooth workflow, production efficiency, and strict quality control throughout the manufacturing process. By integrating design, fabrication, testing, and dispatch operations within a single facility, we ensure better coordination, faster project execution, and consistent product quality.
+                  </p>
+                  <p>
+                    To maintain complete manufacturing transparency, our production specifications, factory information, and approved product categories are properly documented and maintained within our operational records. Customers visiting our manufacturing facility can gain a comprehensive understanding of our production capabilities, engineering processes, quality assurance systems, and manufacturing infrastructure. This openness reflects our confidence in the quality of our work and our commitment to building long-term business relationships based on honesty, professionalism, and accountability.
+                  </p>
+                  <p>
+                    Every product manufactured by G R F Dynamic Engineering is produced using documented manufacturing procedures and established quality management practices. From raw material procurement to final inspection, each stage of production is carefully monitored to ensure compliance with customer specifications and applicable engineering standards. Material traceability, fabrication records, welding documentation, inspection reports, and testing procedures are maintained throughout the manufacturing process, ensuring consistency, reliability, and complete production accountability. These documented processes help us maintain superior quality while providing customers with confidence in every product we deliver.
+                  </p>
+                  <p>
+                    Compliance is not limited to statutory registrations alone. We continuously strive to follow recognized engineering practices, quality standards, and safety guidelines that contribute to dependable industrial equipment manufacturing. Our engineering team works in accordance with established design principles and industry-specific requirements to ensure that every pressure vessel, storage tank, chemical reactor, heat exchanger, and customized process system is manufactured with precision, durability, and operational reliability. This disciplined approach allows us to consistently deliver products that meet demanding industrial applications across pharmaceutical, dairy, food processing, chemical, oil and gas, water treatment, and other process industries.
+                  </p>
+                  <p>
+                    At G R F Dynamic Engineering, regulatory compliance represents more than a legal obligation—it reflects our commitment to integrity, professionalism, and customer confidence. By maintaining officially registered operations, transparent manufacturing practices, documented production processes, and responsible business ethics, we continue to strengthen our reputation as a trusted engineering and manufacturing partner. Our focus on compliance, quality, and accountability ensures that every customer receives dependable industrial solutions backed by a professionally managed organization dedicated to excellence in manufacturing.
+                  </p>
+                </>
+              )}
+            </div>
+
+            <div className="pt-2">
+              <button
+                onClick={() => setIsRegistryExpanded(!isRegistryExpanded)}
+                className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+              >
+                {isRegistryExpanded ? 'View Less -' : 'View More +'}
+              </button>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="bg-[#0a0d18] border border-white/5 p-4 rounded-sm relative group overflow-hidden">
@@ -650,6 +740,7 @@ export default function About() {
                     <button
                       onClick={() => {
                         setActiveCapId(cap.id);
+                        setIsCapabilityExpanded(false);
                         if (window.innerWidth < 1024) {
                           setTimeout(() => {
                             const el = document.getElementById(`cap-container-${cap.id}`);
@@ -706,9 +797,24 @@ export default function About() {
                             <h3 className="heading-font text-white text-base font-bold uppercase tracking-wider">
                               {cap.title}
                             </h3>
-                            <p className="text-slate-400 text-xs leading-relaxed font-light">
-                              {cap.desc}
-                            </p>
+                            <div className="text-slate-400 text-xs leading-relaxed font-light space-y-3">
+                              {isCapabilityExpanded ? (
+                                cap.fullDesc.map((paragraph, pIdx) => (
+                                  <p key={pIdx}>{paragraph}</p>
+                                ))
+                              ) : (
+                                <p>{cap.desc}</p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="pt-1">
+                            <button
+                              onClick={() => setIsCapabilityExpanded(!isCapabilityExpanded)}
+                              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                            >
+                              {isCapabilityExpanded ? 'View Less -' : 'View More +'}
+                            </button>
                           </div>
 
                           <div className="border-t border-white/[0.04] pt-4 mt-2">
@@ -763,9 +869,24 @@ export default function About() {
                   <h3 className="heading-font text-white text-lg font-bold uppercase tracking-wider">
                     {activeCapability.title}
                   </h3>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                    {activeCapability.desc}
-                  </p>
+                  <div className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light space-y-3">
+                    {isCapabilityExpanded ? (
+                      activeCapability.fullDesc.map((paragraph, pIdx) => (
+                        <p key={pIdx}>{paragraph}</p>
+                      ))
+                    ) : (
+                      <p>{activeCapability.desc}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="pt-1">
+                  <button
+                    onClick={() => setIsCapabilityExpanded(!isCapabilityExpanded)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                  >
+                    {isCapabilityExpanded ? 'View Less -' : 'View More +'}
+                  </button>
                 </div>
 
                 <div className="border-t border-white/[0.04] pt-4 mt-2">
@@ -785,33 +906,6 @@ export default function About() {
               </div>
             </div>
 
-          </div>
-        </section>
-
-        {/* Core Values Section */}
-        <section className="glass-panel p-8 rounded-sm shadow-2xl relative mb-20 overflow-hidden">
-          <div className="absolute inset-0 blueprint-grid opacity-5 pointer-events-none"></div>
-          <div className="absolute bottom-0 right-0 border-b-2 border-r-2 border-brand-accent/15 w-16 h-16 pointer-events-none"></div>
-
-          <div className="mb-8 relative z-10">
-            <span className="text-[10px] font-mono text-brand-accent uppercase tracking-widest block">// QUALITY INTEGRITY</span>
-            <h2 className="heading-font text-2xl text-white font-bold uppercase mt-1">
-              Our Core Values
-            </h2>
-            <div className="h-0.5 bg-brand-accent w-12 mt-2"></div>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-            {values.map((val, index) => (
-              <div key={index} className="bg-brand-charcoal/80 p-5 rounded-sm border border-white/5 hover:border-brand-accent/20 transition-all duration-300 group">
-                <h3 className="heading-font text-brand-accent group-hover:text-white font-bold text-xs sm:text-sm mb-2.5 uppercase tracking-wide transition-colors">
-                  {val.name}
-                </h3>
-                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                  {val.desc}
-                </p>
-              </div>
-            ))}
           </div>
         </section>
 
@@ -1087,22 +1181,57 @@ export default function About() {
           </div>
 
           {/* Grid Layout of Workforce */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start mb-12">
             {/* Left: General Introduction & Stats */}
             <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
               <div className="space-y-6">
                 <span className="inline-block bg-[#0ea5e9]/5 border border-[#0ea5e9]/20 text-[#0ea5e9] text-[9px] font-bold px-3 py-1 uppercase tracking-widest rounded-sm font-mono">
                   Operational Safety & Work Culture
                 </span>
-                <p className="text-slate-300 text-sm leading-relaxed font-light">
-                  At GRF Dynamic Engineering, our greatest strength is our highly skilled and dedicated workforce. Backed by a team of experienced engineers, supervisors, and technical professionals, we have built a reputation for delivering high-quality industrial process equipment with precision, reliability, and efficiency.
-                </p>
-                <p className="text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
-                  Safety, discipline, teamwork, and continuous skill development are integral to our work culture. We regularly promote safe working practices, quality awareness, and technical improvement to ensure our workforce remains aligned with the latest industry standards and customer expectations.
-                </p>
-                <p className="text-slate-450 text-xs sm:text-sm leading-relaxed font-light">
-                  Our experienced engineers, manufacturing specialists, welders, fitters, machinists, polishers, installers, and support staff work together with a shared commitment to delivering durable, high-performance, and cost-effective engineering solutions.
-                </p>
+                <div className="text-slate-350 text-sm leading-relaxed font-light space-y-4 text-left">
+                  <p>
+                    At G R F Dynamic Engineering, our greatest strength is our highly skilled, dedicated, and experienced workforce that forms the foundation of our manufacturing excellence. Our team consists of qualified engineers, supervisors, technical professionals, welders, fitters, machinists, polishers, installers, and support staff who work together with a common vision of delivering high-quality industrial process equipment with precision, reliability, and efficiency.
+                  </p>
+                  {isWorkforceExpanded && (
+                    <>
+                      <p>
+                        Our skilled workforce brings extensive practical knowledge and hands-on experience in manufacturing Stainless Steel (SS) and Mild Steel (MS) equipment for various industrial applications. Every team member contributes valuable expertise to ensure that each project is completed according to engineering specifications, quality standards, and customer requirements. Through strong coordination between different departments, we maintain a smooth production workflow and achieve consistent results across all manufacturing activities.
+                      </p>
+                      <p>
+                        Safety is one of the most important pillars of our work culture. At G R F Dynamic Engineering, we believe that a safe working environment is essential for achieving operational excellence. We continuously promote safe work practices by following proper safety procedures, using appropriate protective equipment, and maintaining awareness of workplace safety standards. Regular guidance and supervision help our workforce perform their responsibilities efficiently while minimizing risks during manufacturing, fabrication, and installation activities.
+                      </p>
+                      <p>
+                        Quality awareness is deeply integrated into our daily operations. Our workforce understands the importance of accuracy, attention to detail, and process discipline in delivering reliable industrial solutions. From material preparation and fabrication to welding, finishing, inspection, and final assembly, every stage is handled with a strong commitment to quality. This approach enables us to manufacture equipment that meets performance expectations and provides long-term value to our customers.
+                      </p>
+                      <p>
+                        Continuous learning and skill development are key elements of our organizational growth. We encourage our employees to improve their technical knowledge, adopt modern manufacturing practices, and stay updated with evolving industry requirements. By combining experience with continuous improvement, our workforce remains capable of handling complex engineering challenges and customized project requirements.
+                      </p>
+                      <p>
+                        Our engineers and supervisors provide strong technical guidance throughout the manufacturing process. They ensure proper planning, effective resource utilization, and compliance with design and quality specifications. Skilled technicians and production teams execute these plans with precision, transforming engineering concepts into reliable industrial equipment.
+                      </p>
+                      <p>
+                        Our welders, fitters, machinists, and polishers bring specialized expertise to critical manufacturing operations. Their craftsmanship and attention to detail ensure strong fabrication, accurate assembly, superior surface finishing, and dependable equipment performance. Similarly, our installation and support teams contribute to successful project completion by providing efficient on-site assistance and technical support.
+                      </p>
+                      <p>
+                        Teamwork is a core value at G R F Dynamic Engineering. Every employee understands the importance of collaboration and coordination in achieving project goals. A culture of mutual respect, responsibility, and professional commitment allows us to complete projects effectively while maintaining high standards of quality and safety.
+                      </p>
+                      <p>
+                        With a strong combination of technical expertise, operational discipline, and safety-focused practices, our workforce enables G R F Dynamic Engineering to deliver durable, high-performance, and cost-effective engineering solutions. Our people are not only employees but valuable contributors who drive innovation, reliability, and continuous improvement across the organization.
+                      </p>
+                      <p>
+                        Through dedication, experience, and teamwork, our skilled workforce continues to strengthen our reputation as a trusted engineering partner for industrial manufacturing solutions.
+                      </p>
+                    </>
+                  )}
+                </div>
+                <div className="pt-1 text-left">
+                  <button
+                    onClick={() => setIsWorkforceExpanded(!isWorkforceExpanded)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                  >
+                    {isWorkforceExpanded ? 'View Less -' : 'View More +'}
+                  </button>
+                </div>
               </div>
 
               {/* Counter Row */}
@@ -1127,10 +1256,10 @@ export default function About() {
 
             {/* Right Panels: Pillars of Workforce */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                 {/* Pillar 1: Manufacturing Specialists */}
                 <div className="bg-brand-charcoal/80 p-5 rounded-sm border border-white/5 hover:border-brand-accent/20 transition-all duration-300 relative overflow-hidden flex flex-col justify-between group">
-                  <div className="space-y-3">
+                  <div className="space-y-3 text-left">
                     <div className="flex justify-between items-center">
                       <span className="text-[8px] font-mono text-slate-500 uppercase tracking-widest block">// SPECIALIST_GRP: 01</span>
                       <span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-ping"></span>
@@ -1138,9 +1267,35 @@ export default function About() {
                     <h3 className="heading-font text-white font-bold text-sm uppercase tracking-wide group-hover:text-brand-accent transition-colors">
                       Skilled Technical Team
                     </h3>
-                    <p className="text-slate-400 text-xs leading-relaxed font-light">
-                      Supported by 15 highly skilled manufacturing professionals, fitters, welders, and polishers with extensive hands-on experience in SS & MS setups.
-                    </p>
+                    <div className="text-slate-400 text-xs leading-relaxed font-light space-y-3">
+                      <p>
+                        At G R F Dynamic Engineering, our strength lies in our highly skilled and experienced technical team that drives excellence across every stage of manufacturing. Supported by a team of 15 dedicated professionals, including experienced fitters, certified welders, and skilled polishers, we have built strong expertise in handling complex fabrication requirements for Stainless Steel (SS) and Mild Steel (MS) industrial setups.
+                      </p>
+                      {isWfTechnicalExpanded && (
+                        <>
+                          <p>
+                            Our technical workforce brings extensive hands-on experience in fabrication, assembly, welding, finishing, and quality-focused production processes. Each team member plays an important role in ensuring that every project is completed with accuracy, efficiency, and attention to detail. Their practical knowledge allows us to manage customized engineering requirements while maintaining high standards of workmanship.
+                          </p>
+                          <p>
+                            Our skilled fitters are experienced in precision assembly, alignment, and installation activities, ensuring that every component is manufactured according to engineering drawings and dimensional requirements. Our professional welders specialize in advanced welding techniques, delivering strong and reliable joints for critical industrial applications. Similarly, our polishing experts ensure superior surface quality and finishing standards, especially for applications requiring smooth and hygienic surfaces.
+                          </p>
+                          <p>
+                            Continuous skill development and practical expertise enable our team to adapt to evolving manufacturing technologies and industry requirements. By combining technical knowledge with modern equipment and proven processes, we achieve consistent quality across every project.
+                          </p>
+                          <p>
+                            At G R F Dynamic Engineering, our skilled technical team represents our commitment to reliability, precision, and manufacturing excellence. Their dedication, experience, and craftsmanship ensure that every product delivered meets customer expectations for performance, durability, and quality.
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div className="pt-1">
+                      <button
+                        onClick={() => setIsWfTechnicalExpanded(!isWfTechnicalExpanded)}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                      >
+                        {isWfTechnicalExpanded ? 'View Less -' : 'View More +'}
+                      </button>
+                    </div>
                     <ul className="space-y-1.5 pt-2 text-[10px] font-mono text-slate-350">
                       <li className="flex items-center gap-1.5">
                         <span className="w-1 h-1 bg-brand-accent rounded-full"></span>
@@ -1160,7 +1315,7 @@ export default function About() {
 
                 {/* Pillar 2: Supervision & Engineering */}
                 <div className="bg-brand-charcoal/80 p-5 rounded-sm border border-white/5 hover:border-brand-accent/20 transition-all duration-300 relative overflow-hidden flex flex-col justify-between group">
-                  <div className="space-y-3">
+                  <div className="space-y-3 text-left">
                     <div className="flex justify-between items-center">
                       <span className="text-[8px] font-mono text-slate-500 uppercase tracking-widest block">// CONTROL_GRP: 02</span>
                       <span className="w-1.5 h-1.5 bg-white rounded-full opacity-60"></span>
@@ -1168,9 +1323,35 @@ export default function About() {
                     <h3 className="heading-font text-white font-bold text-sm uppercase tracking-wide group-hover:text-white transition-colors">
                       Engineers & Supervisors
                     </h3>
-                    <p className="text-slate-400 text-xs leading-relaxed font-light">
-                      Our workforce operates under the direct guidance of experienced design engineers, project managers, and quality inspectors.
-                    </p>
+                    <div className="text-slate-400 text-xs leading-relaxed font-light space-y-3">
+                      <p>
+                        At G R F Dynamic Engineering, our manufacturing operations are supported by a team of experienced design engineers, project managers, and quality inspectors who provide strong technical leadership throughout every stage of production. Their expertise ensures that each project is executed with precision, efficiency, and strict compliance with engineering requirements.
+                      </p>
+                      {isWfEngineersExpanded && (
+                        <>
+                          <p>
+                            Our design engineers are responsible for developing accurate technical solutions by analyzing customer requirements, preparing engineering designs, and ensuring that every component meets functional and performance expectations. With advanced knowledge of fabrication processes and industrial equipment design, they help optimize manufacturing methods while maintaining structural integrity and reliability.
+                          </p>
+                          <p>
+                            Project managers play a crucial role in coordinating activities from planning to final delivery. They manage project timelines, resources, production workflows, and communication between different departments to ensure smooth execution. Their effective supervision helps maintain productivity while ensuring that every project is completed within the required schedule and specifications.
+                          </p>
+                          <p>
+                            Our quality inspectors continuously monitor manufacturing processes to maintain high standards of accuracy and safety. They perform detailed inspections, verify material quality, review fabrication activities, and ensure compliance with defined quality procedures. Their attention to detail helps identify potential issues early and ensures that only reliable products are delivered to customers.
+                          </p>
+                          <p>
+                            With the combined expertise of engineers, supervisors, and quality professionals, G R F Dynamic Engineering maintains a strong foundation of technical excellence and operational control. Their guidance enables our team to deliver innovative, durable, and precision-engineered solutions that meet the highest standards of industrial performance.
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div className="pt-1">
+                      <button
+                        onClick={() => setIsWfEngineersExpanded(!isWfEngineersExpanded)}
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                      >
+                        {isWfEngineersExpanded ? 'View Less -' : 'View More +'}
+                      </button>
+                    </div>
                     <ul className="space-y-1.5 pt-2 text-[10px] font-mono text-slate-350">
                       <li className="flex items-center gap-1.5">
                         <span className="w-1 h-1 bg-white rounded-full opacity-50"></span>
@@ -1190,7 +1371,7 @@ export default function About() {
               </div>
 
               {/* Pillar 3: Support Operations & Helpers */}
-              <div className="bg-brand-charcoal/80 p-5 rounded-sm border border-white/5 hover:border-blue-500/20 transition-all duration-300 relative overflow-hidden">
+              <div className="bg-brand-charcoal/80 p-5 rounded-sm border border-white/5 hover:border-blue-500/20 transition-all duration-300 relative overflow-hidden text-left">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-white/[0.04] pb-4 mb-4">
                   <div>
                     <span className="text-[8px] font-mono text-slate-500 uppercase tracking-widest block">// SUPPORT_GRP: 03</span>
@@ -1202,9 +1383,41 @@ export default function About() {
                     Workflow Logistics
                   </span>
                 </div>
-                <p className="text-slate-400 text-xs leading-relaxed font-light">
-                  A dedicated team of semi-skilled and unskilled helpers who play a vital role in supporting manufacturing, material handling, machine operations, assembly, loading, finishing, housekeeping, and on-site installation activities. Their continuous support enables smooth workflow management, timely project execution, and enhanced productivity across all departments.
-                </p>
+                <div className="text-slate-400 text-xs leading-relaxed font-light space-y-3">
+                  <p>
+                    At G R F Dynamic Engineering, our manufacturing success is supported by a dedicated team of semi-skilled and unskilled helpers who play an important role in maintaining smooth workflow operations across all departments. Their continuous support and commitment contribute significantly to efficient production, timely project completion, and overall workplace productivity.
+                  </p>
+                  {isWfHelpersExpanded && (
+                    <>
+                      <p>
+                        Our support staff assists in various essential activities, including material handling, machine operations, fabrication support, assembly work, loading and unloading, surface finishing assistance, housekeeping, and on-site installation activities. Their involvement ensures that every stage of the manufacturing process is properly coordinated and completed without interruptions.
+                      </p>
+                      <p>
+                        The material handling team plays a key role in organizing and moving raw materials, fabricated components, and finished products safely within the facility. Their efficient coordination helps reduce operational delays and improves production flow. During fabrication and assembly processes, our helpers provide valuable assistance to technicians and engineers by preparing materials, supporting equipment operations, and maintaining an organized working environment.
+                      </p>
+                      <p>
+                        For project execution and installation activities, our support staff contributes by assisting with transportation, site preparation, equipment positioning, and installation support. Their practical experience and dedication help ensure smooth execution of both in-house manufacturing and on-site requirements.
+                      </p>
+                      <p>
+                        A clean, safe, and organized workplace is essential for achieving quality results. Our housekeeping support team maintains proper working conditions by following systematic cleaning and safety practices, helping create an efficient environment for manufacturing activities.
+                      </p>
+                      <p>
+                        At G R F Dynamic Engineering, we recognize the importance of every team member in achieving operational excellence. The dedication, teamwork, and reliability of our support staff strengthen our manufacturing capabilities and enable us to deliver projects with better efficiency, quality, and consistency.
+                      </p>
+                      <p>
+                        Through effective workflow management and coordinated efforts across all departments, our dedicated helpers and support staff contribute significantly to building a strong foundation for successful engineering solutions.
+                      </p>
+                    </>
+                  )}
+                </div>
+                <div className="pt-3">
+                  <button
+                    onClick={() => setIsWfHelpersExpanded(!isWfHelpersExpanded)}
+                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+                  >
+                    {isWfHelpersExpanded ? 'View Less -' : 'View More +'}
+                  </button>
+                </div>
               </div>
             </div>
           </div>

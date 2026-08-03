@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import About from './pages/About';
+import WhyChooseUs from './pages/WhyChooseUs';
 import Contact from './pages/Contact';
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
         <Navbar />
 
         {/* Dynamic Pages */}
-        <main className="flex-grow pt-16">
+        <main className="flex-grow pt-20 sm:pt-24">
           <Routes>
             <Route 
               path="/" 
@@ -55,6 +56,7 @@ function App() {
             />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/about" element={<About />} />
+            <Route path="/why-choose-us" element={<WhyChooseUs />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>

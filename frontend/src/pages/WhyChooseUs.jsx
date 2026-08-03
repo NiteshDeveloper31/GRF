@@ -5,6 +5,7 @@ export default function WhyChooseUs() {
   const [expandedValues, setExpandedValues] = useState({});
   const [isMissionExpanded, setIsMissionExpanded] = useState(false);
   const [isVisionExpanded, setIsVisionExpanded] = useState(false);
+  const [isIntroExpanded, setIsIntroExpanded] = useState(false);
 
   const toggleValueExpand = (index) => {
     setExpandedValues((prev) => ({
@@ -180,9 +181,53 @@ export default function WhyChooseUs() {
           <h1 className="heading-font text-3xl sm:text-5xl font-extrabold text-white mt-3 uppercase tracking-wide">
             Why Choose Us
           </h1>
-          <p className="text-slate-400 text-sm sm:text-base max-w-3xl mt-3 font-light leading-relaxed">
-            Discover what sets GRF Dynamic Engineering apart as North India's trusted custom manufacturing partner for high-integrity process equipment, pressure vessels, and industrial storage tanks.
-          </p>
+          <div className="text-slate-400 text-sm sm:text-base max-w-3xl mt-3 font-light leading-relaxed space-y-4">
+            <p>
+              At G R F Dynamic Engineering, we are committed to delivering high-quality custom manufacturing solutions that meet the evolving needs of modern industries. As a trusted engineering partner in North India, we specialize in designing, manufacturing, and delivering high-integrity process equipment, pressure vessels, industrial storage tanks, and customized engineering solutions built for reliability, safety, and long-term performance.
+            </p>
+            {isIntroExpanded && (
+              <>
+                <p>
+                  Our strength lies in combining advanced engineering expertise, skilled manufacturing capabilities, modern technologies, and a customer-focused approach. We understand that every industrial application has unique challenges, and therefore, we focus on providing customized solutions that are precisely designed according to specific process requirements, operational conditions, and industry standards.
+                </p>
+                <p>
+                  One of the key reasons customers choose G R F Dynamic Engineering is our commitment to engineering excellence. Our experienced engineers and technical professionals carefully analyze each project from the initial design stage to final execution. By using advanced CAD modeling, detailed engineering calculations, and practical manufacturing knowledge, we develop equipment that delivers optimum performance, structural reliability, and operational efficiency.
+                </p>
+                <p>
+                  We specialize in manufacturing high-integrity industrial equipment including pressure vessels, storage tanks, reactors, heat exchangers, process skids, and other customized fabrication solutions. Every product is manufactured with careful attention to material selection, dimensional accuracy, welding quality, surface finishing, and performance requirements. Our focus on precision engineering ensures that every system meets customer expectations and performs reliably in demanding industrial environments.
+                </p>
+                <p>
+                  Quality is at the core of our manufacturing philosophy. We follow strict quality control procedures throughout every stage of production, from raw material inspection and fabrication to testing and final delivery. Our in-house inspection capabilities include dimensional verification, weld inspection, Non-Destructive Testing (NDT), hydrostatic testing, pneumatic testing, and surface quality checks. These processes ensure that every product meets the required safety, durability, and performance standards.
+                </p>
+                <p>
+                  Our skilled workforce is another major advantage that sets us apart. Supported by experienced engineers, supervisors, welders, fitters, machinists, polishers, and technical professionals, we have the expertise required to handle complex industrial manufacturing requirements. Our team's practical experience and dedication allow us to deliver consistent quality while maintaining efficiency and reliability throughout every project.
+                </p>
+                <p>
+                  We also focus strongly on innovation and continuous improvement. By adopting modern manufacturing technologies, advanced fabrication methods, and improved engineering practices, we continuously enhance our capabilities. Our goal is to provide customers with future-ready solutions that improve productivity, reduce operational challenges, and deliver long-term value.
+                </p>
+                <p>
+                  Safety is an essential part of our work culture. We design and manufacture equipment with safety integrated into every stage of the process. From material selection and engineering design to fabrication, testing, and installation, we follow strict safety practices to ensure reliable operation and protection of personnel and assets.
+                </p>
+                <p>
+                  Customer satisfaction is the foundation of our long-term relationships. We believe in understanding customer requirements, providing transparent communication, and delivering solutions that exceed expectations. Our support extends beyond manufacturing through installation assistance, technical guidance, and after-sales support to ensure smooth operation throughout the equipment lifecycle.
+                </p>
+                <p>
+                  Located in North India, G R F Dynamic Engineering combines local manufacturing expertise with global quality standards. We take pride in supporting industries such as pharmaceuticals, food and beverage, dairy, chemicals, oil and gas, water treatment, power generation, and other process-driven sectors with dependable engineering solutions.
+                </p>
+                <p>
+                  Choosing G R F Dynamic Engineering means partnering with an organization that values quality, precision, reliability, and customer success. Through advanced engineering, skilled craftsmanship, strict quality practices, and a commitment to excellence, we continue to build industrial solutions that help businesses improve efficiency, enhance productivity, and achieve sustainable growth.
+                </p>
+              </>
+            )}
+          </div>
+          <div className="pt-3">
+            <button
+              onClick={() => setIsIntroExpanded(!isIntroExpanded)}
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-brand-accent hover:text-white uppercase tracking-wider transition-colors cursor-pointer"
+            >
+              {isIntroExpanded ? 'View Less -' : 'View More +'}
+            </button>
+          </div>
           <div className="h-0.5 w-16 bg-brand-accent mt-5"></div>
         </div>
 
